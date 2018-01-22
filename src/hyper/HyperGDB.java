@@ -6,6 +6,11 @@ import java.io.FileReader;
 import java.util.Hashtable;
 
 import org.hypergraphdb.HGHandle;
+import org.hypergraphdb.HGQuery.hg;
+import org.hypergraphdb.HyperGraph;
+import org.hypergraphdb.atom.HGRel;
+import org.hypergraphdb.atom.HGRelType;
+import org.hypergraphdb.type.HGAtomType;
 
 public class HyperGDB {
 	
@@ -14,9 +19,10 @@ public class HyperGDB {
 	String schemaloc;
 	String factloc;
 	String dbName;
+	HyperGraph graph;
 	Hashtable<String,HGHandle> relTypeHandles;
 	Hashtable<String,HGHandle> entityTypeHandles;
-	
+	Hashtable<String,HGHandle> objectHandles;
 	
 	public HyperGDB() {
 		this.schemaloc = null;
@@ -24,6 +30,7 @@ public class HyperGDB {
 		this.dbName = "graph1";
 		this.relTypeHandles = new Hashtable<String,HGHandle>();
 		this.entityTypeHandles = new Hashtable<String,HGHandle>();
+		this.graph = new HyperGraph(dblocation);
 	}
 	/**
 	 * @param schemaloc
@@ -36,6 +43,7 @@ public class HyperGDB {
 		this.dbName = "graph1";
 		this.relTypeHandles = new Hashtable<String,HGHandle>();
 		this.entityTypeHandles = new Hashtable<String,HGHandle>();
+		this.graph = new HyperGraph(dblocation);
 	}
 	public HyperGDB(String schemaloc, String factloc, String dbName) {
 		this.schemaloc = schemaloc;
@@ -44,6 +52,7 @@ public class HyperGDB {
 		dblocation = this.genDbLoc();
 		this.relTypeHandles = new Hashtable<String,HGHandle>();
 		this.entityTypeHandles = new Hashtable<String,HGHandle>();
+		this.graph = new HyperGraph(dblocation);
 	}
 		
 	/**
@@ -139,14 +148,78 @@ public class HyperGDB {
 			int idx = 0;
 			while((line = br.readLine())!=null)
 			{
-				if(!line.startsWith("//"))
+				if(!line.startsWith("//") && !line.isEmpty())
 				{
+					line = line.substring(0, line.length()-1);
+					//Utils.println(line);
 					if(line.startsWith("import:"))
 					{
-						
+						String np = line.split(":")[1];
+						Utils.println(np);
+						np = np.replace('"', ' ').trim();
+						if(np.charAt(0)=='.' && np.charAt(1)=='.')
+						{
+							this.schemaloc = this.schemaloc.substring(0, this.schemaloc.lastIndexOf('/')-1);
+							this.schemaloc = this.schemaloc.substring(0, this.schemaloc.lastIndexOf('/'));
+							np = np.substring(2);
+							this.schemaloc = this.schemaloc + np;
+						}
+						else if((np.charAt(0)=='.' && np.charAt(1)=='/'))
+						{
+							this.schemaloc = this.schemaloc.substring(0, this.schemaloc.lastIndexOf('/'));
+							np = np.substring(2);
+							this.schemaloc = this.schemaloc + np;
+						}
+						else if(np.charAt(0)=='/')
+						{
+							this.schemaloc = np;
+						}
+						else
+						{
+							this.schemaloc = this.schemaloc.substring(0, this.schemaloc.lastIndexOf('/'));
+							this.schemaloc = this.schemaloc + np;
+						}
+						if(!this.loadSchema())
+						{	br.close();
+							return false;
+						}
+						idx++;
+						break;
+					}
+					else if(line.startsWith("mode:"))
+					{
+						String pred = line.split(":")[1].trim();
+						String[] predArr = pred.split("\\(");
+						String predName = predArr[0];
+						String[] args = predArr[1].replaceAll("\\)", "").split(",");
+						HGHandle[] h = new HGHandle[args.length];
+						for(int i =0;i<args.length;i++)
+						{
+							String a = args[i];
+							a = a.replaceAll("\\+", "").replaceAll("-", "").replaceAll("#", "").trim();
+							HGHandle hTemp = this.entityTypeHandles.get(a.intern());
+							if(hTemp==null)
+							{
+								HGRelType objectType = new HGRelType(a.intern());
+								hTemp = this.graph.add(objectType);
+							}
+							h[i] = hTemp;
+							this.entityTypeHandles.put(a, hTemp);
+						}
+						HGRelType relType= new HGRelType(predName.intern(),h);
+						HGHandle relTypeHandle = this.relTypeHandles.get(predName.intern());
+						if(relTypeHandle==null)
+						{
+							relTypeHandle = this.graph.add(relType);
+							this.relTypeHandles.put(predName.intern(), relTypeHandle);
+						}
+						idx++;
 					}
 				}
 			}
+			br.close();
+			if(idx<=0)
+				return false;
 		}
 		catch(Exception e)
 		{
@@ -156,11 +229,85 @@ public class HyperGDB {
 		return true;
 	}
 
-	
+	public boolean loadEvidence()
+	{
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(new File(this.factloc)));
+			String line;
+			int idx=0;
+			while((line=br.readLine())!=null)
+			{
+				if(!line.startsWith("//") && !line.isEmpty())
+				{
+					line=line.substring(0, line.length()-1);
+					Utils.println(line);
+					String[] predArr = line.split("\\(");
+					String predName = predArr[0];
+					HGHandle relTypeHandle = this.relTypeHandles.get(predName);
+					if(relTypeHandle==null)
+						return false;
+					HGRelType relType = this.graph.get(relTypeHandle);
+					String[] args = predArr[1].replaceAll("\\)", "").split(",");
+					HGHandle[] argHandles = new HGHandle[args.length];
+					for(int i=0;i<args.length;i++)
+					{
+						String a = args[i].trim().replace('"',' ').trim();
+						HGHandle entityTypeHandle = relType.getTargetAt(i);
+						if(entityTypeHandle==null)
+							return false;
+						HGHandle objectHandle = this.graph.getHandle(a.intern());
+						Utils.println("ent Type: "+entityTypeHandle);
+						if(objectHandle==null)
+							objectHandle = this.graph.add(a.intern(), entityTypeHandle);
+						argHandles[i] = objectHandle;
+					}
+					HGRel newRel = new HGRel(predName.intern(),argHandles);
+					this.graph.add(newRel,relTypeHandle);
+					idx++;
+				}
+			}
+			br.close();
+			if(idx<=0)
+				return false;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	public void test()
+	{
+		/*String testp = "Mayukh,Tuborg,Nicks)";
+		testp = testp.replaceAll("\\)", "");
+		Utils.println(testp);
+		String[] t = testp.split(",");
+		for(String x:t)
+		{
+			String n = x;
+			Utils.println(n);
+			HGHandle h = this.graph.add(n.intern());
+		}*/
+		String q = "Person";
+		Utils.println(q);
+		HGHandle ret = this.graph.getHandle(q.intern());
+		Utils.println(ret);
+	}
 
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		HyperGDB hgdb = new HyperGDB("./data/uw-cse_rdn/train0_advisedby/train0_advisedby_bk.txt",
+				"./data/uw-cse_rdn/train0_advisedby/train0_advisedby_facts.txt");
+		if(hgdb.loadSchema())
+			if(hgdb.loadEvidence())
+			{
+				Utils.println("Data loaded!!");
+			}
+			else
+				Utils.println("Data not loaded properly!!");
+		//hgdb.test();
 
 	}
 	

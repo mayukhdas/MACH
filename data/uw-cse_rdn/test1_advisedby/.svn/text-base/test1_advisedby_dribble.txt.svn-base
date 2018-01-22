@@ -1,0 +1,375 @@
+
+% Switching to using a leading '?' to denote a variable.
+% Load '../uw-cse_rdn_bk.txt'.
+
+% Reading file '../Testbeds/uw-cse_rdn/test1_advisedby/../uw-cse_rdn_bk.txt'.
+% Load library file 'listsInLogic'.
+% Reading library 'listsInLogic'.
+
+% Switching to Prolog notation for variables.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+% Switching to Prolog notation for variables.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+% Importing '../uw-cse_rdn_bk.txt' also loaded these libraries: [listsInLogic]
+% Precompute #1's requests: 
+%   count_taughtby(?Person, ?N) :- taughtby(?SomeC, ?Person, ?SomeQ), all([?Course, ?Quarter], taughtby(?Course, ?Person, ?Quarter), ?AllCourses), ?N is length(?AllCourses)
+%   count_publications(?Person, ?N) :- publication(?Somet, ?Person), all(?Title, publication(?Title, ?Person), ?AllTitles), ?N is length(?AllTitles)
+%   count_common_pubs(?P1, ?P2, ?N) :- commonpub(?Somet, ?P1, ?P2), all(?Title, commonpub(?Title, ?P1, ?P2), ?AllTitles), ?N is length(?AllTitles)
+% Precompute #2's requests: 
+%   have_more_than_n_pubs(?A, ?N) :- count_publications(?A, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N
+%   have_more_than_n_common_pubs(?A1, ?A2, ?N) :- count_common_pubs(?A1, ?A2, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N
+
+% Precomputing '../Testbeds/uw-cse_rdn/test1_advisedby/precomputed1.txt'.
+
+%%% Precomputing 3 predicates.
+
+% Saving all provable instances of 'count_taughtby'
+% using clause:   count_taughtby(?Person, ?N) :- taughtby(?SomeC, ?Person, ?SomeQ), all([?Course, ?Quarter], taughtby(?Course, ?Person, ?Quarter), ?AllCourses), ?N is length(?AllCourses)
+
+%  Found 85 proofs of 'count_taughtby(?Person, ?N)'.
+
+% Precomputed a total of 21 facts (and found 64 duplications) from 'count_taughtby(?Person, ?N) :- taughtby(?SomeC, ?Person, ?SomeQ), all([?Course, ?Quarter], taughtby(?Course, ?Person, ?Quarter), ?AllCourses), ?N is length(?AllCourses)'.
+
+
+% Saving all provable instances of 'count_publications'
+% using clause:   count_publications(?Person, ?N) :- publication(?Somet, ?Person), all(?Title, publication(?Title, ?Person), ?AllTitles), ?N is length(?AllTitles)
+
+%  Found 247 proofs of 'count_publications(?Person, ?N)'.
+
+% Precomputed a total of 32 facts (and found 215 duplications) from 'count_publications(?Person, ?N) :- publication(?Somet, ?Person), all(?Title, publication(?Title, ?Person), ?AllTitles), ?N is length(?AllTitles)'.
+
+
+% Saving all provable instances of 'count_common_pubs'
+% using clause:   count_common_pubs(?P1, ?P2, ?N) :- commonpub(?Somet, ?P1, ?P2), all(?Title, commonpub(?Title, ?P1, ?P2), ?AllTitles), ?N is length(?AllTitles)
+
+%  Found 390 proofs of 'count_common_pubs(?P1, ?P2, ?N)'.
+
+% Precomputed a total of 128 facts (and found 262 duplications) from 'count_common_pubs(?P1, ?P2, ?N) :- commonpub(?Somet, ?P1, ?P2), all(?Title, commonpub(?Title, ?P1, ?P2), ?AllTitles), ?N is length(?AllTitles)'.
+
+
+
+%%% Precomputed a total of 181 facts (and found 541 duplications).
+
+% Read an additional 181 facts from java.io.FileReader@5bfc924f.
+
+% Precomputing '../Testbeds/uw-cse_rdn/test1_advisedby/precomputed2.txt'.
+
+%%% Precomputing 2 predicates.
+
+% Saving all provable instances of 'have_more_than_n_pubs'
+% using clause:   have_more_than_n_pubs(?A, ?N) :- count_publications(?A, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N
+
+%  Found 92 proofs of 'have_more_than_n_pubs(?A, ?N)'.
+
+% Precomputed a total of 92 facts (and found 0 duplications) from 'have_more_than_n_pubs(?A, ?N) :- count_publications(?A, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N'.
+
+
+% Saving all provable instances of 'have_more_than_n_common_pubs'
+% using clause:   have_more_than_n_common_pubs(?A1, ?A2, ?N) :- count_common_pubs(?A1, ?A2, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N
+
+%  Found 168 proofs of 'have_more_than_n_common_pubs(?A1, ?A2, ?N)'.
+
+% Precomputed a total of 168 facts (and found 0 duplications) from 'have_more_than_n_common_pubs(?A1, ?A2, ?N) :- count_common_pubs(?A1, ?A2, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N'.
+
+
+
+%%% Precomputed a total of 260 facts (and found 0 duplications).
+
+% Read an additional 260 facts from java.io.FileReader@71f69c90.
+
+% Read 33 pos examples and 5,151 neg examples.  Also read (or created) 14 ILP background rules and 1,175 facts.
+
+% Switching to Prolog notation for variables.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+Pos:advisedby(person368, person180) 0.15919711833156197 10
+0.15919711833156197 1
+Pos:advisedby(person130, person124) 0.15919711833156197 10
+0.15919711833156197 1
+Pos:advisedby(person411, person373) 0.3444731539097947 10
+0.3444731539097947 1
+Pos:advisedby(person426, person179) 0.3205909277902117 10
+0.3205909277902117 1
+Pos:advisedby(person426, person235) 0.3205909277902117 10
+0.3205909277902117 1
+Pos:advisedby(person99, person104) 0.20368452242863053 10
+0.20368452242863053 1
+Pos:advisedby(person212, person180) 0.3444731539097947 10
+0.3444731539097947 1
+Pos:advisedby(person403, person234) 0.20368452242863053 10
+0.20368452242863053 1
+Pos:advisedby(person391, person235) 0.20773886225605576 10
+0.20773886225605576 1
+Pos:advisedby(person253, person101) 0.36905151087169813 10
+0.36905151087169813 1
+Pos:advisedby(person280, person101) 0.19006451127331248 10
+0.19006451127331248 1
+Pos:advisedby(person92, person101) 0.44136038353169177 10
+0.44136038353169177 1
+Pos:advisedby(person419, person101) 0.20368452242863053 10
+0.20368452242863053 1
+Pos:advisedby(person357, person124) 0.20368452242863053 10
+0.20368452242863053 1
+Pos:advisedby(person67, person375) 0.059062623902617496 10
+0.059062623902617496 1
+Pos:advisedby(person67, person98) 0.15919711833156197 10
+0.15919711833156197 1
+Pos:advisedby(person89, person104) 0.44136038353169177 10
+0.44136038353169177 1
+Pos:advisedby(person80, person234) 0.20368452242863053 10
+0.20368452242863053 1
+Pos:advisedby(person376, person179) 0.18890007335932282 10
+0.18890007335932282 1
+Pos:advisedby(person376, person107) 0.20368452242863053 10
+0.20368452242863053 1
+Pos:advisedby(person62, person104) 0.19006451127331248 10
+0.19006451127331248 1
+Pos:advisedby(person218, person101) 0.20368452242863053 10
+0.20368452242863053 1
+Pos:advisedby(person154, person124) 0.18890007335932282 10
+0.18890007335932282 1
+Pos:advisedby(person154, person235) 0.20368452242863053 10
+0.20368452242863053 1
+Pos:advisedby(person204, person104) 0.20368452242863053 10
+0.20368452242863053 1
+Pos:advisedby(person126, person213) 0.29533310173645233 10
+0.29533310173645233 1
+Pos:advisedby(person129, person179) 0.15919711833156197 10
+0.15919711833156197 1
+Pos:advisedby(person129, person234) 0.15919711833156197 10
+0.15919711833156197 1
+Pos:advisedby(person374, person179) 0.15919711833156197 10
+0.15919711833156197 1
+Pos:advisedby(person155, person101) 0.19006451127331248 10
+0.19006451127331248 1
+Pos:advisedby(person100, person104) 0.29533310173645233 10
+0.29533310173645233 1
+Pos:advisedby(person100, person235) 0.36905151087169813 10
+0.36905151087169813 1
+Pos:advisedby(person116, person124) 0.19006451127331248 10
+0.19006451127331248 1
+0.05568345941703214 0
+Neg:advisedby(person190, person123) 0.05568345941703214 10
+0.05568345941703214 0
+Neg:advisedby(person190, person67) 0.05568345941703214 10
+0.05568345941703214 0
+Neg:advisedby(person4, person80) 0.05568345941703214 10
+0.12735745422180828 0
+Neg:advisedby(person391, person375) 0.12735745422180828 10
+0.05568345941703214 0
+Neg:advisedby(person274, person340) 0.05568345941703214 10
+0.05568345941703214 0
+Neg:advisedby(person274, person357) 0.05568345941703214 10
+0.05568345941703214 0
+Neg:advisedby(person129, person280) 0.05568345941703214 10
+0.15919711833156197 0
+Neg:advisedby(person354, person290) 0.15919711833156197 10
+0.09579382002426039 0
+Neg:advisedby(person213, person104) 0.09579382002426039 10
+0.06810590457827263 0
+Neg:advisedby(person155, person84) 0.06810590457827263 10
+0.05568345941703214 0
+Neg:advisedby(person130, person67) 0.05568345941703214 10
+0.09714632537013043 0
+Neg:advisedby(person376, person129) 0.09714632537013043 10
+0.05568345941703214 0
+Neg:advisedby(person297, person368) 0.05568345941703214 10
+0.1027678434462033 0
+Neg:advisedby(person80, person297) 0.1027678434462033 10
+0.18890007335932282 0
+Neg:advisedby(person154, person373) 0.18890007335932282 10
+0.05568345941703214 0
+Neg:advisedby(person22, person22) 0.05568345941703214 10
+0.09714632537013043 0
+Neg:advisedby(person234, person80) 0.09714632537013043 10
+0.05568345941703214 0
+Neg:advisedby(person167, person155) 0.05568345941703214 10
+0.05568345941703214 0
+Neg:advisedby(person223, person274) 0.05568345941703214 10
+0.05568345941703214 0
+Neg:advisedby(person368, person204) 0.05568345941703214 10
+0.09714632537013043 0
+Neg:advisedby(person419, person340) 0.09714632537013043 10
+0.09714632537013043 0
+Neg:advisedby(person82, person391) 0.09714632537013043 10
+0.06810590457827263 0
+Neg:advisedby(person277, person89) 0.06810590457827263 10
+0.06810590457827263 0
+Neg:advisedby(person116, person167) 0.06810590457827263 10
+0.19006451127331248 0
+Neg:advisedby(person116, person373) 0.19006451127331248 10
+0.08600473030424147 0
+Neg:advisedby(person124, person179) 0.08600473030424147 10
+0.15919711833156197 0
+Neg:advisedby(person84, person82) 0.15919711833156197 10
+0.06810590457827263 0
+Neg:advisedby(person187, person391) 0.06810590457827263 10
+0.06810590457827263 0
+Neg:advisedby(person187, person187) 0.06810590457827263 10
+0.17247958223878618 0
+Neg:advisedby(person402, person234) 0.17247958223878618 10
+0.17247958223878618 0
+Neg:advisedby(person402, person290) 0.17247958223878618 10
+0.08600473030424147 0
+Neg:advisedby(person107, person213) 0.08600473030424147 10
+0.16199981910182762 0
+Neg:advisedby(person180, person213) 0.16199981910182762 10
+0.05568345941703214 0
+Neg:advisedby(person198, person277) 0.05568345941703214 10
+0.05568345941703214 0
+Neg:advisedby(person358, person167) 0.05568345941703214 10
+0.05568345941703214 0
+Neg:advisedby(person358, person187) 0.05568345941703214 10
+0.059062623902617496 0
+Neg:advisedby(person358, person375) 0.059062623902617496 10
+0.09714632537013043 0
+Neg:advisedby(person290, person419) 0.09714632537013043 10
+0.08600473030424147 0
+Neg:advisedby(person375, person107) 0.08600473030424147 10
+0.19006451127331248 0
+Neg:advisedby(person19, person235) 0.19006451127331248 10
+0.06810590457827263 0
+Neg:advisedby(person19, person253) 0.06810590457827263 10
+0.07218130501982528 0
+Neg:advisedby(person222, person267) 0.07218130501982528 10
+0.09714632537013043 0
+Neg:advisedby(person99, person222) 0.09714632537013043 10
+0.09714632537013043 0
+Neg:advisedby(person99, person417) 0.09714632537013043 10
+0.05568345941703214 0
+Neg:advisedby(person175, person123) 0.05568345941703214 10
+0.06810590457827263 0
+Neg:advisedby(person62, person116) 0.06810590457827263 10
+0.07218130501982528 0
+Neg:advisedby(person417, person267) 0.07218130501982528 10
+0.09714632537013043 0
+Neg:advisedby(person235, person89) 0.09714632537013043 10
+0.19746612054235005 0
+Neg:advisedby(person255, person426) 0.19746612054235005 10
+0.05568345941703214 0
+Neg:advisedby(person269, person253) 0.05568345941703214 10
+0.08600473030424147 0
+Neg:advisedby(person101, person124) 0.08600473030424147 10
+0.19006451127331248 0
+Neg:advisedby(person280, person235) 0.19006451127331248 10
+0.05568345941703214 0
+Neg:advisedby(person67, person299) 0.05568345941703214 10
+0.05568345941703214 0
+Neg:advisedby(person67, person343) 0.05568345941703214 10
+0.29533310173645233 0
+Neg:advisedby(person100, person179) 0.29533310173645233 10
+0.19746612054235005 0
+Neg:advisedby(person100, person80) 0.19746612054235005 10
+0.08600473030424147 0
+Neg:advisedby(person98, person179) 0.08600473030424147 10
+0.09714632537013043 0
+Neg:advisedby(person98, person374) 0.09714632537013043 10
+0.09714632537013043 0
+Neg:advisedby(person98, person187) 0.09714632537013043 10
+0.09714632537013043 0
+Neg:advisedby(person98, person269) 0.09714632537013043 10
+0.09714632537013043 0
+Neg:advisedby(person212, person190) 0.09714632537013043 10
+0.1027678434462033 0
+Neg:advisedby(person212, person267) 0.1027678434462033 10
+0.09714632537013043 0
+Neg:advisedby(person357, person419) 0.09714632537013043 10
+0.19746612054235005 0
+Neg:advisedby(person126, person167) 0.19746612054235005 10
+total prob: 65.40287781732684/97.0 = 0.6742564723435757
+Precision = 0.42105263157894735
+Recall = 0.9696969696969697
+F1 = 0.5871559633027523

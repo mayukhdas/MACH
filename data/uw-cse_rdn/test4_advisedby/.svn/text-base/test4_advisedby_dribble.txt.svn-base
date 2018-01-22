@@ -1,0 +1,79 @@
+% Load '../uw-cse_rdn_bk.txt'.
+
+% Reading file '../Testbeds/uw-cse_rdn/test4_advisedby/../uw-cse_rdn_bk.txt'.
+% Load library file 'listsInLogic'.
+% Reading library 'listsInLogic'.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+% Importing '../uw-cse_rdn_bk.txt' also loaded these libraries: [listsInLogic]
+
+%%%%%%%%%%%%%%% Switching to NOT using a leading '?' to denote a variable.
+% Precompute #1's requests: 
+%   count_taughtby(Person, N) :- taughtby(SomeC, Person, SomeQ), all([Course, Quarter], taughtby(Course, Person, Quarter), AllCourses), N is length(AllCourses)
+%   count_publications(Person, N) :- publication(Somet, Person), all(Title, publication(Title, Person), AllTitles), N is length(AllTitles)
+%   count_common_pubs(P1, P2, N) :- commonpub(Somet, P1, P2), all(Title, commonpub(Title, P1, P2), AllTitles), N is length(AllTitles)
+% Precompute #2's requests: 
+%   have_more_than_n_pubs(A, N) :- count_publications(A, N2), member(N, [1, 3, 5, 7, 9, 11, 13, 15]), N2 > N
+%   have_more_than_n_common_pubs(A1, A2, N) :- count_common_pubs(A1, A2, N2), member(N, [1, 3, 5, 7, 9, 11, 13, 15]), N2 > N
+
+% Precomputing '../Testbeds/uw-cse_rdn/test4_advisedby/precomputed1.txt'.
+
+%%% Precomputing 3 predicates.
+
+% Saving all provable instances of 'count_taughtby'
+% using clause:   count_taughtby(Person, N) :- taughtby(SomeC, Person, SomeQ), all([Course, Quarter], taughtby(Course, Person, Quarter), AllCourses), N is length(AllCourses)
+
+%  Found 58 proofs of 'count_taughtby(Person, N)'.
+
+% Precomputed a total of 11 facts (and found 47 duplications) from 'count_taughtby(Person, N) :- taughtby(SomeC, Person, SomeQ), all([Course, Quarter], taughtby(Course, Person, Quarter), AllCourses), N is length(AllCourses)'.
+
+
+% Saving all provable instances of 'count_publications'
+% using clause:   count_publications(Person, N) :- publication(Somet, Person), all(Title, publication(Title, Person), AllTitles), N is length(AllTitles)
+
+%  Found 292 proofs of 'count_publications(Person, N)'.
+
+% Precomputed a total of 33 facts (and found 259 duplications) from 'count_publications(Person, N) :- publication(Somet, Person), all(Title, publication(Title, Person), AllTitles), N is length(AllTitles)'.
+
+
+% Saving all provable instances of 'count_common_pubs'
+% using clause:   count_common_pubs(P1, P2, N) :- commonpub(Somet, P1, P2), all(Title, commonpub(Title, P1, P2), AllTitles), N is length(AllTitles)
+
+%  Found 436 proofs of 'count_common_pubs(P1, P2, N)'.
+
+% Precomputed a total of 138 facts (and found 298 duplications) from 'count_common_pubs(P1, P2, N) :- commonpub(Somet, P1, P2), all(Title, commonpub(Title, P1, P2), AllTitles), N is length(AllTitles)'.
+
+
+
+%%% Precomputed a total of 182 facts (and found 604 duplications).
+
+% Read an additional 182 facts from java.io.FileReader@2210a0e.
+
+% Precomputing '../Testbeds/uw-cse_rdn/test4_advisedby/precomputed2.txt'.
+
+%%% Precomputing 2 predicates.
+
+% Saving all provable instances of 'have_more_than_n_pubs'
+% using clause:   have_more_than_n_pubs(A, N) :- count_publications(A, N2), member(N, [1, 3, 5, 7, 9, 11, 13, 15]), N2 > N
+
+%  Found 82 proofs of 'have_more_than_n_pubs(A, N)'.
+
+% Precomputed a total of 82 facts (and found 0 duplications) from 'have_more_than_n_pubs(A, N) :- count_publications(A, N2), member(N, [1, 3, 5, 7, 9, 11, 13, 15]), N2 > N'.
+
+
+% Saving all provable instances of 'have_more_than_n_common_pubs'
+% using clause:   have_more_than_n_common_pubs(A1, A2, N) :- count_common_pubs(A1, A2, N2), member(N, [1, 3, 5, 7, 9, 11, 13, 15]), N2 > N
+
+%  Found 154 proofs of 'have_more_than_n_common_pubs(A1, A2, N)'.
+
+% Precomputed a total of 154 facts (and found 0 duplications) from 'have_more_than_n_common_pubs(A1, A2, N) :- count_common_pubs(A1, A2, N2), member(N, [1, 3, 5, 7, 9, 11, 13, 15]), N2 > N'.
+
+
+
+%%% Precomputed a total of 236 facts (and found 0 duplications).
+
+% Read an additional 236 facts from java.io.FileReader@61ae37b5.
+
+% Read 35 pos examples and 4,589 neg examples.  Also read (or created) 14 ILP background rules and 1,150 facts.

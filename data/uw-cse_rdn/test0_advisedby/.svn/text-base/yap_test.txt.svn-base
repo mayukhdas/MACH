@@ -1,0 +1,195 @@
+% Load '../uw-cse_rdn_bk.txt'.
+
+% Reading file '/u/t/u/tushar/workspace/Testbeds/uw-cse_rdn/test0_advisedby/../uw-cse_rdn_bk.txt'.
+% Load library file 'listsInLogic'.
+% Reading library 'listsInLogic'.
+% Importing '../uw-cse_rdn_bk.txt' also loaded these libraries: [listsInLogic]
+% Precompute #1's requests: 
+%   count_taughtby(?Person, ?N) :- taughtby(?SomeC, ?Person, ?SomeQ), all([?Course, ?Quarter], taughtby(?Course, ?Person, ?Quarter), ?AllCourses), ?N is length(?AllCourses)
+%   count_publications(?Person, ?N) :- publication(?Somet, ?Person), all(?Title, publication(?Title, ?Person), ?AllTitles), ?N is length(?AllTitles)
+%   count_common_pubs(?P1, ?P2, ?N) :- commonpub(?Somet, ?P1, ?P2), all(?Title, commonpub(?Title, ?P1, ?P2), ?AllTitles), ?N is length(?AllTitles)
+% Precompute #2's requests: 
+%   have_more_than_n_pubs(?A, ?N) :- count_publications(?A, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N
+%   have_more_than_n_common_pubs(?A1, ?A2, ?N) :- count_common_pubs(?A1, ?A2, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N
+
+% Precomputing '/u/t/u/tushar/workspace/Testbeds/uw-cse_rdn/test0_advisedby/precomputed1.txt'.
+
+%%% Precomputing 3 predicates.
+
+% Saving all provable instances of 'count_taughtby'
+% using clause:   count_taughtby(?Person, ?N) :- taughtby(?SomeC, ?Person, ?SomeQ), all([?Course, ?Quarter], taughtby(?Course, ?Person, ?Quarter), ?AllCourses), ?N is length(?AllCourses)
+
+%  Found 67 proofs of 'count_taughtby(?Person, ?N)'.
+
+% Precomputed a total of 15 facts (and found 52 duplications) from 'count_taughtby(?Person, ?N) :- taughtby(?SomeC, ?Person, ?SomeQ), all([?Course, ?Quarter], taughtby(?Course, ?Person, ?Quarter), ?AllCourses), ?N is length(?AllCourses)'.
+
+
+% Saving all provable instances of 'count_publications'
+% using clause:   count_publications(?Person, ?N) :- publication(?Somet, ?Person), all(?Title, publication(?Title, ?Person), ?AllTitles), ?N is length(?AllTitles)
+
+%  Found 112 proofs of 'count_publications(?Person, ?N)'.
+
+% Precomputed a total of 12 facts (and found 100 duplications) from 'count_publications(?Person, ?N) :- publication(?Somet, ?Person), all(?Title, publication(?Title, ?Person), ?AllTitles), ?N is length(?AllTitles)'.
+
+
+% Saving all provable instances of 'count_common_pubs'
+% using clause:   count_common_pubs(?P1, ?P2, ?N) :- commonpub(?Somet, ?P1, ?P2), all(?Title, commonpub(?Title, ?P1, ?P2), ?AllTitles), ?N is length(?AllTitles)
+
+%  Found 136 proofs of 'count_common_pubs(?P1, ?P2, ?N)'.
+
+% Precomputed a total of 30 facts (and found 106 duplications) from 'count_common_pubs(?P1, ?P2, ?N) :- commonpub(?Somet, ?P1, ?P2), all(?Title, commonpub(?Title, ?P1, ?P2), ?AllTitles), ?N is length(?AllTitles)'.
+
+
+
+%%% Precomputed a total of 57 facts (and found 258 duplications).
+
+% Read an additional 57 facts from java.io.FileReader@39223bf0.
+
+% Precomputing '/u/t/u/tushar/workspace/Testbeds/uw-cse_rdn/test0_advisedby/precomputed2.txt'.
+
+%%% Precomputing 2 predicates.
+
+% Saving all provable instances of 'have_more_than_n_pubs'
+% using clause:   have_more_than_n_pubs(?A, ?N) :- count_publications(?A, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N
+
+%  Found 49 proofs of 'have_more_than_n_pubs(?A, ?N)'.
+
+% Precomputed a total of 49 facts (and found 0 duplications) from 'have_more_than_n_pubs(?A, ?N) :- count_publications(?A, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N'.
+
+
+% Saving all provable instances of 'have_more_than_n_common_pubs'
+% using clause:   have_more_than_n_common_pubs(?A1, ?A2, ?N) :- count_common_pubs(?A1, ?A2, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N
+
+%  Found 56 proofs of 'have_more_than_n_common_pubs(?A1, ?A2, ?N)'.
+
+% Precomputed a total of 56 facts (and found 0 duplications) from 'have_more_than_n_common_pubs(?A1, ?A2, ?N) :- count_common_pubs(?A1, ?A2, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N'.
+
+
+
+%%% Precomputed a total of 105 facts (and found 0 duplications).
+
+% Read an additional 105 facts from java.io.FileReader@704aa085.
+Neg=2385
+
+% Read 16 pos examples and 2,385 neg examples.  Also read (or created) 14 ILP background rules and 628 facts.
+Initial size of negs: 2385
+Sample prob: 0.013417190775681341
+Final size of negs: 40
+No sampling needed
+For Target: advisedby
+Pos:advisedby(person309, person378) 0.5185960240739774
+0.5185960240739774 1
+Pos:advisedby(person141, person331) 0.17503785353052473
+0.17503785353052473 1
+Pos:advisedby(person288, person165) 0.39240601925658936
+0.39240601925658936 1
+Pos:advisedby(person159, person201) 0.3535162385374955
+0.3535162385374955 1
+Pos:advisedby(person159, person57) 0.34980312255694296
+0.34980312255694296 1
+Pos:advisedby(person226, person324) 0.6249090932008954
+0.6249090932008954 1
+Pos:advisedby(person242, person29) 0.947312155309102
+0.947312155309102 1
+Pos:advisedby(person242, person165) 0.947312155309102
+0.947312155309102 1
+Pos:advisedby(person348, person324) 0.5860758470327361
+0.5860758470327361 1
+Pos:advisedby(person6, person29) 0.8168919541893471
+0.8168919541893471 1
+Pos:advisedby(person6, person165) 0.39240601925658936
+0.39240601925658936 1
+Pos:advisedby(person75, person331) 0.923508192675059
+0.923508192675059 1
+Pos:advisedby(person303, person165) 0.39240601925658936
+0.39240601925658936 1
+Pos:advisedby(person303, person29) 0.8168919541893471
+0.8168919541893471 1
+Pos:advisedby(person249, person331) 0.9516062428258014
+0.9516062428258014 1
+Pos:advisedby(person68, person201) 0.3535162385374955
+0.3535162385374955 1
+0.038032654370546 0
+Neg:advisedby(person364, person6) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person68, person249) 0.038032654370546
+0.818553729399907 0
+Neg:advisedby(person68, person298) 0.818553729399907
+0.4026072942821804 0
+Neg:advisedby(person422, person331) 0.4026072942821804
+0.038032654370546 0
+Neg:advisedby(person172, person397) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person237, person310) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person237, person356) 0.038032654370546
+0.8095714432230093 0
+Neg:advisedby(person237, person298) 0.8095714432230093
+0.038032654370546 0
+Neg:advisedby(person315, person58) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person75, person125) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person75, person278) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person75, person401) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person138, person422) 0.038032654370546
+0.07856026744736234 0
+Neg:advisedby(person57, person324) 0.07856026744736234
+0.038032654370546 0
+Neg:advisedby(person57, person226) 0.038032654370546
+0.03094769318090548 0
+Neg:advisedby(person324, person52) 0.03094769318090548
+0.038032654370546 0
+Neg:advisedby(person6, person383) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person6, person144) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person52, person350) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person52, person23) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person249, person288) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person242, person383) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person242, person390) 0.038032654370546
+0.6650266757343589 0
+Neg:advisedby(person348, person331) 0.6650266757343589
+0.038032654370546 0
+Neg:advisedby(person144, person310) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person144, person23) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person181, person383) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person181, person242) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person77, person242) 0.038032654370546
+0.04096025794717126 0
+Neg:advisedby(person77, person181) 0.04096025794717126
+0.038032654370546 0
+Neg:advisedby(person159, person138) 0.038032654370546
+0.03094769318090548 0
+Neg:advisedby(person378, person57) 0.03094769318090548
+0.038032654370546 0
+Neg:advisedby(person378, person424) 0.038032654370546
+0.3778060299411817 0
+Neg:advisedby(person278, person57) 0.3778060299411817
+0.038032654370546 0
+Neg:advisedby(person278, person58) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person191, person138) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person191, person77) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person23, person390) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person29, person424) 0.038032654370546
+0.038032654370546 0
+Neg:advisedby(person401, person138) 0.038032654370546
+total prob: 45.108201759913676/56.0 = 0.8055036028556014
+Precision = 0.75
+Recall = 0.5625
+F1 = 0.6428571428571429

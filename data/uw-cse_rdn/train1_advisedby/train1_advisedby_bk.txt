@@ -1,0 +1,4 @@
+import: "../uw-cse_rdn_bk.txt". 
+//setParam:topNeg=3.
+//setParam:sampleByResidue=true.
+setParam:influenceTrimming=true.

@@ -1,0 +1,4058 @@
+% Load '../uw-cse_rdn_bk.txt'.
+
+% Reading file '/u/t/u/tushar/workspace/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/../uw-cse_rdn_bk.txt'.
+% Load library file 'listsInLogic'.
+% Reading library 'listsInLogic'.
+% Importing '../uw-cse_rdn_bk.txt' also loaded these libraries: [listsInLogic]
+%   Have read 10,000 items so far from stream.
+%   Have read 20,000 items so far from stream.
+%   Have read 30,000 items so far from stream.
+%   Have read 40,000 items so far from stream.
+%   Have read 50,000 items so far from stream.
+% Precompute #1's requests: 
+%   count_taughtby(?Person, ?N) :- taughtby(?SomeC, ?Person, ?SomeQ), all([?Course, ?Quarter], taughtby(?Course, ?Person, ?Quarter), ?AllCourses), ?N is length(?AllCourses)
+%   count_publications(?Person, ?N) :- publication(?Somet, ?Person), all(?Title, publication(?Title, ?Person), ?AllTitles), ?N is length(?AllTitles)
+%   count_common_pubs(?P1, ?P2, ?N) :- commonpub(?Somet, ?P1, ?P2), all(?Title, commonpub(?Title, ?P1, ?P2), ?AllTitles), ?N is length(?AllTitles)
+% Precompute #2's requests: 
+%   have_more_than_n_pubs(?A, ?N) :- count_publications(?A, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N
+%   have_more_than_n_common_pubs(?A1, ?A2, ?N) :- count_common_pubs(?A1, ?A2, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N
+
+% Precomputing '/u/t/u/tushar/workspace/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/precomputed1.txt'.
+
+%%% Precomputing 3 predicates.
+
+% Saving all provable instances of 'count_taughtby'
+% using clause:   count_taughtby(?Person, ?N) :- taughtby(?SomeC, ?Person, ?SomeQ), all([?Course, ?Quarter], taughtby(?Course, ?Person, ?Quarter), ?AllCourses), ?N is length(?AllCourses)
+
+%  Found 219 proofs of 'count_taughtby(?Person, ?N)'.
+
+% Precomputed a total of 49 facts (and found 170 duplications) from 'count_taughtby(?Person, ?N) :- taughtby(?SomeC, ?Person, ?SomeQ), all([?Course, ?Quarter], taughtby(?Course, ?Person, ?Quarter), ?AllCourses), ?N is length(?AllCourses)'.
+
+
+% Saving all provable instances of 'count_publications'
+% using clause:   count_publications(?Person, ?N) :- publication(?Somet, ?Person), all(?Title, publication(?Title, ?Person), ?AllTitles), ?N is length(?AllTitles)
+
+%  Found 622 proofs of 'count_publications(?Person, ?N)'.
+
+% Precomputed a total of 87 facts (and found 535 duplications) from 'count_publications(?Person, ?N) :- publication(?Somet, ?Person), all(?Title, publication(?Title, ?Person), ?AllTitles), ?N is length(?AllTitles)'.
+
+
+% Saving all provable instances of 'count_common_pubs'
+% using clause:   count_common_pubs(?P1, ?P2, ?N) :- commonpub(?Somet, ?P1, ?P2), all(?Title, commonpub(?Title, ?P1, ?P2), ?AllTitles), ?N is length(?AllTitles)
+
+%  Found 960 proofs of 'count_common_pubs(?P1, ?P2, ?N)'.
+
+% Precomputed a total of 332 facts (and found 628 duplications) from 'count_common_pubs(?P1, ?P2, ?N) :- commonpub(?Somet, ?P1, ?P2), all(?Title, commonpub(?Title, ?P1, ?P2), ?AllTitles), ?N is length(?AllTitles)'.
+
+
+
+%%% Precomputed a total of 468 facts (and found 1,333 duplications).
+
+% Read an additional 468 facts from java.io.FileReader@30c26c8f.
+
+% Precomputing '/u/t/u/tushar/workspace/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/precomputed2.txt'.
+
+%%% Precomputing 2 predicates.
+
+% Saving all provable instances of 'have_more_than_n_pubs'
+% using clause:   have_more_than_n_pubs(?A, ?N) :- count_publications(?A, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N
+
+%  Found 207 proofs of 'have_more_than_n_pubs(?A, ?N)'.
+
+% Precomputed a total of 207 facts (and found 0 duplications) from 'have_more_than_n_pubs(?A, ?N) :- count_publications(?A, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N'.
+
+
+% Saving all provable instances of 'have_more_than_n_common_pubs'
+% using clause:   have_more_than_n_common_pubs(?A1, ?A2, ?N) :- count_common_pubs(?A1, ?A2, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N
+
+%  Found 368 proofs of 'have_more_than_n_common_pubs(?A1, ?A2, ?N)'.
+
+% Precomputed a total of 368 facts (and found 0 duplications) from 'have_more_than_n_common_pubs(?A1, ?A2, ?N) :- count_common_pubs(?A1, ?A2, ?N2), member(?N, [1, 3, 5, 7, 9, 11, 13, 15]), ?N2 > ?N'.
+
+
+
+%%% Precomputed a total of 575 facts (and found 0 duplications).
+
+% Read an additional 575 facts from java.io.FileReader@21bdbf51.
+Neg=52344
+
+% Read 97 pos examples and 52,344 neg examples.  Also read (or created) 14 ILP background rules and 3,139 facts.
+Learn model for: advisedby
+Dataset size:288
+Added theory 1
+
+% STARTING executeOuterLoop()
+%  getNumberOfLearnedClauses() = 0 vs 12
+%  getNumberOfCycles()         = 0 vs 16
+%  getFractionOfPosCovered()   = 0.0 vs 0.900000
+%  getTotal_nodesConsidered()  = 0 vs 10,000,000
+%  getTotal_nodesCreated()     = 0 vs 100,000,000
+%  getClockTimeUsed()          = 0 vs 9,223,372,036,854,775,807
+Time for loop #0 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #1 with strategy=heuristic (created a total of 0 clauses so far and explored 0)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 28 33 125 146 228 240 249 253 279 280
+
+%  Target #0 being learned: 'advisedby(?a, ?b)',
+%  with argument types: [?a[+Person], ?b[+Person]]
+%   typeList:   [signature = [Const, Const], types = [+Person, +Person]]
+%   varList:    [?a, ?b]
+%   specsList:  [?a[+Person], ?b[+Person]]
+% Most-general root: advisedby(?a, ?b).  [covers 288.0/288.0 pos, 0.0/0.0 neg]  score = -Infinity
+% New best node found (score = -0.203): advisedby(?a, ?b) :- professor(?a).  [covers 43.0/288.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.097): advisedby(?a, ?b) :- professor(?b).  [covers 136.0/288.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #1.  It scores=-0.10 and has recall=0.47, precision=1.00, and F1=0.64 (using m-estimates).
+ // It covers 47.2% of the positive examples, 136 of 288,
+(advisedby(?a, ?b) :- professor(?b))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- professor(?b))
+
+Added theory 1
+Time for loop #1 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #2 with strategy=heuristic (created a total of 68 clauses so far and explored 68)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 23 43 73 81 93 99 104 120 126
+% New best node found (score = -0.132): advisedby(?a, ?b) :- professor(?b), professor(?a).  [covers 17.0/136.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #2.  It scores=-0.13 and has recall=0.12, precision=0.99, and F1=0.22 (using m-estimates).
+ // It covers 12.5% of the positive examples, 17 of 136,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b), professor(?a))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- professor(?a))
+
+Added theory 1
+Time for loop #2 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #3 with strategy=heuristic (created a total of 150 clauses so far and explored 150)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 62 66 68 76 82 95 107 111
+% New best node found (score = -0.138): advisedby(?a, ?b) :- professor(?b), publication(?ar, ?a).  [covers 58.0/119.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.122): advisedby(?a, ?b) :- professor(?b), tempadvisedby(?a, ?aw).  [covers 5.0/119.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #3.  It scores=-0.12 and has recall=0.04, precision=0.98, and F1=0.08 (using m-estimates).
+ // It covers 4.2% of the positive examples, 5 of 119,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b), tempadvisedby(?a, ?aw))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- tempadvisedby(?a, ?aw))
+
+Added theory 1
+Time for loop #3 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #4 with strategy=heuristic (created a total of 202 clauses so far and explored 202)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 21 22 23 26 54 57 66 95 102 110
+% New best node found (score = -0.120): advisedby(?a, ?b) :- professor(?b), publication(?bh, ?a).  [covers 58.0/114.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.120): advisedby(?a, ?b) :- professor(?b), publication(?bh, ?b).  [covers 97.0/114.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.116): advisedby(?a, ?b) :- professor(?b), count_common_pubs(?a, ?b, ?bw).  [covers 37.0/114.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #4.  It scores=-0.12 and has recall=0.32, precision=1.00, and F1=0.49 (using m-estimates).
+ // It covers 32.5% of the positive examples, 37 of 114,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b), count_common_pubs(?a, ?b, ?bw))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- count_common_pubs(?a, ?b, ?bw))
+
+Added theory 1
+Time for loop #4 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #5 with strategy=heuristic (created a total of 267 clauses so far and explored 267)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 1 2 13 17 19 44 47 49 50 56
+% New best node found (score = -0.172): advisedby(?a, ?b) :- professor(?b), publication(?bz, ?a).  [covers 21.0/77.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.167): advisedby(?a, ?b) :- professor(?b), publication(?bz, ?b).  [covers 60.0/77.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.165): advisedby(?a, ?b) :- professor(?b), hasposition(?b, faculty).  [covers 68.0/77.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.163): advisedby(?a, ?b) :- professor(?b), inphase(?a, post_quals).  [covers 35.0/77.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.158): advisedby(?a, ?b) :- professor(?b), yearsinprogram(?a, year_4).  [covers 17.0/77.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #5.  It scores=-0.16 and has recall=0.22, precision=0.99, and F1=0.36 (using m-estimates).
+ // It covers 22.1% of the positive examples, 17 of 77,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b), yearsinprogram(?a, year_4))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- yearsinprogram(?a, year_4))
+
+Added theory 1
+Time for loop #5 1
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #6 with strategy=heuristic (created a total of 326 clauses so far and explored 326)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 20 24 26 32 37 38 43 49 52 56
+% New best node found (score = -0.202): advisedby(?a, ?b) :- professor(?b), publication(?cr, ?a).  [covers 12.0/60.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.194): advisedby(?a, ?b) :- professor(?b), publication(?cr, ?b).  [covers 47.0/60.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.194): advisedby(?a, ?b) :- professor(?b), inphase(?a, post_quals).  [covers 24.0/60.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.192): advisedby(?a, ?b) :- professor(?b), yearsinprogram(?a, year_5).  [covers 17.0/60.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #6.  It scores=-0.19 and has recall=0.28, precision=0.99, and F1=0.44 (using m-estimates).
+ // It covers 28.3% of the positive examples, 17 of 60,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b), yearsinprogram(?a, year_5))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- yearsinprogram(?a, year_5))
+
+Added theory 1
+Added theory 2
+Time for loop #6 1
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #7 with strategy=heuristic (created a total of 374 clauses so far and explored 374)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 4 5 7 8 9 11 12 13 14
+% New best node found (score = -0.104): advisedby(?a, ?b) :- professor(?b), yearsinprogram(?a, year_5), publication(?dh, ?a).  [covers 9.0/17.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.101): advisedby(?a, ?b) :- professor(?b), yearsinprogram(?a, year_5), publication(?dh, ?b).  [covers 12.0/17.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.098): advisedby(?a, ?b) :- professor(?b), yearsinprogram(?a, year_5), taughtby(?di, ?b, ?dj).  [covers 13.0/17.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.098): advisedby(?a, ?b) :- professor(?b), yearsinprogram(?a, year_5), hasposition(?b, faculty).  [covers 13.0/17.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.092): advisedby(?a, ?b) :- professor(?b), yearsinprogram(?a, year_5), inphase(?a, post_quals).  [covers 8.0/17.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.084): advisedby(?a, ?b) :- professor(?b), yearsinprogram(?a, year_5), inphase(?a, post_generals).  [covers 7.0/17.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #7.  It scores=-0.08 and has recall=0.41, precision=0.99, and F1=0.58 (using m-estimates).
+ // It covers 41.2% of the positive examples, 7 of 17,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b), yearsinprogram(?a, year_5), inphase(?a, post_generals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_generals))
+
+Time for loop #7 1
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #8 with strategy=heuristic (created a total of 419 clauses so far and explored 419)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 12 21 24 25
+% New best node found (score = -0.210): advisedby(?a, ?b) :- professor(?b), publication(?dz, ?b).  [covers 35.0/43.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.208): advisedby(?a, ?b) :- professor(?b), have_more_than_n_pubs(?b, 1).  [covers 33.0/43.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #8.  It scores=-0.21 and has recall=0.77, precision=1.00, and F1=0.87 (using m-estimates).
+ // It covers 76.7% of the positive examples, 33 of 43,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b), have_more_than_n_pubs(?b, 1))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 1))
+
+Added theory 1
+Added theory 2
+Time for loop #8 1
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #9 with strategy=heuristic (created a total of 459 clauses so far and explored 459)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 2 3 4 5 6 13 15 16 22 23
+% New best node found (score = -0.192): advisedby(?a, ?b) :- professor(?b), have_more_than_n_pubs(?b, 1), inphase(?a, post_quals).  [covers 12.0/33.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.178): advisedby(?a, ?b) :- professor(?b), have_more_than_n_pubs(?b, 1), inphase(?a, pre_quals).  [covers 7.0/33.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #9.  It scores=-0.18 and has recall=0.21, precision=0.99, and F1=0.35 (using m-estimates).
+ // It covers 21.2% of the positive examples, 7 of 33,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b), have_more_than_n_pubs(?b, 1), inphase(?a, pre_quals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, pre_quals))
+
+Time for loop #9 1
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #10 with strategy=heuristic (created a total of 506 clauses so far and explored 506)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 3 4 5 6 7 8 9
+% New best node found (score = -0.238): advisedby(?a, ?b) :- professor(?b), hasposition(?b, faculty).  [covers 7.0/10.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.233): advisedby(?a, ?b) :- professor(?b), inphase(?a, post_generals).  [covers 4.0/10.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.158): advisedby(?a, ?b) :- professor(?b), tempadvisedby(?fm, ?b).  [covers 4.0/10.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #10.  It scores=-0.16 and has recall=0.40, precision=0.98, and F1=0.56 (using m-estimates).
+ // It covers 40.0% of the positive examples, 4 of 10,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b), tempadvisedby(?fm, ?b))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- tempadvisedby(?fm, ?b))
+
+Added theory 1
+Time for loop #10 1
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #11 with strategy=heuristic (created a total of 534 clauses so far and explored 534)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+***** Warning: % Have only 6 positive examples, so cannot choose 10 of them. *****
+
+
+% Have these positive seeds: 0 1 2 3 4 5
+% New best node found (score = -0.111): advisedby(?a, ?b) :- professor(?b), hasposition(?b, faculty_adjunct).  [covers 3.0/6.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.111): advisedby(?a, ?b) :- professor(?b), inphase(?a, post_quals).  [covers 3.0/6.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #11.  It scores=-0.11 and has recall=0.49, precision=0.97, and F1=0.65 (using m-estimates).
+ // It covers 50.0% of the positive examples, 3 of 6,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b), inphase(?a, post_quals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_quals))
+
+
+% ******************************************
+
+%  Have stopped ILP's outer loop because the tree-structured queue is empty.
+
+% ******************************************
+% FOR advisedby(?a, ?b):
+%   if ( professor(?b) )
+%   then if ( professor(?a) )
+%   | then return -0.1418510649004878;  // 17.000 (wgt'ed) examples reached here.
+%   | else if ( tempadvisedby(?a, ?c) )
+%   | | then return -0.1418510649004878;  // 5.000 (wgt'ed) examples reached here.
+%   | | else if ( count_common_pubs(?a, ?b, ?d) )
+%   | | | then return 0.8581489350995115;  // 37.000 (wgt'ed) examples reached here.
+%   | | | else if ( yearsinprogram(?a, year_4) )
+%   | | | | then return 0.8581489350995123;  // 17.000 (wgt'ed) examples reached here.
+%   | | | | else if ( yearsinprogram(?a, year_5) )
+%   | | | | | then if ( inphase(?a, post_generals) )
+%   | | | | | | then return 0.5724346493852266;  // 7.000 (wgt'ed) examples reached here.
+%   | | | | | | else return 0.8581489350995122;  // 10.000 (wgt'ed) examples reached here.
+%   | | | | | else if ( have_more_than_n_pubs(?b, 1) )
+%   | | | | | | then if ( inphase(?a, pre_quals) )
+%   | | | | | | | then return 0.8581489350995123;  // 7.000 (wgt'ed) examples reached here.
+%   | | | | | | | else return 0.5119950889456661;  // 26.000 (wgt'ed) examples reached here.
+%   | | | | | | else if ( tempadvisedby(?e, ?b) )
+%   | | | | | | | then return 0.6081489350995122;  // 4.000 (wgt'ed) examples reached here.
+%   | | | | | | | else  ... <tree too deep>
+%   else return -0.1418510649004881;  // 152.000 (wgt'ed) examples reached here.
+
+
+% Clauses:
+
+advisedby(?a, ?b, -0.1418510649004878) :- 
+   professor(?b),
+   professor(?a). // Clause #1.
+
+advisedby(?a, ?b, -0.1418510649004878) :- 
+   professor(?b),
+   not_inventedPred9(?a),
+   tempadvisedby(?a, ?c). // Clause #2.
+
+advisedby(?a, ?b, 0.8581489350995115) :- 
+   professor(?b),
+   not_inventedPred9(?a),
+   not_inventedPred8(?a, ?c),
+   count_common_pubs(?a, ?b, ?d). // Clause #3.
+
+advisedby(?a, ?b, 0.8581489350995123) :- 
+   professor(?b),
+   not_inventedPred9(?a),
+   not_inventedPred8(?a, ?c),
+   not_inventedPred7(?a, ?b, ?d),
+   yearsinprogram(?a, year_4). // Clause #4.
+
+advisedby(?a, ?b, 0.5724346493852266) :- 
+   professor(?b),
+   not_inventedPred9(?a),
+   not_inventedPred8(?a, ?c),
+   not_inventedPred7(?a, ?b, ?d),
+   not_inventedPred6(?a),
+   yearsinprogram(?a, year_5),
+   inphase(?a, post_generals). // Clause #5.
+
+advisedby(?a, ?b, 0.8581489350995122) :- 
+   professor(?b),
+   not_inventedPred9(?a),
+   not_inventedPred8(?a, ?c),
+   not_inventedPred7(?a, ?b, ?d),
+   not_inventedPred6(?a),
+   yearsinprogram(?a, year_5),
+   not_inventedPred0(?a). // Clause #6.
+
+advisedby(?a, ?b, 0.8581489350995123) :- 
+   professor(?b),
+   not_inventedPred9(?a),
+   not_inventedPred8(?a, ?c),
+   not_inventedPred7(?a, ?b, ?d),
+   not_inventedPred6(?a),
+   not_inventedPred5(?a),
+   have_more_than_n_pubs(?b, 1),
+   inphase(?a, pre_quals). // Clause #7.
+
+advisedby(?a, ?b, 0.5119950889456661) :- 
+   professor(?b),
+   not_inventedPred9(?a),
+   not_inventedPred8(?a, ?c),
+   not_inventedPred7(?a, ?b, ?d),
+   not_inventedPred6(?a),
+   not_inventedPred5(?a),
+   have_more_than_n_pubs(?b, 1),
+   not_inventedPred1(?a). // Clause #8.
+
+advisedby(?a, ?b, 0.6081489350995122) :- 
+   professor(?b),
+   not_inventedPred9(?a),
+   not_inventedPred8(?a, ?c),
+   not_inventedPred7(?a, ?b, ?d),
+   not_inventedPred6(?a),
+   not_inventedPred5(?a),
+   not_inventedPred4(?b),
+   tempadvisedby(?e, ?b). // Clause #9.
+
+advisedby(?a, ?b, 0.19148226843284552) :- 
+   professor(?b),
+   not_inventedPred9(?a),
+   not_inventedPred8(?a, ?c),
+   not_inventedPred7(?a, ?b, ?d),
+   not_inventedPred6(?a),
+   not_inventedPred5(?a),
+   not_inventedPred4(?b),
+   not_inventedPred3(?e, ?b),
+   inphase(?a, post_quals). // Clause #10.
+
+advisedby(?a, ?b, -0.1418510649004878) :- 
+   professor(?b),
+   not_inventedPred9(?a),
+   not_inventedPred8(?a, ?c),
+   not_inventedPred7(?a, ?b, ?d),
+   not_inventedPred6(?a),
+   not_inventedPred5(?a),
+   not_inventedPred4(?b),
+   not_inventedPred3(?e, ?b),
+   not_inventedPred2(?a). // Clause #11.
+
+advisedby(?a, ?b, -0.1418510649004881) :- 
+   not_inventedPred10(?b). // Clause #12.
+
+
+% Supporting Clauses:
+
+not_inventedPred7(?a, ?b, ?d) :- 
+   \+(count_common_pubs(?a, ?b, ?d)). // Supporting Clause #1.
+
+not_inventedPred3(?e, ?b) :- 
+   \+(tempadvisedby(?e, ?b)). // Supporting Clause #2.
+
+not_inventedPred0(?a) :- 
+   \+(inphase(?a, post_generals)). // Supporting Clause #3.
+
+not_inventedPred8(?a, ?c) :- 
+   \+(tempadvisedby(?a, ?c)). // Supporting Clause #4.
+
+not_inventedPred2(?a) :- 
+   \+(inphase(?a, post_quals)). // Supporting Clause #5.
+
+not_inventedPred4(?b) :- 
+   \+(have_more_than_n_pubs(?b, 1)). // Supporting Clause #6.
+
+not_inventedPred6(?a) :- 
+   \+(yearsinprogram(?a, year_4)). // Supporting Clause #7.
+
+not_inventedPred10(?b) :- 
+   \+(professor(?b)). // Supporting Clause #8.
+
+not_inventedPred9(?a) :- 
+   \+(professor(?a)). // Supporting Clause #9.
+
+not_inventedPred1(?a) :- 
+   \+(inphase(?a, pre_quals)). // Supporting Clause #10.
+
+not_inventedPred5(?a) :- 
+   \+(yearsinprogram(?a, year_5)). // Supporting Clause #11.
+
+
+Time for 1 trees:2
+Dataset size:281
+Added theory 1
+
+% STARTING executeOuterLoop()
+%  getNumberOfLearnedClauses() = 0 vs 12
+%  getNumberOfCycles()         = 0 vs 16
+%  getFractionOfPosCovered()   = 0.0 vs 0.900000
+%  getTotal_nodesConsidered()  = 0 vs 10,000,000
+%  getTotal_nodesCreated()     = 0 vs 100,000,000
+%  getClockTimeUsed()          = 0 vs 9,223,372,036,854,775,807
+Time for loop #0 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #1 with strategy=heuristic (created a total of 0 clauses so far and explored 0)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 30 80 246 261 272
+
+%  Target #0 being learned: 'advisedby(?a, ?b)',
+%  with argument types: [?a[+Person], ?b[+Person]]
+%   typeList:   [signature = [Const, Const], types = [+Person, +Person]]
+%   varList:    [?a, ?b]
+%   specsList:  [?a[+Person], ?b[+Person]]
+% Most-general root: advisedby(?a, ?b).  [covers 281.0/281.0 pos, 0.0/0.0 neg]  score = -Infinity
+% New best node found (score = -0.158): advisedby(?a, ?b) :- professor(?a).  [covers 47.0/281.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.092): advisedby(?a, ?b) :- professor(?b).  [covers 141.0/281.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.082): advisedby(?a, ?b) :- hasposition(?b, faculty).  [covers 117.0/281.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #1.  It scores=-0.08 and has recall=0.42, precision=1.00, and F1=0.59 (using m-estimates).
+ // It covers 41.6% of the positive examples, 117 of 281,
+(advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+Added theory 1
+Added theory 2
+Time for loop #1 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #2 with strategy=heuristic (created a total of 68 clauses so far and explored 68)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 26 32 44 47 56 60
+% New best node found (score = -0.129): advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a).  [covers 111.0/117.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #2.  It scores=-0.13 and has recall=0.95, precision=1.00, and F1=0.97 (using m-estimates).
+ // It covers 94.9% of the positive examples, 111 of 117,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- student(?a))
+
+Added theory 2
+Time for loop #2 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #3 with strategy=heuristic (created a total of 114 clauses so far and explored 114)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 46 61 66 69 100 116
+% New best node found (score = -0.032): advisedby(?a, ?b) :- professor(?a).  [covers 41.0/164.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.027): advisedby(?a, ?b) :- student(?b).  [covers 140.0/164.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #3.  It scores=-0.03 and has recall=0.85, precision=1.00, and F1=0.92 (using m-estimates).
+ // It covers 85.4% of the positive examples, 140 of 164,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- student(?b))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- student(?b))
+
+Added theory 2
+Time for loop #3 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #4 with strategy=heuristic (created a total of 170 clauses so far and explored 170)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 9 11 67 82 98 110
+% New best node found (score = -0.127): advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a), publication(?hw, ?a).  [covers 54.0/111.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.125): advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a), inphase(?a, post_generals).  [covers 48.0/111.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #4.  It scores=-0.12 and has recall=0.43, precision=1.00, and F1=0.60 (using m-estimates).
+ // It covers 43.2% of the positive examples, 48 of 111,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a), inphase(?a, post_generals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_generals))
+
+Time for loop #4 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #5 with strategy=heuristic (created a total of 232 clauses so far and explored 232)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 1 7 8 10 13 19
+% New best node found (score = -0.170): advisedby(?a, ?b) :- professor(?a).  [covers 5.0/24.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.161): advisedby(?a, ?b) :- publication(?in, ?b).  [covers 7.0/24.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.150): advisedby(?a, ?b) :- taughtby(?ip, ?b, ?iq).  [covers 17.0/24.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.121): advisedby(?a, ?b) :- inphase(?a, post_generals).  [covers 3.0/24.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #5.  It scores=-0.12 and has recall=0.12, precision=0.97, and F1=0.22 (using m-estimates).
+ // It covers 12.5% of the positive examples, 3 of 24,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- inphase(?a, post_generals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_generals))
+
+Added theory 1
+Time for loop #5 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #6 with strategy=heuristic (created a total of 286 clauses so far and explored 286)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 6 9 11
+% New best node found (score = -0.134): advisedby(?a, ?b) :- professor(?a).  [covers 5.0/21.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.069): advisedby(?a, ?b) :- taughtby(?jf, ?b, ?jg).  [covers 14.0/21.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.069): advisedby(?a, ?b) :- count_taughtby(?b, ?jq).  [covers 14.0/21.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #6.  It scores=-0.07 and has recall=0.66, precision=0.99, and F1=0.80 (using m-estimates).
+ // It covers 66.7% of the positive examples, 14 of 21,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- count_taughtby(?b, ?jq))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- count_taughtby(?b, ?jq))
+
+Added theory 1
+Time for loop #6 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #7 with strategy=heuristic (created a total of 309 clauses so far and explored 309)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 1 2 3 4 6
+% New best node found (score = -0.191): advisedby(?a, ?b) :- publication(?jw, ?a).  [covers 3.0/7.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.161): advisedby(?a, ?b) :- inphase(?a, post_quals).  [covers 4.0/7.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.101): advisedby(?a, ?b) :- yearsinprogram(?a, year_5).  [covers 3.0/7.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #7.  It scores=-0.10 and has recall=0.42, precision=0.97, and F1=0.59 (using m-estimates).
+ // It covers 42.9% of the positive examples, 3 of 7,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- yearsinprogram(?a, year_5))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- yearsinprogram(?a, year_5))
+
+
+% ******************************************
+
+%  Have stopped ILP's outer loop because the tree-structured queue is empty.
+
+% ******************************************
+% FOR advisedby(?a, ?b):
+%   if ( hasposition(?b, faculty) )
+%   then if ( student(?a) )
+%   | then if ( inphase(?a, post_generals) )
+%   | | then return 0.6785267456415042;  // 48.000 (wgt'ed) examples reached here.
+%   | | else return 0.4667440337650695;  // 63.000 (wgt'ed) examples reached here.
+%   | else return -0.12544463852839138;  // 6.000 (wgt'ed) examples reached here.
+%   else if ( student(?b) )
+%   | then return -0.1254446385283912;  // 140.000 (wgt'ed) examples reached here.
+%   | else if ( inphase(?a, post_generals) )
+%   | | then return 0.7409187108880886;  // 3.000 (wgt'ed) examples reached here.
+%   | | else if ( count_taughtby(?b, ?c) )
+%   | | | then return -0.19190833106867172;  // 14.000 (wgt'ed) examples reached here.
+%   | | | else if ( yearsinprogram(?a, year_5) )
+%   | | | | then return 0.7194734122109544;  // 3.000 (wgt'ed) examples reached here.
+%   | | | | else return 0.10388042635157851;  // 4.000 (wgt'ed) examples reached here.
+
+
+% Clauses:
+
+advisedby(?a, ?b, 0.6785267456415042) :- 
+   hasposition(?b, faculty),
+   student(?a),
+   inphase(?a, post_generals). // Clause #1.
+
+advisedby(?a, ?b, 0.4667440337650695) :- 
+   hasposition(?b, faculty),
+   student(?a),
+   not_inventedPred11(?a). // Clause #2.
+
+advisedby(?a, ?b, -0.12544463852839138) :- 
+   hasposition(?b, faculty),
+   not_inventedPred12(?a). // Clause #3.
+
+advisedby(?a, ?b, -0.1254446385283912) :- 
+   not_inventedPred17(?b),
+   student(?b). // Clause #4.
+
+advisedby(?a, ?b, 0.7409187108880886) :- 
+   not_inventedPred17(?b),
+   not_inventedPred16(?b),
+   inphase(?a, post_generals). // Clause #5.
+
+advisedby(?a, ?b, -0.19190833106867172) :- 
+   not_inventedPred17(?b),
+   not_inventedPred16(?b),
+   not_inventedPred15(?a),
+   count_taughtby(?b, ?c). // Clause #6.
+
+advisedby(?a, ?b, 0.7194734122109544) :- 
+   not_inventedPred17(?b),
+   not_inventedPred16(?b),
+   not_inventedPred15(?a),
+   not_inventedPred14(?b, ?c),
+   yearsinprogram(?a, year_5). // Clause #7.
+
+advisedby(?a, ?b, 0.10388042635157851) :- 
+   not_inventedPred17(?b),
+   not_inventedPred16(?b),
+   not_inventedPred15(?a),
+   not_inventedPred14(?b, ?c),
+   not_inventedPred13(?a). // Clause #8.
+
+
+% Supporting Clauses:
+
+not_inventedPred12(?a) :- 
+   \+(student(?a)). // Supporting Clause #1.
+
+not_inventedPred16(?b) :- 
+   \+(student(?b)). // Supporting Clause #2.
+
+not_inventedPred14(?b, ?c) :- 
+   \+(count_taughtby(?b, ?c)). // Supporting Clause #3.
+
+not_inventedPred15(?a) :- 
+   \+(inphase(?a, post_generals)). // Supporting Clause #4.
+
+not_inventedPred13(?a) :- 
+   \+(yearsinprogram(?a, year_5)). // Supporting Clause #5.
+
+not_inventedPred11(?a) :- 
+   \+(inphase(?a, post_generals)). // Supporting Clause #6.
+
+not_inventedPred17(?b) :- 
+   \+(hasposition(?b, faculty)). // Supporting Clause #7.
+
+
+Time for 2 trees:4
+Dataset size:300
+Added theory 1
+
+% STARTING executeOuterLoop()
+%  getNumberOfLearnedClauses() = 0 vs 12
+%  getNumberOfCycles()         = 0 vs 16
+%  getFractionOfPosCovered()   = 0.0 vs 0.900000
+%  getTotal_nodesConsidered()  = 0 vs 10,000,000
+%  getTotal_nodesCreated()     = 0 vs 100,000,000
+%  getClockTimeUsed()          = 0 vs 9,223,372,036,854,775,807
+Time for loop #0 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #1 with strategy=heuristic (created a total of 0 clauses so far and explored 0)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 86 112 123 165 184 229
+
+%  Target #0 being learned: 'advisedby(?a, ?b)',
+%  with argument types: [?a[+Person], ?b[+Person]]
+%   typeList:   [signature = [Const, Const], types = [+Person, +Person]]
+%   varList:    [?a, ?b]
+%   specsList:  [?a[+Person], ?b[+Person]]
+% Most-general root: advisedby(?a, ?b).  [covers 300.0/300.0 pos, 0.0/0.0 neg]  score = -Infinity
+% New best node found (score = -0.110): advisedby(?a, ?b) :- professor(?a).  [covers 61.0/300.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.066): advisedby(?a, ?b) :- professor(?b).  [covers 139.0/300.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.060): advisedby(?a, ?b) :- hasposition(?b, faculty).  [covers 115.0/300.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #1.  It scores=-0.06 and has recall=0.38, precision=1.00, and F1=0.55 (using m-estimates).
+ // It covers 38.3% of the positive examples, 115 of 300,
+(advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+Added theory 1
+Added theory 2
+Time for loop #1 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #2 with strategy=heuristic (created a total of 59 clauses so far and explored 59)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 27 56 83 91 101 105
+% New best node found (score = -0.099): advisedby(?a, ?b) :- hasposition(?b, faculty), professor(?a).  [covers 9.0/115.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #2.  It scores=-0.10 and has recall=0.08, precision=0.99, and F1=0.14 (using m-estimates).
+ // It covers 7.8% of the positive examples, 9 of 115,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), professor(?a))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- professor(?a))
+
+Added theory 2
+Time for loop #2 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #3 with strategy=heuristic (created a total of 134 clauses so far and explored 134)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 2 12 28 43 104 117
+% New best node found (score = -0.019): advisedby(?a, ?b) :- professor(?a).  [covers 52.0/185.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.016): advisedby(?a, ?b) :- professor(?b).  [covers 24.0/185.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.015): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct).  [covers 8.0/185.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #3.  It scores=-0.01 and has recall=0.04, precision=0.99, and F1=0.08 (using m-estimates).
+ // It covers 4.3% of the positive examples, 8 of 185,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct))
+
+Added theory 2
+Time for loop #3 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #4 with strategy=heuristic (created a total of 185 clauses so far and explored 185)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 2 3 4 5 8 9
+% New best node found (score = -0.106): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?mq, ?a).  [covers 54.0/106.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.105): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals).  [covers 15.0/106.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.098): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_1).  [covers 4.0/106.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #4.  It scores=-0.10 and has recall=0.04, precision=0.98, and F1=0.07 (using m-estimates).
+ // It covers 3.8% of the positive examples, 4 of 106,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_1))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- yearsinprogram(?a, year_1))
+
+Added theory 2
+Time for loop #4 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #5 with strategy=heuristic (created a total of 234 clauses so far and explored 234)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 3 4 5
+% New best node found (score = -0.148): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), publication(?ng, ?a).  [covers 3.0/8.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.113): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), inphase(?a, post_quals).  [covers 4.0/8.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.092): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), yearsinprogram(?a, year_5).  [covers 3.0/8.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #5.  It scores=-0.09 and has recall=0.37, precision=0.97, and F1=0.54 (using m-estimates).
+ // It covers 37.5% of the positive examples, 3 of 8,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), yearsinprogram(?a, year_5))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- yearsinprogram(?a, year_5))
+
+Time for loop #5 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #6 with strategy=heuristic (created a total of 260 clauses so far and explored 260)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 17 19 25 30 35 65
+% New best node found (score = -0.096): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?ny, ?a).  [covers 54.0/102.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.095): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?ny, ?b).  [covers 94.0/102.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.094): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals).  [covers 47.0/102.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.093): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_5).  [covers 23.0/102.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.093): advisedby(?a, ?b) :- hasposition(?b, faculty), count_common_pubs(?a, ?b, ?pm).  [covers 35.0/102.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #6.  It scores=-0.09 and has recall=0.34, precision=1.00, and F1=0.51 (using m-estimates).
+ // It covers 34.3% of the positive examples, 35 of 102,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), count_common_pubs(?a, ?b, ?pm))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- count_common_pubs(?a, ?b, ?pm))
+
+Added theory 1
+Time for loop #6 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #7 with strategy=heuristic (created a total of 317 clauses so far and explored 317)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 52 56 60 61 64
+% New best node found (score = -0.141): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?pq, ?a).  [covers 19.0/67.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.138): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?pq, ?b).  [covers 59.0/67.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.135): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_5).  [covers 12.0/67.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.135): advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_pubs(?b, 13).  [covers 17.0/67.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.131): advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_common_pubs(?b, ?py, 11).  [covers 8.0/67.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.128): advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_common_pubs(?b, ?py, 15).  [covers 7.0/67.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #7.  It scores=-0.13 and has recall=0.10, precision=0.99, and F1=0.19 (using m-estimates).
+ // It covers 10.4% of the positive examples, 7 of 67,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_common_pubs(?b, ?py, 15))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_common_pubs(?b, ?py, 15))
+
+Added theory 1
+Added theory 2
+Time for loop #7 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #8 with strategy=heuristic (created a total of 368 clauses so far and explored 368)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 3 4 5
+% New best node found (score = -0.238): advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_common_pubs(?b, ?py, 15), inphase(?a, post_quals).  [covers 4.0/7.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #8.  It scores=-0.24 and has recall=0.56, precision=0.98, and F1=0.71 (using m-estimates).
+ // It covers 57.1% of the positive examples, 4 of 7,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_common_pubs(?b, ?py, 15), inphase(?a, post_quals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_quals))
+
+Time for loop #8 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #9 with strategy=heuristic (created a total of 454 clauses so far and explored 454)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 5 11 17 19 27 49
+% New best node found (score = -0.114): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?qy, ?a).  [covers 18.0/60.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.112): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?qy, ?b).  [covers 52.0/60.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.110): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_5).  [covers 12.0/60.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #9.  It scores=-0.11 and has recall=0.20, precision=0.99, and F1=0.33 (using m-estimates).
+ // It covers 20.0% of the positive examples, 12 of 60,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_5))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- yearsinprogram(?a, year_5))
+
+Added theory 1
+Time for loop #9 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #10 with strategy=heuristic (created a total of 490 clauses so far and explored 490)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 5 8 16 19
+% New best node found (score = -0.135): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?rq, ?a).  [covers 12.0/48.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.134): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?rq, ?b).  [covers 42.0/48.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.134): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals).  [covers 23.0/48.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.133): advisedby(?a, ?b) :- hasposition(?b, faculty), tempadvisedby(?ru, ?b).  [covers 28.0/48.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.133): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_4).  [covers 18.0/48.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #10.  It scores=-0.13 and has recall=0.37, precision=0.99, and F1=0.54 (using m-estimates).
+ // It covers 37.5% of the positive examples, 18 of 48,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_4))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- yearsinprogram(?a, year_4))
+
+Added theory 1
+Added theory 2
+Time for loop #10 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #11 with strategy=heuristic (created a total of 532 clauses so far and explored 532)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 1 10 14 15
+% New best node found (score = -0.049): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_4), publication(?sg, ?a).  [covers 10.0/18.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.044): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_4), ta(?sn, ?a, ?sp).  [covers 6.0/18.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.044): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_4), have_more_than_n_pubs(?b, 9).  [covers 5.0/18.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.041): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_4), have_more_than_n_pubs(?b, 11).  [covers 4.0/18.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.036): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_4), have_more_than_n_common_pubs(?b, ?sq, 7).  [covers 3.0/18.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #11.  It scores=-0.04 and has recall=0.17, precision=0.97, and F1=0.28 (using m-estimates).
+ // It covers 16.7% of the positive examples, 3 of 18,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_4), have_more_than_n_common_pubs(?b, ?sq, 7))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_common_pubs(?b, ?sq, 7))
+
+Time for loop #11 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #12 with strategy=heuristic (created a total of 571 clauses so far and explored 571)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 2 17 19 20
+% New best node found (score = -0.174): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals).  [covers 11.0/30.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.166): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_3).  [covers 14.0/30.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.164): advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_pubs(?b, 9).  [covers 11.0/30.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #12.  It scores=-0.16 and has recall=0.37, precision=0.99, and F1=0.53 (using m-estimates).
+ // It covers 36.7% of the positive examples, 11 of 30,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_pubs(?b, 9))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 9))
+
+Added theory 1
+Added theory 2
+
+% ******************************************
+
+% Have stopped ILP's outer loop because have reached the maximum number of learned clauses (12).
+
+% ******************************************
+% FOR advisedby(?a, ?b):
+%   if ( hasposition(?b, faculty) )
+%   then if ( professor(?a) )
+%   | then return -0.11231637819360639;  // 9.000 (wgt'ed) examples reached here.
+%   | else if ( yearsinprogram(?a, year_1) )
+%   | | then return -0.020503196849890548;  // 4.000 (wgt'ed) examples reached here.
+%   | | else if ( count_common_pubs(?a, ?b, ?c) )
+%   | | | then return 0.5756810069786686;  // 35.000 (wgt'ed) examples reached here.
+%   | | | else if ( have_more_than_n_common_pubs(?b, ?d, 15) )
+%   | | | | then if ( inphase(?a, post_quals) )
+%   | | | | | then return 0.15554786573406384;  // 4.000 (wgt'ed) examples reached here.
+%   | | | | | else return 0.04164270677213927;  // 3.000 (wgt'ed) examples reached here.
+%   | | | | else if ( yearsinprogram(?a, year_5) )
+%   | | | | | then return 0.623808767505783;  // 12.000 (wgt'ed) examples reached here.
+%   | | | | | else if ( yearsinprogram(?a, year_4) )
+%   | | | | | | then if ( have_more_than_n_common_pubs(?b, ?e, 7) )
+%   | | | | | | | then return 0.2662123073861182;  // 3.000 (wgt'ed) examples reached here.
+%   | | | | | | | else return 0.6063641075025323;  // 15.000 (wgt'ed) examples reached here.
+%   | | | | | | else if ( have_more_than_n_pubs(?b, 9) )
+%   | | | | | | | then  ... <tree too deep>
+%   | | | | | | | else  ... <tree too deep>
+%   else if ( hasposition(?b, faculty_adjunct) )
+%   | then if ( yearsinprogram(?a, year_5) )
+%   | | then return 0.5553664367462845;  // 3.000 (wgt'ed) examples reached here.
+%   | | else return 0.05121772133543301;  // 5.000 (wgt'ed) examples reached here.
+%   | else return -0.10325171843733369;  // 177.000 (wgt'ed) examples reached here.
+
+
+% Clauses:
+
+advisedby(?a, ?b, -0.11231637819360639) :- 
+   hasposition(?b, faculty),
+   professor(?a). // Clause #1.
+
+advisedby(?a, ?b, -0.020503196849890548) :- 
+   hasposition(?b, faculty),
+   not_inventedPred25(?a),
+   yearsinprogram(?a, year_1). // Clause #2.
+
+advisedby(?a, ?b, 0.5756810069786686) :- 
+   hasposition(?b, faculty),
+   not_inventedPred25(?a),
+   not_inventedPred24(?a),
+   count_common_pubs(?a, ?b, ?c). // Clause #3.
+
+advisedby(?a, ?b, 0.15554786573406384) :- 
+   hasposition(?b, faculty),
+   not_inventedPred25(?a),
+   not_inventedPred24(?a),
+   not_inventedPred23(?a, ?b, ?c),
+   have_more_than_n_common_pubs(?b, ?d, 15),
+   inphase(?a, post_quals). // Clause #4.
+
+advisedby(?a, ?b, 0.04164270677213927) :- 
+   hasposition(?b, faculty),
+   not_inventedPred25(?a),
+   not_inventedPred24(?a),
+   not_inventedPred23(?a, ?b, ?c),
+   have_more_than_n_common_pubs(?b, ?d, 15),
+   not_inventedPred18(?a). // Clause #5.
+
+advisedby(?a, ?b, 0.623808767505783) :- 
+   hasposition(?b, faculty),
+   not_inventedPred25(?a),
+   not_inventedPred24(?a),
+   not_inventedPred23(?a, ?b, ?c),
+   not_inventedPred22(?b, ?d),
+   yearsinprogram(?a, year_5). // Clause #6.
+
+advisedby(?a, ?b, 0.2662123073861182) :- 
+   hasposition(?b, faculty),
+   not_inventedPred25(?a),
+   not_inventedPred24(?a),
+   not_inventedPred23(?a, ?b, ?c),
+   not_inventedPred22(?b, ?d),
+   not_inventedPred21(?a),
+   yearsinprogram(?a, year_4),
+   have_more_than_n_common_pubs(?b, ?e, 7). // Clause #7.
+
+advisedby(?a, ?b, 0.6063641075025323) :- 
+   hasposition(?b, faculty),
+   not_inventedPred25(?a),
+   not_inventedPred24(?a),
+   not_inventedPred23(?a, ?b, ?c),
+   not_inventedPred22(?b, ?d),
+   not_inventedPred21(?a),
+   yearsinprogram(?a, year_4),
+   not_inventedPred19(?b, ?e). // Clause #8.
+
+advisedby(?a, ?b, 0.5553664367462845) :- 
+   not_inventedPred28(?b),
+   hasposition(?b, faculty_adjunct),
+   yearsinprogram(?a, year_5). // Clause #9.
+
+advisedby(?a, ?b, 0.05121772133543301) :- 
+   not_inventedPred28(?b),
+   hasposition(?b, faculty_adjunct),
+   not_inventedPred26(?a). // Clause #10.
+
+advisedby(?a, ?b, -0.10325171843733369) :- 
+   not_inventedPred28(?b),
+   not_inventedPred27(?b). // Clause #11.
+
+
+% Supporting Clauses:
+
+not_inventedPred23(?a, ?b, ?c) :- 
+   \+(count_common_pubs(?a, ?b, ?c)). // Supporting Clause #1.
+
+not_inventedPred26(?a) :- 
+   \+(yearsinprogram(?a, year_5)). // Supporting Clause #2.
+
+not_inventedPred18(?a) :- 
+   \+(inphase(?a, post_quals)). // Supporting Clause #3.
+
+not_inventedPred19(?b, ?e) :- 
+   \+(have_more_than_n_common_pubs(?b, ?e, 7)). // Supporting Clause #4.
+
+not_inventedPred27(?b) :- 
+   \+(hasposition(?b, faculty_adjunct)). // Supporting Clause #5.
+
+not_inventedPred24(?a) :- 
+   \+(yearsinprogram(?a, year_1)). // Supporting Clause #6.
+
+not_inventedPred28(?b) :- 
+   \+(hasposition(?b, faculty)). // Supporting Clause #7.
+
+not_inventedPred22(?b, ?d) :- 
+   \+(have_more_than_n_common_pubs(?b, ?d, 15)). // Supporting Clause #8.
+
+not_inventedPred20(?a) :- 
+   \+(yearsinprogram(?a, year_4)). // Supporting Clause #9.
+
+not_inventedPred21(?a) :- 
+   \+(yearsinprogram(?a, year_5)). // Supporting Clause #10.
+
+not_inventedPred25(?a) :- 
+   \+(professor(?a)). // Supporting Clause #11.
+
+
+Time for 3 trees:6
+Dataset size:265
+Added theory 3
+
+% STARTING executeOuterLoop()
+%  getNumberOfLearnedClauses() = 0 vs 12
+%  getNumberOfCycles()         = 0 vs 16
+%  getFractionOfPosCovered()   = 0.0 vs 0.900000
+%  getTotal_nodesConsidered()  = 0 vs 10,000,000
+%  getTotal_nodesCreated()     = 0 vs 100,000,000
+%  getClockTimeUsed()          = 0 vs 9,223,372,036,854,775,807
+Time for loop #0 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #1 with strategy=heuristic (created a total of 0 clauses so far and explored 0)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 3 5 6 7 8
+% New best node found (score = -0.066): advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_pubs(?b, 9), inphase(?a, post_quals).  [covers 5.0/11.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.061): advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_pubs(?b, 9), yearsinprogram(?a, year_3).  [covers 7.0/11.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.061): advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_pubs(?b, 9), ta(?nk, ?a, ?nm).  [covers 8.0/11.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #1.  It scores=-0.06 and has recall=0.72, precision=0.99, and F1=0.83 (using m-estimates).
+ // It covers 72.7% of the positive examples, 8 of 11,
+(advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_pubs(?b, 9), ta(?nk, ?a, ?nm))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- ta(?nk, ?a, ?nm))
+
+Time for loop #1 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #2 with strategy=heuristic (created a total of 43 clauses so far and explored 43)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 10 11 16 18
+% New best node found (score = -0.207): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals).  [covers 8.0/19.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.204): advisedby(?a, ?b) :- hasposition(?b, faculty), tempadvisedby(?tr, ?b).  [covers 14.0/19.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.198): advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_pubs(?b, 3).  [covers 8.0/19.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #2.  It scores=-0.20 and has recall=0.42, precision=0.99, and F1=0.59 (using m-estimates).
+ // It covers 42.1% of the positive examples, 8 of 19,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_pubs(?b, 3))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3))
+
+Added theory 2
+Added theory 3
+Time for loop #2 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #3 with strategy=heuristic (created a total of 67 clauses so far and explored 67)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 72 147 179 256
+
+%  Target #0 being learned: 'advisedby(?a, ?b)',
+%  with argument types: [?a[+Person], ?b[+Person]]
+%   typeList:   [signature = [Const, Const], types = [+Person, +Person]]
+%   varList:    [?a, ?b]
+%   specsList:  [?a[+Person], ?b[+Person]]
+% Most-general root: advisedby(?a, ?b).  [covers 265.0/265.0 pos, 0.0/0.0 neg]  score = -Infinity
+% New best node found (score = -0.102): advisedby(?a, ?b) :- professor(?a).  [covers 24.0/265.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.061): advisedby(?a, ?b) :- professor(?b).  [covers 128.0/265.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.061): advisedby(?a, ?b) :- hasposition(?b, faculty).  [covers 110.0/265.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #3.  It scores=-0.06 and has recall=0.41, precision=1.00, and F1=0.59 (using m-estimates).
+ // It covers 41.5% of the positive examples, 110 of 265,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+Added theory 3
+Added theory 4
+Time for loop #3 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #4 with strategy=heuristic (created a total of 128 clauses so far and explored 128)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 4 6 7
+% New best node found (score = -0.221): advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_pubs(?b, 3), inphase(?a, post_generals).  [covers 5.0/8.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.217): advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_pubs(?b, 3), tempadvisedby(?uz, ?b).  [covers 5.0/8.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #4.  It scores=-0.22 and has recall=0.62, precision=0.98, and F1=0.76 (using m-estimates).
+ // It covers 62.5% of the positive examples, 5 of 8,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_pubs(?b, 3), tempadvisedby(?uz, ?b))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- tempadvisedby(?uz, ?b))
+
+Time for loop #4 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #5 with strategy=heuristic (created a total of 161 clauses so far and explored 161)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 3 4 6 7
+% New best node found (score = -0.152): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals).  [covers 3.0/11.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #5.  It scores=-0.15 and has recall=0.27, precision=0.97, and F1=0.42 (using m-estimates).
+ // It covers 27.3% of the positive examples, 3 of 11,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_generals))
+
+Added theory 3
+Time for loop #5 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #6 with strategy=heuristic (created a total of 186 clauses so far and explored 186)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 9 28 37 56 61 90
+% New best node found (score = -0.117): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?wd, ?a).  [covers 58.0/110.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.107): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?wd, ?b).  [covers 94.0/110.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.103): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_3).  [covers 14.0/110.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #6.  It scores=-0.10 and has recall=0.13, precision=0.99, and F1=0.23 (using m-estimates).
+ // It covers 12.7% of the positive examples, 14 of 110,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_3))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- yearsinprogram(?a, year_3))
+
+Added theory 3
+Time for loop #6 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #7 with strategy=heuristic (created a total of 236 clauses so far and explored 236)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 5 27 29 42 52 53
+% New best node found (score = -0.020): advisedby(?a, ?b) :- professor(?a).  [covers 22.0/155.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.016): advisedby(?a, ?b) :- professor(?b).  [covers 18.0/155.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.015): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct).  [covers 6.0/155.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #7.  It scores=-0.01 and has recall=0.04, precision=0.98, and F1=0.07 (using m-estimates).
+ // It covers 3.9% of the positive examples, 6 of 155,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct))
+
+Added theory 3
+Added theory 4
+Time for loop #7 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #8 with strategy=heuristic (created a total of 286 clauses so far and explored 286)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 3 4 6
+% New best node found (score = -0.207): advisedby(?a, ?b) :- hasposition(?b, faculty), ta(?xt, ?a, ?xu).  [covers 3.0/8.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #8.  It scores=-0.21 and has recall=0.37, precision=0.97, and F1=0.54 (using m-estimates).
+ // It covers 37.5% of the positive examples, 3 of 8,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), ta(?xt, ?a, ?xu))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- ta(?xt, ?a, ?xu))
+
+Time for loop #8 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #9 with strategy=heuristic (created a total of 307 clauses so far and explored 307)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 19 22 34 41 49 56
+% New best node found (score = -0.118): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?yd, ?a).  [covers 58.0/96.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.109): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?yd, ?b).  [covers 80.0/96.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.108): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals).  [covers 48.0/96.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #9.  It scores=-0.11 and has recall=0.50, precision=1.00, and F1=0.67 (using m-estimates).
+ // It covers 50.0% of the positive examples, 48 of 96,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_generals))
+
+Added theory 3
+Added theory 4
+Time for loop #9 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #10 with strategy=heuristic (created a total of 352 clauses so far and explored 352)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 3 4 5
+% New best node found (score = -0.108): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), publication(?yv, ?a).  [covers 3.0/6.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.050): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), inphase(?a, post_quals).  [covers 3.0/6.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #10.  It scores=-0.05 and has recall=0.49, precision=0.97, and F1=0.65 (using m-estimates).
+ // It covers 50.0% of the positive examples, 3 of 6,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), inphase(?a, post_quals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_quals))
+
+Time for loop #10 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #11 with strategy=heuristic (created a total of 385 clauses so far and explored 385)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 31 32 51 54 64 91
+% New best node found (score = -0.011): advisedby(?a, ?b) :- professor(?a).  [covers 20.0/149.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.010): advisedby(?a, ?b) :- student(?b).  [covers 137.0/149.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.010): advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 5).  [covers 20.0/149.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #11.  It scores=-0.0096 and has recall=0.13, precision=1.00, and F1=0.24 (using m-estimates).
+ // It covers 13.4% of the positive examples, 20 of 149,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 5))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 5))
+
+Added theory 3
+Time for loop #11 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #12 with strategy=heuristic (created a total of 437 clauses so far and explored 437)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 14 26 27 44
+% New best node found (score = -0.048): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals), publication(?abd, ?a).  [covers 35.0/48.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #12.  It scores=-0.05 and has recall=0.73, precision=1.00, and F1=0.84 (using m-estimates).
+ // It covers 72.9% of the positive examples, 35 of 48,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals), publication(?abd, ?a))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- publication(?abd, ?a))
+
+
+% ******************************************
+
+% Have stopped ILP's outer loop because have reached the maximum number of learned clauses (12).
+
+% ******************************************
+% FOR advisedby(?a, ?b):
+%   if ( hasposition(?b, faculty) )
+%   then if ( yearsinprogram(?a, year_3) )
+%   | then return 0.6676271871940821;  // 14.000 (wgt'ed) examples reached here.
+%   | else if ( inphase(?a, post_generals) )
+%   | | then if ( publication(?c, ?a) )
+%   | | | then return 0.3519584156998498;  // 35.000 (wgt'ed) examples reached here.
+%   | | | else return 0.5701686499789748;  // 13.000 (wgt'ed) examples reached here.
+%   | | else if ( true )
+%   | | | then ???
+%   | | | else ???
+%   else if ( hasposition(?b, faculty_adjunct) )
+%   | then if ( inphase(?a, post_quals) )
+%   | | then return 0.548517107257061;  // 3.000 (wgt'ed) examples reached here.
+%   | | else return 0.05441233439838397;  // 3.000 (wgt'ed) examples reached here.
+%   | else if ( have_more_than_n_pubs(?b, 5) )
+%   | | then if ( true )
+%   | | | then ???
+%   | | | else ???
+%   | | else return -0.10618374334296322;  // 129.000 (wgt'ed) examples reached here.
+
+
+% Clauses:
+
+advisedby(?a, ?b, 0.6676271871940821) :- 
+   hasposition(?b, faculty),
+   yearsinprogram(?a, year_3). // Clause #1.
+
+advisedby(?a, ?b, 0.3519584156998498) :- 
+   hasposition(?b, faculty),
+   not_inventedPred30(?a),
+   inphase(?a, post_generals),
+   publication(?c, ?a). // Clause #2.
+
+advisedby(?a, ?b, 0.5701686499789748) :- 
+   hasposition(?b, faculty),
+   not_inventedPred30(?a),
+   inphase(?a, post_generals),
+   not_inventedPred29(?c, ?a). // Clause #3.
+
+advisedby(?a, ?b, 0.548517107257061) :- 
+   not_inventedPred34(?b),
+   hasposition(?b, faculty_adjunct),
+   inphase(?a, post_quals). // Clause #4.
+
+advisedby(?a, ?b, 0.05441233439838397) :- 
+   not_inventedPred34(?b),
+   hasposition(?b, faculty_adjunct),
+   not_inventedPred31(?a). // Clause #5.
+
+advisedby(?a, ?b, -0.10618374334296322) :- 
+   not_inventedPred34(?b),
+   not_inventedPred33(?b),
+   not_inventedPred32(?b). // Clause #6.
+
+
+% Supporting Clauses:
+
+not_inventedPred34(?b) :- 
+   \+(hasposition(?b, faculty)). // Supporting Clause #1.
+
+not_inventedPred31(?a) :- 
+   \+(inphase(?a, post_quals)). // Supporting Clause #2.
+
+not_inventedPred29(?c, ?a) :- 
+   \+(publication(?c, ?a)). // Supporting Clause #3.
+
+not_inventedPred32(?b) :- 
+   \+(have_more_than_n_pubs(?b, 5)). // Supporting Clause #4.
+
+not_inventedPred30(?a) :- 
+   \+(yearsinprogram(?a, year_3)). // Supporting Clause #5.
+
+not_inventedPred33(?b) :- 
+   \+(hasposition(?b, faculty_adjunct)). // Supporting Clause #6.
+
+
+Time for 4 trees:8
+Dataset size:284
+Added theory 3
+
+% STARTING executeOuterLoop()
+%  getNumberOfLearnedClauses() = 0 vs 12
+%  getNumberOfCycles()         = 0 vs 16
+%  getFractionOfPosCovered()   = 0.0 vs 0.900000
+%  getTotal_nodesConsidered()  = 0 vs 10,000,000
+%  getTotal_nodesCreated()     = 0 vs 100,000,000
+%  getClockTimeUsed()          = 0 vs 9,223,372,036,854,775,807
+Time for loop #0 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #1 with strategy=heuristic (created a total of 0 clauses so far and explored 0)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 4 16 25 37
+% New best node found (score = -0.150): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?mb, ?a).  [covers 23.0/48.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.150): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?mb, ?b).  [covers 35.0/48.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.114): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals).  [covers 28.0/48.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #1.  It scores=-0.11 and has recall=0.58, precision=1.00, and F1=0.73 (using m-estimates).
+ // It covers 58.3% of the positive examples, 28 of 48,
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_quals))
+
+Added theory 3
+Added theory 4
+Time for loop #1 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #2 with strategy=heuristic (created a total of 47 clauses so far and explored 47)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 2 5 7 9 17 18
+% New best node found (score = -0.042): advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 5), professor(?b).  [covers 6.0/20.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.019): advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 5), inphase(?a, post_generals).  [covers 4.0/20.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #2.  It scores=-0.02 and has recall=0.20, precision=0.98, and F1=0.33 (using m-estimates).
+ // It covers 20.0% of the positive examples, 4 of 20,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 5), inphase(?a, post_generals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_generals))
+
+Time for loop #2 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #3 with strategy=heuristic (created a total of 88 clauses so far and explored 88)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 10 31 46 72 118 123
+
+%  Target #0 being learned: 'advisedby(?a, ?b)',
+%  with argument types: [?a[+Person], ?b[+Person]]
+%   typeList:   [signature = [Const, Const], types = [+Person, +Person]]
+%   varList:    [?a, ?b]
+%   specsList:  [?a[+Person], ?b[+Person]]
+% Most-general root: advisedby(?a, ?b).  [covers 284.0/284.0 pos, 0.0/0.0 neg]  score = -Infinity
+% New best node found (score = -0.062): advisedby(?a, ?b) :- professor(?b).  [covers 140.0/284.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.059): advisedby(?a, ?b) :- hasposition(?b, faculty).  [covers 118.0/284.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #3.  It scores=-0.06 and has recall=0.42, precision=1.00, and F1=0.59 (using m-estimates).
+ // It covers 41.5% of the positive examples, 118 of 284,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+Added theory 3
+Added theory 4
+Time for loop #3 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #4 with strategy=heuristic (created a total of 167 clauses so far and explored 167)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 2 8 10 14 18 23
+% New best node found (score = -0.080): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals), publication(?acz, ?a).  [covers 17.0/28.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.077): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals), tempadvisedby(?add, ?b).  [covers 18.0/28.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.076): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals), have_more_than_n_pubs(?a, 1).  [covers 11.0/28.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.075): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals), have_more_than_n_pubs(?b, 11).  [covers 8.0/28.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #4.  It scores=-0.08 and has recall=0.28, precision=0.99, and F1=0.44 (using m-estimates).
+ // It covers 28.6% of the positive examples, 8 of 28,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals), have_more_than_n_pubs(?b, 11))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 11))
+
+Time for loop #4 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #5 with strategy=heuristic (created a total of 210 clauses so far and explored 210)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 6 7 9 15 16 18
+% New best node found (score = -0.159): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?adr, ?a).  [covers 6.0/20.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.158): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?adr, ?b).  [covers 12.0/20.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.149): advisedby(?a, ?b) :- hasposition(?b, faculty), projectmember(?adu, ?b).  [covers 3.0/20.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.109): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals).  [covers 10.0/20.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #5.  It scores=-0.11 and has recall=0.50, precision=0.99, and F1=0.66 (using m-estimates).
+ // It covers 50.0% of the positive examples, 10 of 20,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, pre_quals))
+
+Added theory 3
+Time for loop #5 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #6 with strategy=heuristic (created a total of 252 clauses so far and explored 252)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 43 46 51 63 75 102
+% New best node found (score = -0.104): advisedby(?a, ?b) :- hasposition(?b, faculty), professor(?a).  [covers 7.0/118.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #6.  It scores=-0.10 and has recall=0.06, precision=0.99, and F1=0.11 (using m-estimates).
+ // It covers 5.9% of the positive examples, 7 of 118,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), professor(?a))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- professor(?a))
+
+Added theory 3
+Time for loop #6 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #7 with strategy=heuristic (created a total of 303 clauses so far and explored 303)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 40 42 52 90 116 149
+% New best node found (score = -0.020): advisedby(?a, ?b) :- professor(?a).  [covers 36.0/166.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.019): advisedby(?a, ?b) :- professor(?b).  [covers 22.0/166.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.019): advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3).  [covers 17.0/166.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #7.  It scores=-0.02 and has recall=0.10, precision=0.99, and F1=0.19 (using m-estimates).
+ // It covers 10.2% of the positive examples, 17 of 166,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3))
+
+Added theory 3
+Added theory 4
+Time for loop #7 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #8 with strategy=heuristic (created a total of 348 clauses so far and explored 348)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 1 5 8
+% New best node found (score = -0.199): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals), publication(?afr, ?a).  [covers 4.0/10.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.179): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals), publication(?afr, ?b).  [covers 5.0/10.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.179): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals), have_more_than_n_pubs(?b, 1).  [covers 5.0/10.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #8.  It scores=-0.18 and has recall=0.50, precision=0.98, and F1=0.66 (using m-estimates).
+ // It covers 50.0% of the positive examples, 5 of 10,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals), have_more_than_n_pubs(?b, 1))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 1))
+
+Time for loop #8 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #9 with strategy=heuristic (created a total of 388 clauses so far and explored 388)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 29 68 107
+% New best node found (score = -0.111): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?agh, ?a).  [covers 56.0/111.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.111): advisedby(?a, ?b) :- hasposition(?b, faculty), taughtby(?agi, ?b, ?agj).  [covers 106.0/111.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.109): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals).  [covers 12.0/111.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.106): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_3).  [covers 15.0/111.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #9.  It scores=-0.11 and has recall=0.14, precision=0.99, and F1=0.24 (using m-estimates).
+ // It covers 13.5% of the positive examples, 15 of 111,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_3))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- yearsinprogram(?a, year_3))
+
+Added theory 3
+Added theory 4
+Time for loop #9 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #10 with strategy=heuristic (created a total of 435 clauses so far and explored 435)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 1 4 6 8 11 12
+% New best node found (score = -0.000276): advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3), professor(?b).  [covers 3.0/17.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #10.  It scores=-0.00028 and has recall=0.18, precision=0.97, and F1=0.30 (using m-estimates).
+ // It covers 17.6% of the positive examples, 3 of 17,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3), professor(?b))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- professor(?b))
+
+Time for loop #10 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #11 with strategy=heuristic (created a total of 501 clauses so far and explored 501)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 17 138
+% New best node found (score = -0.013): advisedby(?a, ?b) :- student(?a).  [covers 118.0/149.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.013): advisedby(?a, ?b) :- publication(?ahr, ?b).  [covers 40.0/149.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.013): advisedby(?a, ?b) :- inphase(?a, post_generals).  [covers 23.0/149.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #11.  It scores=-0.01 and has recall=0.15, precision=1.00, and F1=0.27 (using m-estimates).
+ // It covers 15.4% of the positive examples, 23 of 149,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- inphase(?a, post_generals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_generals))
+
+Added theory 3
+Added theory 4
+Time for loop #11 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #12 with strategy=heuristic (created a total of 521 clauses so far and explored 521)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 5 7 8 9 10 14
+% New best node found (score = -0.046): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_3), inphase(?a, post_quals).  [covers 11.0/15.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.044): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_3), tempadvisedby(?aim, ?b).  [covers 7.0/15.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.043): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_3), ta(?aip, ?a, ?aiq).  [covers 8.0/15.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.042): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_3), have_more_than_n_pubs(?b, 11).  [covers 8.0/15.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.040): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_3), have_more_than_n_pubs(?b, 13).  [covers 6.0/15.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.036): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_3), have_more_than_n_common_pubs(?b, ?air, 9).  [covers 4.0/15.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.031): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_3), have_more_than_n_common_pubs(?b, ?air, 11).  [covers 3.0/15.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #12.  It scores=-0.03 and has recall=0.20, precision=0.97, and F1=0.33 (using m-estimates).
+ // It covers 20.0% of the positive examples, 3 of 15,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_3), have_more_than_n_common_pubs(?b, ?air, 11))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_common_pubs(?b, ?air, 11))
+
+
+% ******************************************
+
+% Have stopped ILP's outer loop because have reached the maximum number of learned clauses (12).
+
+% ******************************************
+% FOR advisedby(?a, ?b):
+%   if ( hasposition(?b, faculty) )
+%   then if ( professor(?a) )
+%   | then return -0.10159632948783627;  // 7.000 (wgt'ed) examples reached here.
+%   | else if ( yearsinprogram(?a, year_3) )
+%   | | then if ( have_more_than_n_common_pubs(?b, ?c, 11) )
+%   | | | then return 0.1995641575096709;  // 3.000 (wgt'ed) examples reached here.
+%   | | | else return 0.5147570534268949;  // 12.000 (wgt'ed) examples reached here.
+%   | | else if ( true )
+%   | | | then ???
+%   | | | else ???
+%   else if ( have_more_than_n_pubs(?b, 3) )
+%   | then if ( professor(?b) )
+%   | | then return 0.602672221354236;  // 3.000 (wgt'ed) examples reached here.
+%   | | else return -0.10042136709097986;  // 14.000 (wgt'ed) examples reached here.
+%   | else if ( inphase(?a, post_generals) )
+%   | | then if ( true )
+%   | | | then ???
+%   | | | else ???
+%   | | else if ( true )
+%   | | | then ???
+%   | | | else ???
+
+
+% Clauses:
+
+advisedby(?a, ?b, -0.10159632948783627) :- 
+   hasposition(?b, faculty),
+   professor(?a). // Clause #1.
+
+advisedby(?a, ?b, 0.1995641575096709) :- 
+   hasposition(?b, faculty),
+   not_inventedPred36(?a),
+   yearsinprogram(?a, year_3),
+   have_more_than_n_common_pubs(?b, ?c, 11). // Clause #2.
+
+advisedby(?a, ?b, 0.5147570534268949) :- 
+   hasposition(?b, faculty),
+   not_inventedPred36(?a),
+   yearsinprogram(?a, year_3),
+   not_inventedPred35(?b, ?c). // Clause #3.
+
+advisedby(?a, ?b, 0.602672221354236) :- 
+   not_inventedPred39(?b),
+   have_more_than_n_pubs(?b, 3),
+   professor(?b). // Clause #4.
+
+advisedby(?a, ?b, -0.10042136709097986) :- 
+   not_inventedPred39(?b),
+   have_more_than_n_pubs(?b, 3),
+   not_inventedPred37(?b). // Clause #5.
+
+
+% Supporting Clauses:
+
+not_inventedPred36(?a) :- 
+   \+(professor(?a)). // Supporting Clause #1.
+
+not_inventedPred38(?b) :- 
+   \+(have_more_than_n_pubs(?b, 3)). // Supporting Clause #2.
+
+not_inventedPred35(?b, ?c) :- 
+   \+(have_more_than_n_common_pubs(?b, ?c, 11)). // Supporting Clause #3.
+
+not_inventedPred37(?b) :- 
+   \+(professor(?b)). // Supporting Clause #4.
+
+not_inventedPred39(?b) :- 
+   \+(hasposition(?b, faculty)). // Supporting Clause #5.
+
+
+Time for 5 trees:10
+Dataset size:294
+Added theory 4
+
+% STARTING executeOuterLoop()
+%  getNumberOfLearnedClauses() = 0 vs 12
+%  getNumberOfCycles()         = 0 vs 16
+%  getFractionOfPosCovered()   = 0.0 vs 0.900000
+%  getTotal_nodesConsidered()  = 0 vs 10,000,000
+%  getTotal_nodesCreated()     = 0 vs 100,000,000
+%  getClockTimeUsed()          = 0 vs 9,223,372,036,854,775,807
+Time for loop #0 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #1 with strategy=heuristic (created a total of 0 clauses so far and explored 0)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 7 29 37 39 45 54
+% New best node found (score = -0.112): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?ts, ?a).  [covers 55.0/96.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.111): advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_pubs(?a, 1).  [covers 39.0/96.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.111): advisedby(?a, ?b) :- hasposition(?b, faculty), have_more_than_n_common_pubs(?a, ?b, 1).  [covers 23.0/96.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.108): advisedby(?a, ?b) :- hasposition(?b, faculty), count_common_pubs(?a, ?b, ?ahe).  [covers 35.0/96.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #1.  It scores=-0.11 and has recall=0.36, precision=1.00, and F1=0.53 (using m-estimates).
+ // It covers 36.5% of the positive examples, 35 of 96,
+(advisedby(?a, ?b) :- hasposition(?b, faculty), count_common_pubs(?a, ?b, ?ahe))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- count_common_pubs(?a, ?b, ?ahe))
+
+Added theory 4
+Time for loop #1 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #2 with strategy=heuristic (created a total of 56 clauses so far and explored 56)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 1 2 3 4 6 7
+% New best node found (score = -0.002): advisedby(?a, ?b) :- inphase(?a, post_generals), professor(?b).  [covers 3.0/23.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #2.  It scores=-0.0018 and has recall=0.13, precision=0.97, and F1=0.23 (using m-estimates).
+ // It covers 13.0% of the positive examples, 3 of 23,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- inphase(?a, post_generals), professor(?b))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- professor(?b))
+
+Time for loop #2 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #3 with strategy=heuristic (created a total of 109 clauses so far and explored 109)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 2 28 35 66 73 81
+% New best node found (score = -0.013): advisedby(?a, ?b) :- professor(?b).  [covers 16.0/126.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.012): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct).  [covers 11.0/126.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #3.  It scores=-0.01 and has recall=0.09, precision=0.99, and F1=0.16 (using m-estimates).
+ // It covers 8.7% of the positive examples, 11 of 126,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct))
+
+Added theory 3
+Time for loop #3 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #4 with strategy=heuristic (created a total of 137 clauses so far and explored 137)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 21 42 146 175 194 251
+
+%  Target #0 being learned: 'advisedby(?a, ?b)',
+%  with argument types: [?a[+Person], ?b[+Person]]
+%   typeList:   [signature = [Const, Const], types = [+Person, +Person]]
+%   varList:    [?a, ?b]
+%   specsList:  [?a[+Person], ?b[+Person]]
+% Most-general root: advisedby(?a, ?b).  [covers 294.0/294.0 pos, 0.0/0.0 neg]  score = -Infinity
+% New best node found (score = -0.078): advisedby(?a, ?b) :- professor(?a).  [covers 38.0/294.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.060): advisedby(?a, ?b) :- professor(?b).  [covers 139.0/294.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.060): advisedby(?a, ?b) :- taughtby(?akc, ?b, ?akd).  [covers 123.0/294.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.057): advisedby(?a, ?b) :- hasposition(?b, faculty).  [covers 118.0/294.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #4.  It scores=-0.06 and has recall=0.40, precision=1.00, and F1=0.57 (using m-estimates).
+ // It covers 40.1% of the positive examples, 118 of 294,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+Added theory 3
+Added theory 4
+Time for loop #4 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #5 with strategy=heuristic (created a total of 202 clauses so far and explored 202)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 3 9 15 17 43 44
+% New best node found (score = -0.169): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?akt, ?a).  [covers 20.0/61.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.168): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?akt, ?b).  [covers 50.0/61.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.167): advisedby(?a, ?b) :- hasposition(?b, faculty), taughtby(?aku, ?b, ?akv).  [covers 58.0/61.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.163): advisedby(?a, ?b) :- hasposition(?b, faculty), projectmember(?akw, ?b).  [covers 4.0/61.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.160): advisedby(?a, ?b) :- hasposition(?b, faculty), tempadvisedby(?a, ?aky).  [covers 3.0/61.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #5.  It scores=-0.16 and has recall=0.05, precision=0.97, and F1=0.09 (using m-estimates).
+ // It covers 4.9% of the positive examples, 3 of 61,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), tempadvisedby(?a, ?aky))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- tempadvisedby(?a, ?aky))
+
+Added theory 4
+Time for loop #5 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #6 with strategy=heuristic (created a total of 242 clauses so far and explored 242)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 1 2 3 6 7 8
+% New best node found (score = -0.133): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), publication(?amj, ?a).  [covers 6.0/11.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.126): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), ta(?amr, ?a, ?ams).  [covers 4.0/11.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.094): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), have_more_than_n_pubs(?a, 1).  [covers 4.0/11.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #6.  It scores=-0.09 and has recall=0.36, precision=0.98, and F1=0.53 (using m-estimates).
+ // It covers 36.4% of the positive examples, 4 of 11,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), have_more_than_n_pubs(?a, 1))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?a, 1))
+
+Added theory 4
+Time for loop #6 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #7 with strategy=heuristic (created a total of 266 clauses so far and explored 266)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 28 53 72 74 106
+% New best node found (score = -0.115): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?anb, ?a).  [covers 56.0/118.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.115): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals).  [covers 47.0/118.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.112): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals).  [covers 39.0/118.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #7.  It scores=-0.11 and has recall=0.33, precision=1.00, and F1=0.50 (using m-estimates).
+ // It covers 33.1% of the positive examples, 39 of 118,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_quals))
+
+Added theory 4
+Added theory 5
+Time for loop #7 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #8 with strategy=heuristic (created a total of 337 clauses so far and explored 337)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 58 76 82 138 156 162
+% New best node found (score = -0.015): advisedby(?a, ?b) :- professor(?a).  [covers 36.0/176.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.014): advisedby(?a, ?b) :- professor(?b).  [covers 21.0/176.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.014): advisedby(?a, ?b) :- hasposition(?b, faculty_affiliate).  [covers 5.0/176.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #8.  It scores=-0.01 and has recall=0.03, precision=0.98, and F1=0.06 (using m-estimates).
+ // It covers 2.8% of the positive examples, 5 of 176,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty_affiliate))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- hasposition(?b, faculty_affiliate))
+
+Added theory 5
+Time for loop #8 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #9 with strategy=heuristic (created a total of 394 clauses so far and explored 394)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 8 11 18 25 33 36
+% New best node found (score = -0.168): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?apj, ?a).  [covers 20.0/58.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.166): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?apj, ?b).  [covers 48.0/58.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.163): advisedby(?a, ?b) :- hasposition(?b, faculty), projectmember(?apn, ?b).  [covers 4.0/58.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.155): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals).  [covers 6.0/58.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #9.  It scores=-0.16 and has recall=0.10, precision=0.98, and F1=0.19 (using m-estimates).
+ // It covers 10.3% of the positive examples, 6 of 58,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, pre_quals))
+
+Added theory 5
+Time for loop #9 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #10 with strategy=heuristic (created a total of 436 clauses so far and explored 436)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 3 4 5
+% New best node found (score = -0.102): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), inphase(?a, post_quals).  [covers 4.0/7.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.091): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), yearsinprogram(?a, year_5).  [covers 3.0/7.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #10.  It scores=-0.09 and has recall=0.42, precision=0.97, and F1=0.59 (using m-estimates).
+ // It covers 42.9% of the positive examples, 3 of 7,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), yearsinprogram(?a, year_5))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- yearsinprogram(?a, year_5))
+
+Time for loop #10 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #11 with strategy=heuristic (created a total of 454 clauses so far and explored 454)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 9 10
+% New best node found (score = -0.076): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals), publication(?aqt, ?a).  [covers 17.0/39.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.064): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals), yearsinprogram(?a, year_3).  [covers 13.0/39.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #11.  It scores=-0.06 and has recall=0.33, precision=0.99, and F1=0.50 (using m-estimates).
+ // It covers 33.3% of the positive examples, 13 of 39,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals), yearsinprogram(?a, year_3))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- yearsinprogram(?a, year_3))
+
+Time for loop #11 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #12 with strategy=heuristic (created a total of 498 clauses so far and explored 498)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 10 13 14 22 25 39
+% New best node found (score = -0.119): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?arj, ?a).  [covers 39.0/79.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.089): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals).  [covers 47.0/79.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #12.  It scores=-0.09 and has recall=0.59, precision=1.00, and F1=0.74 (using m-estimates).
+ // It covers 59.5% of the positive examples, 47 of 79,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_generals))
+
+Added theory 3
+Added theory 4
+
+% ******************************************
+
+% Have stopped ILP's outer loop because have reached the maximum number of learned clauses (12).
+
+% ******************************************
+% FOR advisedby(?a, ?b):
+%   if ( hasposition(?b, faculty) )
+%   then if ( inphase(?a, post_quals) )
+%   | then if ( yearsinprogram(?a, year_3) )
+%   | | then return 0.205689544394128;  // 13.000 (wgt'ed) examples reached here.
+%   | | else return 0.44926576765579995;  // 26.000 (wgt'ed) examples reached here.
+%   | else if ( inphase(?a, post_generals) )
+%   | | then if ( true )
+%   | | | then ???
+%   | | | else ???
+%   | | else if ( true )
+%   | | | then ???
+%   | | | else ???
+%   else if ( hasposition(?b, faculty_affiliate) )
+%   | then return 0.09656755296730977;  // 5.000 (wgt'ed) examples reached here.
+%   | else if ( true )
+%   | | then ???
+%   | | else ???
+
+
+% Clauses:
+
+advisedby(?a, ?b, 0.205689544394128) :- 
+   hasposition(?b, faculty),
+   inphase(?a, post_quals),
+   yearsinprogram(?a, year_3). // Clause #1.
+
+advisedby(?a, ?b, 0.44926576765579995) :- 
+   hasposition(?b, faculty),
+   inphase(?a, post_quals),
+   not_inventedPred40(?a). // Clause #2.
+
+advisedby(?a, ?b, 0.09656755296730977) :- 
+   not_inventedPred42(?b),
+   hasposition(?b, faculty_affiliate). // Clause #3.
+
+
+% Supporting Clauses:
+
+not_inventedPred42(?b) :- 
+   \+(hasposition(?b, faculty)). // Supporting Clause #1.
+
+not_inventedPred40(?a) :- 
+   \+(yearsinprogram(?a, year_3)). // Supporting Clause #2.
+
+not_inventedPred41(?a) :- 
+   \+(inphase(?a, post_quals)). // Supporting Clause #3.
+
+
+Time for 6 trees:12
+Dataset size:291
+Added theory 5
+
+% STARTING executeOuterLoop()
+%  getNumberOfLearnedClauses() = 0 vs 12
+%  getNumberOfCycles()         = 0 vs 16
+%  getFractionOfPosCovered()   = 0.0 vs 0.900000
+%  getTotal_nodesConsidered()  = 0 vs 10,000,000
+%  getTotal_nodesCreated()     = 0 vs 100,000,000
+%  getClockTimeUsed()          = 0 vs 9,223,372,036,854,775,807
+Time for loop #0 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #1 with strategy=heuristic (created a total of 0 clauses so far and explored 0)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 22 68 72 74 81 98
+% New best node found (score = -0.012): advisedby(?a, ?b) :- professor(?b).  [covers 16.0/171.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.012): advisedby(?a, ?b) :- have_more_than_n_pubs(?a, 1).  [covers 56.0/171.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #1.  It scores=-0.01 and has recall=0.33, precision=1.00, and F1=0.49 (using m-estimates).
+ // It covers 32.7% of the positive examples, 56 of 171,
+(advisedby(?a, ?b) :- have_more_than_n_pubs(?a, 1))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?a, 1))
+
+Added theory 5
+Time for loop #1 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #2 with strategy=heuristic (created a total of 46 clauses so far and explored 46)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 6 19 21 27 30 39
+% New best node found (score = -0.173): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?apq, ?a).  [covers 18.0/52.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.171): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?apq, ?b).  [covers 44.0/52.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.163): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals).  [covers 23.0/52.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.163): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_4).  [covers 17.0/52.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #2.  It scores=-0.16 and has recall=0.33, precision=0.99, and F1=0.49 (using m-estimates).
+ // It covers 32.7% of the positive examples, 17 of 52,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_4))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- yearsinprogram(?a, year_4))
+
+Added theory 5
+Added theory 6
+Time for loop #2 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 6
+
+% ********************
+% Outer Loop Iteration #3 with strategy=heuristic (created a total of 83 clauses so far and explored 83)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 4 11 15 20 21 28
+% New best node found (score = -0.047): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals), publication(?asd, ?a).  [covers 33.0/47.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.043): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals), publication(?asd, ?b).  [covers 44.0/47.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.042): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals), have_more_than_n_pubs(?b, 3).  [covers 34.0/47.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #3.  It scores=-0.04 and has recall=0.72, precision=1.00, and F1=0.84 (using m-estimates).
+ // It covers 72.3% of the positive examples, 34 of 47,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals), have_more_than_n_pubs(?b, 3))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3))
+
+Time for loop #3 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #4 with strategy=heuristic (created a total of 141 clauses so far and explored 141)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 2 4 9 13
+% New best node found (score = -0.146): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?asv, ?b).  [covers 28.0/32.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.143): advisedby(?a, ?b) :- hasposition(?b, faculty), projectmember(?asy, ?b).  [covers 3.0/32.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.117): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals).  [covers 17.0/32.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #4.  It scores=-0.12 and has recall=0.53, precision=0.99, and F1=0.69 (using m-estimates).
+ // It covers 53.1% of the positive examples, 17 of 32,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, pre_quals))
+
+Added theory 5
+Time for loop #4 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #5 with strategy=heuristic (created a total of 172 clauses so far and explored 172)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 25 27 64 82 88 106
+
+%  Target #0 being learned: 'advisedby(?a, ?b)',
+%  with argument types: [?a[+Person], ?b[+Person]]
+%   typeList:   [signature = [Const, Const], types = [+Person, +Person]]
+%   varList:    [?a, ?b]
+%   specsList:  [?a[+Person], ?b[+Person]]
+% Most-general root: advisedby(?a, ?b).  [covers 291.0/291.0 pos, 0.0/0.0 neg]  score = -Infinity
+% New best node found (score = -0.049): advisedby(?a, ?b) :- professor(?b).  [covers 133.0/291.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.048): advisedby(?a, ?b) :- hasposition(?b, faculty).  [covers 116.0/291.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #5.  It scores=-0.05 and has recall=0.40, precision=1.00, and F1=0.57 (using m-estimates).
+ // It covers 39.9% of the positive examples, 116 of 291,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+Added theory 5
+Added theory 6
+Time for loop #5 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 6
+
+% ********************
+% Outer Loop Iteration #6 with strategy=heuristic (created a total of 243 clauses so far and explored 243)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 5 12 15 40 56 91
+% New best node found (score = -0.013): advisedby(?a, ?b) :- professor(?a).  [covers 17.0/115.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.009): advisedby(?a, ?b) :- professor(?b).  [covers 10.0/115.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #6.  It scores=-0.0090 and has recall=0.09, precision=0.99, and F1=0.16 (using m-estimates).
+ // It covers 8.7% of the positive examples, 10 of 115,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- professor(?b))
+
+Added theory 6
+Time for loop #6 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 6
+
+% ********************
+% Outer Loop Iteration #7 with strategy=heuristic (created a total of 273 clauses so far and explored 273)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 3 4 5 9 10
+% New best node found (score = -0.108): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_4), publication(?auv, ?a).  [covers 10.0/17.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.102): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_4), inphase(?a, post_quals).  [covers 12.0/17.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.089): advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_4), have_more_than_n_pubs(?b, 3).  [covers 9.0/17.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #7.  It scores=-0.09 and has recall=0.53, precision=0.99, and F1=0.69 (using m-estimates).
+ // It covers 52.9% of the positive examples, 9 of 17,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), yearsinprogram(?a, year_4), have_more_than_n_pubs(?b, 3))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3))
+
+Time for loop #7 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #8 with strategy=heuristic (created a total of 312 clauses so far and explored 312)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 2 18 19 21 23
+% New best node found (score = -0.185): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?avm, ?a).  [covers 8.0/35.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.179): advisedby(?a, ?b) :- hasposition(?b, faculty), publication(?avm, ?b).  [covers 31.0/35.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.170): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals).  [covers 17.0/35.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #8.  It scores=-0.17 and has recall=0.48, precision=0.99, and F1=0.65 (using m-estimates).
+ // It covers 48.6% of the positive examples, 17 of 35,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_generals))
+
+Added theory 5
+Added theory 6
+Time for loop #8 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 6
+
+% ********************
+% Outer Loop Iteration #9 with strategy=heuristic (created a total of 362 clauses so far and explored 362)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 1 4 10 11 13 15
+% New best node found (score = -0.213): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals), tempadvisedby(?awh, ?b).  [covers 10.0/17.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.211): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals), yearsinprogram(?a, year_3).  [covers 6.0/17.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.209): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals), ta(?awj, ?a, ?awk).  [covers 11.0/17.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.206): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals), have_more_than_n_pubs(?b, 3).  [covers 9.0/17.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.204): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals), have_more_than_n_pubs(?b, 13).  [covers 4.0/17.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #9.  It scores=-0.20 and has recall=0.23, precision=0.98, and F1=0.38 (using m-estimates).
+ // It covers 23.5% of the positive examples, 4 of 17,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, pre_quals), have_more_than_n_pubs(?b, 13))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 13))
+
+Time for loop #9 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #10 with strategy=heuristic (created a total of 404 clauses so far and explored 404)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 2 8 16 31 47 76
+% New best node found (score = -0.093): advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a).  [covers 108.0/116.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #10.  It scores=-0.09 and has recall=0.93, precision=1.00, and F1=0.96 (using m-estimates).
+ // It covers 93.1% of the positive examples, 108 of 116,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- student(?a))
+
+Added theory 5
+Time for loop #10 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #11 with strategy=heuristic (created a total of 462 clauses so far and explored 462)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 26 59 77
+% New best node found (score = -0.014): advisedby(?a, ?b) :- student(?a).  [covers 139.0/175.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.012): advisedby(?a, ?b) :- student(?b).  [covers 158.0/175.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #11.  It scores=-0.01 and has recall=0.90, precision=1.00, and F1=0.95 (using m-estimates).
+ // It covers 90.3% of the positive examples, 158 of 175,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- student(?b))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- student(?b))
+
+Added theory 5
+Time for loop #11 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #12 with strategy=heuristic (created a total of 488 clauses so far and explored 488)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 3 4 6
+% New best node found (score = -0.102): advisedby(?a, ?b) :- professor(?b), publication(?ayd, ?a).  [covers 4.0/10.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.098): advisedby(?a, ?b) :- professor(?b), publication(?ayd, ?b).  [covers 3.0/10.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.068): advisedby(?a, ?b) :- professor(?b), inphase(?a, post_quals).  [covers 3.0/10.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #12.  It scores=-0.07 and has recall=0.30, precision=0.97, and F1=0.45 (using m-estimates).
+ // It covers 30.0% of the positive examples, 3 of 10,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b), inphase(?a, post_quals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_quals))
+
+Added theory 5
+
+% ******************************************
+
+% Have stopped ILP's outer loop because have reached the maximum number of learned clauses (12).
+
+% ******************************************
+% FOR advisedby(?a, ?b):
+%   if ( hasposition(?b, faculty) )
+%   then if ( student(?a) )
+%   | then if ( true )
+%   | | then ???
+%   | | else ???
+%   | else return -0.09269127618926097;  // 8.000 (wgt'ed) examples reached here.
+%   else if ( student(?b) )
+%   | then return -0.09299326985018538;  // 158.000 (wgt'ed) examples reached here.
+%   | else if ( true )
+%   | | then ???
+%   | | else ???
+
+
+% Clauses:
+
+advisedby(?a, ?b, -0.09269127618926097) :- 
+   hasposition(?b, faculty),
+   not_inventedPred43(?a). // Clause #1.
+
+advisedby(?a, ?b, -0.09299326985018538) :- 
+   not_inventedPred44(?b),
+   student(?b). // Clause #2.
+
+
+% Supporting Clauses:
+
+not_inventedPred44(?b) :- 
+   \+(hasposition(?b, faculty)). // Supporting Clause #1.
+
+not_inventedPred43(?a) :- 
+   \+(student(?a)). // Supporting Clause #2.
+
+
+Time for 7 trees:14
+Dataset size:290
+Added theory 6
+
+% STARTING executeOuterLoop()
+%  getNumberOfLearnedClauses() = 0 vs 12
+%  getNumberOfCycles()         = 0 vs 16
+%  getFractionOfPosCovered()   = 0.0 vs 0.900000
+%  getTotal_nodesConsidered()  = 0 vs 10,000,000
+%  getTotal_nodesCreated()     = 0 vs 100,000,000
+%  getClockTimeUsed()          = 0 vs 9,223,372,036,854,775,807
+Time for loop #0 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 6
+
+% ********************
+% Outer Loop Iteration #1 with strategy=heuristic (created a total of 0 clauses so far and explored 0)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 4 9 11 14 16
+% New best node found (score = -0.143): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals), publication(?adc, ?a).  [covers 4.0/17.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.136): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals), have_more_than_n_pubs(?b, 9).  [covers 6.0/17.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #1.  It scores=-0.14 and has recall=0.35, precision=0.98, and F1=0.52 (using m-estimates).
+ // It covers 35.3% of the positive examples, 6 of 17,
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_generals), have_more_than_n_pubs(?b, 9))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 9))
+
+Time for loop #1 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #2 with strategy=heuristic (created a total of 44 clauses so far and explored 44)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 1 7 11
+% New best node found (score = -0.123): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals).  [covers 11.0/18.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #2.  It scores=-0.12 and has recall=0.61, precision=0.99, and F1=0.75 (using m-estimates).
+ // It covers 61.1% of the positive examples, 11 of 18,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_quals))
+
+Added theory 5
+Time for loop #2 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #3 with strategy=heuristic (created a total of 77 clauses so far and explored 77)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 1 3 18 19 61
+% New best node found (score = -0.100): advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a), publication(?ayv, ?a).  [covers 57.0/108.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.099): advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a), publication(?ayv, ?b).  [covers 99.0/108.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.097): advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a), inphase(?a, pre_quals).  [covers 11.0/108.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.095): advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a), count_common_pubs(?a, ?b, ?azi).  [covers 35.0/108.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #3.  It scores=-0.10 and has recall=0.32, precision=1.00, and F1=0.49 (using m-estimates).
+ // It covers 32.4% of the positive examples, 35 of 108,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a), count_common_pubs(?a, ?b, ?azi))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- count_common_pubs(?a, ?b, ?azi))
+
+Time for loop #3 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #4 with strategy=heuristic (created a total of 125 clauses so far and explored 125)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 3 8 9 16
+% New best node found (score = -0.122): advisedby(?a, ?b) :- publication(?azm, ?a).  [covers 7.0/17.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.117): advisedby(?a, ?b) :- publication(?azm, ?b).  [covers 7.0/17.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.117): advisedby(?a, ?b) :- have_more_than_n_pubs(?a, 3).  [covers 3.0/17.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #4.  It scores=-0.12 and has recall=0.18, precision=0.97, and F1=0.30 (using m-estimates).
+ // It covers 17.6% of the positive examples, 3 of 17,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- have_more_than_n_pubs(?a, 3))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?a, 3))
+
+Added theory 4
+Time for loop #4 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #5 with strategy=heuristic (created a total of 178 clauses so far and explored 178)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 3 4 5
+% New best node found (score = -0.080): advisedby(?a, ?b) :- professor(?b), publication(?bad, ?a).  [covers 3.0/7.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.038): advisedby(?a, ?b) :- professor(?b), publication(?bad, ?b).  [covers 3.0/7.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #5.  It scores=-0.04 and has recall=0.42, precision=0.97, and F1=0.59 (using m-estimates).
+ // It covers 42.9% of the positive examples, 3 of 7,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b), publication(?bad, ?b))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- publication(?bad, ?b))
+
+Time for loop #5 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #6 with strategy=heuristic (created a total of 213 clauses so far and explored 213)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 26 32 96 107 171 176
+
+%  Target #0 being learned: 'advisedby(?a, ?b)',
+%  with argument types: [?a[+Person], ?b[+Person]]
+%   typeList:   [signature = [Const, Const], types = [+Person, +Person]]
+%   varList:    [?a, ?b]
+%   specsList:  [?a[+Person], ?b[+Person]]
+% Most-general root: advisedby(?a, ?b).  [covers 290.0/290.0 pos, 0.0/0.0 neg]  score = -Infinity
+% New best node found (score = -0.054): advisedby(?a, ?b) :- professor(?b).  [covers 141.0/290.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.052): advisedby(?a, ?b) :- hasposition(?b, faculty).  [covers 120.0/290.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #6.  It scores=-0.05 and has recall=0.41, precision=1.00, and F1=0.59 (using m-estimates).
+ // It covers 41.4% of the positive examples, 120 of 290,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+Added theory 3
+Added theory 4
+Time for loop #6 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #7 with strategy=heuristic (created a total of 259 clauses so far and explored 259)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 2 3 5 6 8
+% New best node found (score = -0.199): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals), publication(?bbm, ?a).  [covers 4.0/11.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.196): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals), tempadvisedby(?bbr, ?b).  [covers 7.0/11.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.193): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals), yearsinprogram(?a, year_2).  [covers 3.0/11.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.190): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals), have_more_than_n_pubs(?b, 3).  [covers 7.0/11.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.171): advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals), have_more_than_n_pubs(?b, 5).  [covers 5.0/11.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #7.  It scores=-0.17 and has recall=0.45, precision=0.98, and F1=0.62 (using m-estimates).
+ // It covers 45.5% of the positive examples, 5 of 11,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), inphase(?a, post_quals), have_more_than_n_pubs(?b, 5))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 5))
+
+Time for loop #7 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #8 with strategy=heuristic (created a total of 305 clauses so far and explored 305)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 4 5 7 10 11 12
+% New best node found (score = -0.127): advisedby(?a, ?b) :- publication(?bcd, ?a).  [covers 4.0/14.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.125): advisedby(?a, ?b) :- publication(?bcd, ?b).  [covers 4.0/14.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.125): advisedby(?a, ?b) :- inphase(?a, post_quals).  [covers 6.0/14.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.124): advisedby(?a, ?b) :- yearsinprogram(?a, year_2).  [covers 3.0/14.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.117): advisedby(?a, ?b) :- ta(?bcj, ?a, ?bck).  [covers 4.0/14.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #8.  It scores=-0.12 and has recall=0.28, precision=0.98, and F1=0.44 (using m-estimates).
+ // It covers 28.6% of the positive examples, 4 of 14,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- ta(?bcj, ?a, ?bck))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- ta(?bcj, ?a, ?bck))
+
+Added theory 3
+Time for loop #8 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #9 with strategy=heuristic (created a total of 346 clauses so far and explored 346)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 9 52 55 58 72 87
+% New best node found (score = -0.096): advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a).  [covers 109.0/120.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #9.  It scores=-0.10 and has recall=0.91, precision=1.00, and F1=0.95 (using m-estimates).
+ // It covers 90.8% of the positive examples, 109 of 120,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- student(?a))
+
+Added theory 3
+Time for loop #9 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #10 with strategy=heuristic (created a total of 385 clauses so far and explored 385)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 37 49 114 127 154
+% New best node found (score = -0.015): advisedby(?a, ?b) :- professor(?b).  [covers 21.0/170.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.014): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct).  [covers 8.0/170.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #10.  It scores=-0.01 and has recall=0.05, precision=0.99, and F1=0.09 (using m-estimates).
+ // It covers 4.7% of the positive examples, 8 of 170,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct))
+
+Added theory 3
+Time for loop #10 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #11 with strategy=heuristic (created a total of 436 clauses so far and explored 436)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 3 5 6
+% New best node found (score = -0.126): advisedby(?a, ?b) :- publication(?bed, ?a).  [covers 3.0/10.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.125): advisedby(?a, ?b) :- taughtby(?bee, ?b, ?bef).  [covers 4.0/10.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.125): advisedby(?a, ?b) :- count_taughtby(?b, ?bep).  [covers 4.0/10.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #11.  It scores=-0.12 and has recall=0.40, precision=0.98, and F1=0.56 (using m-estimates).
+ // It covers 40.0% of the positive examples, 4 of 10,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- count_taughtby(?b, ?bep))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- count_taughtby(?b, ?bep))
+
+Added theory 3
+Time for loop #11 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #12 with strategy=heuristic (created a total of 469 clauses so far and explored 469)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 41 70 84
+% New best node found (score = -0.105): advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a), publication(?bev, ?a).  [covers 56.0/109.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.104): advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a), publication(?bev, ?b).  [covers 100.0/109.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.102): advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a), inphase(?a, post_quals).  [covers 37.0/109.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.098): advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a), ta(?bfb, ?a, ?bfc).  [covers 52.0/109.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #12.  It scores=-0.10 and has recall=0.48, precision=1.00, and F1=0.65 (using m-estimates).
+ // It covers 47.7% of the positive examples, 52 of 109,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty), student(?a), ta(?bfb, ?a, ?bfc))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- ta(?bfb, ?a, ?bfc))
+
+
+% ******************************************
+
+% Have stopped ILP's outer loop because have reached the maximum number of learned clauses (12).
+
+% ******************************************
+% FOR advisedby(?a, ?b):
+%   if ( hasposition(?b, faculty) )
+%   then if ( student(?a) )
+%   | then if ( ta(?c, ?a, ?d) )
+%   | | then return 0.14743144725965723;  // 52.000 (wgt'ed) examples reached here.
+%   | | else return 0.32056132362364675;  // 57.000 (wgt'ed) examples reached here.
+%   | else return -0.08518475138839686;  // 11.000 (wgt'ed) examples reached here.
+%   else if ( hasposition(?b, faculty_adjunct) )
+%   | then if ( true )
+%   | | then ???
+%   | | else ???
+%   | else return -0.08393203058208393;  // 162.000 (wgt'ed) examples reached here.
+
+
+% Clauses:
+
+advisedby(?a, ?b, 0.14743144725965723) :- 
+   hasposition(?b, faculty),
+   student(?a),
+   ta(?c, ?a, ?d). // Clause #1.
+
+advisedby(?a, ?b, 0.32056132362364675) :- 
+   hasposition(?b, faculty),
+   student(?a),
+   not_inventedPred45(?c, ?a, ?d). // Clause #2.
+
+advisedby(?a, ?b, -0.08518475138839686) :- 
+   hasposition(?b, faculty),
+   not_inventedPred46(?a). // Clause #3.
+
+advisedby(?a, ?b, -0.08393203058208393) :- 
+   not_inventedPred48(?b),
+   not_inventedPred47(?b). // Clause #4.
+
+
+% Supporting Clauses:
+
+not_inventedPred46(?a) :- 
+   \+(student(?a)). // Supporting Clause #1.
+
+not_inventedPred48(?b) :- 
+   \+(hasposition(?b, faculty)). // Supporting Clause #2.
+
+not_inventedPred45(?c, ?a, ?d) :- 
+   \+(ta(?c, ?a, ?d)). // Supporting Clause #3.
+
+not_inventedPred47(?b) :- 
+   \+(hasposition(?b, faculty_adjunct)). // Supporting Clause #4.
+
+
+Time for 8 trees:16
+Dataset size:298
+Added theory 3
+
+% STARTING executeOuterLoop()
+%  getNumberOfLearnedClauses() = 0 vs 12
+%  getNumberOfCycles()         = 0 vs 16
+%  getFractionOfPosCovered()   = 0.0 vs 0.900000
+%  getTotal_nodesConsidered()  = 0 vs 10,000,000
+%  getTotal_nodesCreated()     = 0 vs 100,000,000
+%  getClockTimeUsed()          = 0 vs 9,223,372,036,854,775,807
+Time for loop #0 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #1 with strategy=heuristic (created a total of 0 clauses so far and explored 0)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 1 2 4 5 6 7
+% New best node found (score = -0.127): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), publication(?ajk, ?a).  [covers 3.0/8.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.065): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), inphase(?a, post_quals).  [covers 3.0/8.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #1.  It scores=-0.06 and has recall=0.37, precision=0.97, and F1=0.54 (using m-estimates).
+ // It covers 37.5% of the positive examples, 3 of 8,
+(advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), inphase(?a, post_quals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_quals))
+
+Time for loop #1 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #2 with strategy=heuristic (created a total of 31 clauses so far and explored 31)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 3 4 5
+% New best node found (score = -0.206): advisedby(?a, ?b) :- yearsinprogram(?a, year_5).  [covers 3.0/6.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #2.  It scores=-0.21 and has recall=0.49, precision=0.97, and F1=0.65 (using m-estimates).
+ // It covers 50.0% of the positive examples, 3 of 6,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- yearsinprogram(?a, year_5))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- yearsinprogram(?a, year_5))
+
+Time for loop #2 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #3 with strategy=heuristic (created a total of 53 clauses so far and explored 53)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 8 15 41 73 175
+
+%  Target #0 being learned: 'advisedby(?a, ?b)',
+%  with argument types: [?a[+Person], ?b[+Person]]
+%   typeList:   [signature = [Const, Const], types = [+Person, +Person]]
+%   varList:    [?a, ?b]
+%   specsList:  [?a[+Person], ?b[+Person]]
+% Most-general root: advisedby(?a, ?b).  [covers 298.0/298.0 pos, 0.0/0.0 neg]  score = -Infinity
+% New best node found (score = -0.049): advisedby(?a, ?b) :- professor(?b).  [covers 144.0/298.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.048): advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3).  [covers 95.0/298.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #3.  It scores=-0.05 and has recall=0.32, precision=1.00, and F1=0.48 (using m-estimates).
+ // It covers 31.9% of the positive examples, 95 of 298,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3))
+
+Added theory 1
+Added theory 2
+Time for loop #3 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #4 with strategy=heuristic (created a total of 121 clauses so far and explored 121)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 7 60 70 73 86
+% New best node found (score = -0.061): advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3), professor(?a).  [covers 7.0/95.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.053): advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3), professor(?b).  [covers 80.0/95.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.053): advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3), tempadvisedby(?a, ?bgm).  [covers 7.0/95.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #4.  It scores=-0.05 and has recall=0.07, precision=0.99, and F1=0.14 (using m-estimates).
+ // It covers 7.4% of the positive examples, 7 of 95,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3), tempadvisedby(?a, ?bgm))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- tempadvisedby(?a, ?bgm))
+
+Added theory 2
+Added theory 3
+Time for loop #4 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #5 with strategy=heuristic (created a total of 202 clauses so far and explored 202)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 9 34 71 74 122 172
+% New best node found (score = -0.039): advisedby(?a, ?b) :- professor(?a).  [covers 32.0/203.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.038): advisedby(?a, ?b) :- professor(?b).  [covers 64.0/203.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.038): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct).  [covers 6.0/203.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #5.  It scores=-0.04 and has recall=0.03, precision=0.98, and F1=0.06 (using m-estimates).
+ // It covers 3.0% of the positive examples, 6 of 203,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct))
+
+Added theory 3
+Added theory 4
+Time for loop #5 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #6 with strategy=heuristic (created a total of 239 clauses so far and explored 239)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 4 5 6
+% New best node found (score = -0.008): advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3), tempadvisedby(?a, ?bgm), professor(?b).  [covers 3.0/7.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #6.  It scores=-0.0080 and has recall=0.42, precision=0.97, and F1=0.59 (using m-estimates).
+ // It covers 42.9% of the positive examples, 3 of 7,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3), tempadvisedby(?a, ?bgm), professor(?b))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- professor(?b))
+
+Time for loop #6 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #7 with strategy=heuristic (created a total of 323 clauses so far and explored 323)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 17 36 68 80
+% New best node found (score = -0.046): advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3), professor(?a).  [covers 7.0/88.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.041): advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3), professor(?b).  [covers 77.0/88.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #7.  It scores=-0.04 and has recall=0.87, precision=1.00, and F1=0.93 (using m-estimates).
+ // It covers 87.5% of the positive examples, 77 of 88,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3), professor(?b))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- professor(?b))
+
+Added theory 3
+Time for loop #7 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #8 with strategy=heuristic (created a total of 395 clauses so far and explored 395)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 3 4 5
+% New best node found (score = -0.121): advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), yearsinprogram(?a, year_5).  [covers 3.0/6.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #8.  It scores=-0.12 and has recall=0.49, precision=0.97, and F1=0.65 (using m-estimates).
+ // It covers 50.0% of the positive examples, 3 of 6,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty_adjunct), yearsinprogram(?a, year_5))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- yearsinprogram(?a, year_5))
+
+Time for loop #8 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #9 with strategy=heuristic (created a total of 431 clauses so far and explored 431)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 35 50 63 74 91 154
+% New best node found (score = -0.034): advisedby(?a, ?b) :- professor(?a).  [covers 31.0/197.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.033): advisedby(?a, ?b) :- student(?b).  [covers 139.0/197.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #9.  It scores=-0.03 and has recall=0.71, precision=1.00, and F1=0.83 (using m-estimates).
+ // It covers 70.6% of the positive examples, 139 of 197,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- student(?b))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- student(?b))
+
+Added theory 2
+Time for loop #9 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #10 with strategy=heuristic (created a total of 476 clauses so far and explored 476)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 4 13 19 30 40 46
+% New best node found (score = -0.041): advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3), professor(?b), student(?a).  [covers 73.0/77.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #10.  It scores=-0.04 and has recall=0.95, precision=1.00, and F1=0.97 (using m-estimates).
+ // It covers 94.8% of the positive examples, 73 of 77,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 3), professor(?b), student(?a))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- student(?a))
+
+Time for loop #10 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 1
+
+% ********************
+% Outer Loop Iteration #11 with strategy=heuristic (created a total of 542 clauses so far and explored 542)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 2 26 28 29 32 36
+% New best node found (score = -0.113): advisedby(?a, ?b) :- professor(?a).  [covers 6.0/58.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.113): advisedby(?a, ?b) :- publication(?bky, ?a).  [covers 25.0/58.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.113): advisedby(?a, ?b) :- publication(?bky, ?b).  [covers 30.0/58.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.110): advisedby(?a, ?b) :- hasposition(?b, faculty).  [covers 49.0/58.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.108): advisedby(?a, ?b) :- inphase(?a, post_generals).  [covers 16.0/58.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.104): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b).  [covers 28.0/58.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #11.  It scores=-0.10 and has recall=0.48, precision=1.00, and F1=0.65 (using m-estimates).
+ // It covers 48.3% of the positive examples, 28 of 58,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b))
+
+Added theory 1
+Added theory 2
+Time for loop #11 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 2
+
+% ********************
+% Outer Loop Iteration #12 with strategy=heuristic (created a total of 588 clauses so far and explored 588)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 2 4 22
+% New best node found (score = -0.125): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), student(?a).  [covers 24.0/28.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.122): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), yearsinprogram(?a, year_3).  [covers 4.0/28.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.121): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), have_more_than_n_pubs(?a, 3).  [covers 4.0/28.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #12.  It scores=-0.12 and has recall=0.14, precision=0.98, and F1=0.25 (using m-estimates).
+ // It covers 14.3% of the positive examples, 4 of 28,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), have_more_than_n_pubs(?a, 3))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?a, 3))
+
+Added theory 2
+
+% ******************************************
+
+% Have stopped ILP's outer loop because have reached the maximum number of learned clauses (12).
+
+% ******************************************
+% FOR advisedby(?a, ?b):
+%   if ( have_more_than_n_pubs(?b, 3) )
+%   then if ( tempadvisedby(?a, ?c) )
+%   | then if ( professor(?b) )
+%   | | then return -0.42309011913305666;  // 3.000 (wgt'ed) examples reached here.
+%   | | else return -0.07773276764220625;  // 4.000 (wgt'ed) examples reached here.
+%   | else if ( professor(?b) )
+%   | | then if ( student(?a) )
+%   | | | then return 0.2810173907451817;  // 73.000 (wgt'ed) examples reached here.
+%   | | | else return -0.07877675473109173;  // 4.000 (wgt'ed) examples reached here.
+%   | | else return -0.0782400183247654;  // 11.000 (wgt'ed) examples reached here.
+%   else if ( hasposition(?b, faculty_adjunct) )
+%   | then if ( yearsinprogram(?a, year_5) )
+%   | | then return 0.3300249072194075;  // 3.000 (wgt'ed) examples reached here.
+%   | | else return 0.04031544286309117;  // 3.000 (wgt'ed) examples reached here.
+%   | else if ( student(?b) )
+%   | | then return -0.07917156977288493;  // 139.000 (wgt'ed) examples reached here.
+%   | | else if ( tempadvisedby(?d, ?b) )
+%   | | | then if ( have_more_than_n_pubs(?a, 3) )
+%   | | | | then return -0.13215574100665953;  // 4.000 (wgt'ed) examples reached here.
+%   | | | | else if ( true )
+%   | | | | | then ???
+%   | | | | | else ???
+%   | | | else if ( true )
+%   | | | | then ???
+%   | | | | else ???
+
+
+% Clauses:
+
+advisedby(?a, ?b, -0.42309011913305666) :- 
+   have_more_than_n_pubs(?b, 3),
+   tempadvisedby(?a, ?c),
+   professor(?b). // Clause #1.
+
+advisedby(?a, ?b, -0.07773276764220625) :- 
+   have_more_than_n_pubs(?b, 3),
+   tempadvisedby(?a, ?c),
+   not_inventedPred49(?b). // Clause #2.
+
+advisedby(?a, ?b, 0.2810173907451817) :- 
+   have_more_than_n_pubs(?b, 3),
+   not_inventedPred52(?a, ?c),
+   professor(?b),
+   student(?a). // Clause #3.
+
+advisedby(?a, ?b, -0.07877675473109173) :- 
+   have_more_than_n_pubs(?b, 3),
+   not_inventedPred52(?a, ?c),
+   professor(?b),
+   not_inventedPred50(?a). // Clause #4.
+
+advisedby(?a, ?b, -0.0782400183247654) :- 
+   have_more_than_n_pubs(?b, 3),
+   not_inventedPred52(?a, ?c),
+   not_inventedPred51(?b). // Clause #5.
+
+advisedby(?a, ?b, 0.3300249072194075) :- 
+   not_inventedPred56(?b),
+   hasposition(?b, faculty_adjunct),
+   yearsinprogram(?a, year_5). // Clause #6.
+
+advisedby(?a, ?b, 0.04031544286309117) :- 
+   not_inventedPred56(?b),
+   hasposition(?b, faculty_adjunct),
+   not_inventedPred53(?a). // Clause #7.
+
+advisedby(?a, ?b, -0.07917156977288493) :- 
+   not_inventedPred56(?b),
+   not_inventedPred55(?b),
+   student(?b). // Clause #8.
+
+advisedby(?a, ?b, -0.13215574100665953) :- 
+   not_inventedPred56(?b),
+   not_inventedPred55(?b),
+   not_inventedPred54(?b),
+   tempadvisedby(?d, ?b),
+   have_more_than_n_pubs(?a, 3). // Clause #9.
+
+
+% Supporting Clauses:
+
+not_inventedPred50(?a) :- 
+   \+(student(?a)). // Supporting Clause #1.
+
+not_inventedPred56(?b) :- 
+   \+(have_more_than_n_pubs(?b, 3)). // Supporting Clause #2.
+
+not_inventedPred53(?a) :- 
+   \+(yearsinprogram(?a, year_5)). // Supporting Clause #3.
+
+not_inventedPred54(?b) :- 
+   \+(student(?b)). // Supporting Clause #4.
+
+not_inventedPred55(?b) :- 
+   \+(hasposition(?b, faculty_adjunct)). // Supporting Clause #5.
+
+not_inventedPred49(?b) :- 
+   \+(professor(?b)). // Supporting Clause #6.
+
+not_inventedPred52(?a, ?c) :- 
+   \+(tempadvisedby(?a, ?c)). // Supporting Clause #7.
+
+not_inventedPred51(?b) :- 
+   \+(professor(?b)). // Supporting Clause #8.
+
+
+Time for 9 trees:18
+Dataset size:305
+Added theory 3
+
+% STARTING executeOuterLoop()
+%  getNumberOfLearnedClauses() = 0 vs 12
+%  getNumberOfCycles()         = 0 vs 16
+%  getFractionOfPosCovered()   = 0.0 vs 0.900000
+%  getTotal_nodesConsidered()  = 0 vs 10,000,000
+%  getTotal_nodesCreated()     = 0 vs 100,000,000
+%  getClockTimeUsed()          = 0 vs 9,223,372,036,854,775,807
+Time for loop #0 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #1 with strategy=heuristic (created a total of 0 clauses so far and explored 0)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 3 17 21 24 27
+% New best node found (score = -0.080): advisedby(?a, ?b) :- publication(?awi, ?a).  [covers 10.0/30.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.075): advisedby(?a, ?b) :- publication(?awi, ?b).  [covers 13.0/30.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.068): advisedby(?a, ?b) :- inphase(?a, post_generals).  [covers 7.0/30.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #1.  It scores=-0.07 and has recall=0.23, precision=0.99, and F1=0.38 (using m-estimates).
+ // It covers 23.3% of the positive examples, 7 of 30,
+(advisedby(?a, ?b) :- inphase(?a, post_generals))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- inphase(?a, post_generals))
+
+Added theory 3
+Added theory 4
+Time for loop #1 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #2 with strategy=heuristic (created a total of 32 clauses so far and explored 32)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 4 7 15 17 19 22
+% New best node found (score = -0.119): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), publication(?bij, ?a).  [covers 11.0/24.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.119): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), publication(?bij, ?b).  [covers 14.0/24.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.118): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), inphase(?a, post_generals).  [covers 7.0/24.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.115): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), yearsinprogram(?a, year_3).  [covers 4.0/24.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.106): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), ta(?bkm, ?a, ?bmd).  [covers 12.0/24.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #2.  It scores=-0.11 and has recall=0.50, precision=0.99, and F1=0.66 (using m-estimates).
+ // It covers 50.0% of the positive examples, 12 of 24,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), ta(?bkm, ?a, ?bmd))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- ta(?bkm, ?a, ?bmd))
+
+Added theory 4
+Added theory 5
+Time for loop #2 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #3 with strategy=heuristic (created a total of 77 clauses so far and explored 77)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 15 25 38 68 90 135
+
+%  Target #0 being learned: 'advisedby(?a, ?b)',
+%  with argument types: [?a[+Person], ?b[+Person]]
+%   typeList:   [signature = [Const, Const], types = [+Person, +Person]]
+%   varList:    [?a, ?b]
+%   specsList:  [?a[+Person], ?b[+Person]]
+% Most-general root: advisedby(?a, ?b).  [covers 305.0/305.0 pos, 0.0/0.0 neg]  score = -Infinity
+% New best node found (score = -0.032): advisedby(?a, ?b) :- professor(?b).  [covers 132.0/305.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #3.  It scores=-0.03 and has recall=0.43, precision=1.00, and F1=0.60 (using m-estimates).
+ // It covers 43.3% of the positive examples, 132 of 305,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- professor(?b))
+
+Added theory 5
+Time for loop #3 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #4 with strategy=heuristic (created a total of 139 clauses so far and explored 139)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 3 4 5
+% New best node found (score = -0.031): advisedby(?a, ?b) :- inphase(?a, post_generals), publication(?bpd, ?a).  [covers 4.0/7.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.005): advisedby(?a, ?b) :- inphase(?a, post_generals), publication(?bpd, ?b).  [covers 4.0/7.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.005): advisedby(?a, ?b) :- inphase(?a, post_generals), hasposition(?b, faculty).  [covers 4.0/7.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #4.  It scores=-0.0049 and has recall=0.56, precision=0.98, and F1=0.71 (using m-estimates).
+ // It covers 57.1% of the positive examples, 4 of 7,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- inphase(?a, post_generals), hasposition(?b, faculty))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+Time for loop #4 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #5 with strategy=heuristic (created a total of 179 clauses so far and explored 179)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 7 10 14 15 16 19
+% New best node found (score = -0.065): advisedby(?a, ?b) :- publication(?bpv, ?a).  [covers 6.0/23.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.064): advisedby(?a, ?b) :- yearsinprogram(?a, year_4).  [covers 5.0/23.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.057): advisedby(?a, ?b) :- ta(?bqb, ?a, ?bqc).  [covers 11.0/23.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #5.  It scores=-0.06 and has recall=0.48, precision=0.99, and F1=0.64 (using m-estimates).
+ // It covers 47.8% of the positive examples, 11 of 23,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- ta(?bqb, ?a, ?bqc))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- ta(?bqb, ?a, ?bqc))
+
+Added theory 4
+Added theory 5
+Time for loop #5 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 5
+
+% ********************
+% Outer Loop Iteration #6 with strategy=heuristic (created a total of 202 clauses so far and explored 202)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 3 4 5
+% New best node found (score = -0.037): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), ta(?bkm, ?a, ?bmd), publication(?bqm, ?a).  [covers 5.0/12.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.017): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), ta(?bkm, ?a, ?bmd), taughtby(?bkm, ?bqp, ?bmd).  [covers 9.0/12.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #6.  It scores=-0.02 and has recall=0.74, precision=0.99, and F1=0.85 (using m-estimates).
+ // It covers 75.0% of the positive examples, 9 of 12,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), ta(?bkm, ?a, ?bmd), taughtby(?bkm, ?bqp, ?bmd))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- taughtby(?bkm, ?bqp, ?bmd))
+
+Time for loop #6 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #7 with strategy=heuristic (created a total of 252 clauses so far and explored 252)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 5 7 11
+% New best node found (score = -0.169): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), publication(?brh, ?a).  [covers 6.0/12.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.156): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), publication(?brh, ?b).  [covers 6.0/12.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.147): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), projectmember(?brk, ?b).  [covers 4.0/12.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.122): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), have_more_than_n_pubs(?b, 1).  [covers 4.0/12.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #7.  It scores=-0.12 and has recall=0.33, precision=0.98, and F1=0.49 (using m-estimates).
+ // It covers 33.3% of the positive examples, 4 of 12,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), have_more_than_n_pubs(?b, 1))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_pubs(?b, 1))
+
+Added theory 4
+Time for loop #7 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #8 with strategy=heuristic (created a total of 293 clauses so far and explored 293)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 17 25 29 63 82 85
+% New best node found (score = -0.068): advisedby(?a, ?b) :- professor(?b), student(?a).  [covers 118.0/132.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #8.  It scores=-0.07 and has recall=0.89, precision=1.00, and F1=0.94 (using m-estimates).
+ // It covers 89.4% of the positive examples, 118 of 132,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b), student(?a))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- student(?a))
+
+Added theory 4
+Time for loop #8 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #9 with strategy=heuristic (created a total of 353 clauses so far and explored 353)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 2 3 6 7 9 10
+% New best node found (score = -0.026): advisedby(?a, ?b) :- ta(?bqb, ?a, ?bqc), publication(?bsr, ?b).  [covers 4.0/11.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #9.  It scores=-0.03 and has recall=0.36, precision=0.98, and F1=0.53 (using m-estimates).
+ // It covers 36.4% of the positive examples, 4 of 11,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- ta(?bqb, ?a, ?bqc), publication(?bsr, ?b))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- publication(?bsr, ?b))
+
+Added theory 4
+Time for loop #9 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #10 with strategy=heuristic (created a total of 384 clauses so far and explored 384)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 0 1 2 6 7 8
+% New best node found (score = -0.081): advisedby(?a, ?b) :- publication(?btm, ?a).  [covers 5.0/12.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.080): advisedby(?a, ?b) :- publication(?btm, ?b).  [covers 5.0/12.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.079): advisedby(?a, ?b) :- hasposition(?b, faculty).  [covers 8.0/12.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #10.  It scores=-0.08 and has recall=0.66, precision=0.99, and F1=0.79 (using m-estimates).
+ // It covers 66.7% of the positive examples, 8 of 12,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- hasposition(?b, faculty))
+
+Added theory 4
+Time for loop #10 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 4
+
+% ********************
+% Outer Loop Iteration #11 with strategy=heuristic (created a total of 412 clauses so far and explored 412)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 1 2 3 4 5 6
+% New best node found (score = -0.067): advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), publication(?bud, ?a).  [covers 5.0/8.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #11.  It scores=-0.07 and has recall=0.62, precision=0.98, and F1=0.76 (using m-estimates).
+ // It covers 62.5% of the positive examples, 5 of 8,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- tempadvisedby(?bmc, ?b), publication(?bud, ?a))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- publication(?bud, ?a))
+
+Time for loop #11 0
+Internal node length=1
+Tree depth=3
+Number of clauses=12
+Popped theory 3
+
+% ********************
+% Outer Loop Iteration #12 with strategy=heuristic (created a total of 453 clauses so far and explored 453)
+%  [Min precision = 0.050, (weighted) minPosCov = 2.81, and (weighted) maxNegCov = 0.50]
+% ********************
+
+% Have these positive seeds: 2 16 73 111
+% New best node found (score = -0.075): advisedby(?a, ?b) :- professor(?b), student(?a), publication(?buv, ?a).  [covers 60.0/118.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.074): advisedby(?a, ?b) :- professor(?b), student(?a), inphase(?a, post_quals).  [covers 41.0/118.0 pos, 0.0/0.0 neg]
+% New best node found (score = -0.073): advisedby(?a, ?b) :- professor(?b), student(?a), have_more_than_n_common_pubs(?b, ?bvd, 15).  [covers 8.0/118.0 pos, 0.0/0.0 neg]
+
+% New full  clause: 
+ // Learned this clause on outer loop cycle #12.  It scores=-0.07 and has recall=0.07, precision=0.99, and F1=0.13 (using m-estimates).
+ // It covers 6.8% of the positive examples, 8 of 118,
+ // So far 0 (0.0%) of the positive examples have been covered.
+(advisedby(?a, ?b) :- professor(?b), student(?a), have_more_than_n_common_pubs(?b, ?bvd, 15))
+
+
+% New LOCAL clause: (advisedby(?a, ?b) :- have_more_than_n_common_pubs(?b, ?bvd, 15))
+
+
+% ******************************************
+
+% Have stopped ILP's outer loop because have reached the maximum number of learned clauses (12).
+
+% ******************************************
+% FOR advisedby(?a, ?b):
+%   if ( professor(?b) )
+%   then if ( student(?a) )
+%   | then if ( have_more_than_n_common_pubs(?b, ?c, 15) )
+%   | | then return -0.042054307197815055;  // 8.000 (wgt'ed) examples reached here.
+%   | | else return 0.18948162350093242;  // 110.000 (wgt'ed) examples reached here.
+%   | else return -0.0761771131295687;  // 14.000 (wgt'ed) examples reached here.
+%   else return -0.07334181273972887;  // 173.000 (wgt'ed) examples reached here.
+
+
+% Clauses:
+
+advisedby(?a, ?b, -0.042054307197815055) :- 
+   professor(?b),
+   student(?a),
+   have_more_than_n_common_pubs(?b, ?c, 15). // Clause #1.
+
+advisedby(?a, ?b, 0.18948162350093242) :- 
+   professor(?b),
+   student(?a),
+   not_inventedPred57(?b, ?c). // Clause #2.
+
+advisedby(?a, ?b, -0.0761771131295687) :- 
+   professor(?b),
+   not_inventedPred58(?a). // Clause #3.
+
+advisedby(?a, ?b, -0.07334181273972887) :- 
+   not_inventedPred59(?b). // Clause #4.
+
+
+% Supporting Clauses:
+
+not_inventedPred58(?a) :- 
+   \+(student(?a)). // Supporting Clause #1.
+
+not_inventedPred59(?b) :- 
+   \+(professor(?b)). // Supporting Clause #2.
+
+not_inventedPred57(?b, ?c) :- 
+   \+(have_more_than_n_common_pubs(?b, ?c, 15)). // Supporting Clause #3.
+
+
+Time for learning model: 21.0

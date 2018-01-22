@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/test1_advisedby
+END
+precomputed1.txt
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/test1_advisedby/precomputed1.txt
+END
+precomputed2.txt
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/test1_advisedby/precomputed2.txt
+END
+test1_advisedby_neg.txt
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/test1_advisedby/test1_advisedby_neg.txt
+END
+test1_advisedby_bk.txt
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/test1_advisedby/test1_advisedby_bk.txt
+END
+test1_advisedby_started.txt
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/test1_advisedby/test1_advisedby_started.txt
+END
+test1_advisedby_dribble.txt
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/test1_advisedby/test1_advisedby_dribble.txt
+END
+test1_advisedby_pos.txt
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/test1_advisedby/test1_advisedby_pos.txt
+END
+test1_advisedby_facts.txt
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/test1_advisedby/test1_advisedby_facts.txt
+END

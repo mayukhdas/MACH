@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/shavlikgroup/!svn/ver/2535/bootstrap2/Testbeds/RDNs/uw-cse_rdn/train0_advisedby
+END
+train0_advisedby_started.txt
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/shavlikgroup/!svn/ver/2535/bootstrap2/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/train0_advisedby_started.txt
+END
+time_yap.data
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/time_yap.data
+END
+precomputed1.txt
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/precomputed1.txt
+END
+train0_advisedby_dribble.txt
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/shavlikgroup/!svn/ver/2535/bootstrap2/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/train0_advisedby_dribble.txt
+END
+train0_advisedby_pos.txt
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/train0_advisedby_pos.txt
+END
+precomputed2.txt
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/precomputed2.txt
+END
+time_will.data
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/time_will.data
+END
+train0_advisedby_facts.txt
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/train0_advisedby_facts.txt
+END
+train0_advisedby_gleaner.txt
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/shavlikgroup/!svn/ver/2535/bootstrap2/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/train0_advisedby_gleaner.txt
+END
+time.data
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/time.data
+END
+time_yap2.data
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/time_yap2.data
+END
+train0_advisedby_bk.txt
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/train0_advisedby_bk.txt
+END
+train0_advisedby_neg.txt
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/shavlikgroup/!svn/ver/2533/bootstrap2/Testbeds/RDNs/uw-cse_rdn/train0_advisedby/train0_advisedby_neg.txt
+END

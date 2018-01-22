@@ -1,0 +1,37 @@
+$target="advisedby";
+$pref = shift @ARGV;
+$dir_name = $pref."_".$target;
+system "mkdir -p ".$dir_name;
+$pos_file = $dir_name."/".$dir_name."_pos.txt";
+$neg_file = $dir_name."/".$dir_name."_neg.txt";
+$facts_file = $dir_name."/".$dir_name."_facts.txt";
+$bg_file = $dir_name."/".$dir_name."_bk.txt";
+
+open(POS, ">", $pos_file);
+system "touch ".$neg_file;
+#open(NEG, ">", $neg_file);
+open(FACT, ">", $facts_file);
+open(BK, ">", $bg_file);
+
+while(<>) {
+    # lowercase everything
+    chomp();
+    $line = lc($_);
+
+    # add .
+    $line =~ s/\)$/\)./;
+    
+    # split 
+    if ($line =~ m/^$target/) {
+	print POS $line."\n";
+    } else {
+	print FACT $line."\n";
+    }
+    
+}
+
+print BK "import: \"../uw-cse_rdn_bk.txt\". \n";
+close BK;
+close POS;
+close FACT;
+
