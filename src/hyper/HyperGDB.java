@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.Hashtable;
+import java.util.List;
 
 import org.hypergraphdb.HGHandle;
 import org.hypergraphdb.HGQuery.hg;
@@ -22,8 +23,21 @@ public class HyperGDB {
 	HyperGraph graph;
 	Hashtable<String,HGHandle> relTypeHandles;
 	Hashtable<String,HGHandle> entityTypeHandles;
-	Hashtable<String,HGHandle> objectHandles;
 	
+	/*
+	 * Summary Tables
+	 */
+	Hashtable<String,Double> typeCounts;
+	Hashtable<String,Hashtable<String,Double>> outCounts;
+	Hashtable<String,Hashtable<String,Double>> InCounts;
+	Hashtable<String,Hashtable<String,Double>> typeInAvg;
+	Hashtable<String,Hashtable<String,Double>> typeOutAvg;
+	Hashtable<String,Double> predCounts;
+	Hashtable<String,Double> corrMatrix;
+	
+	/**
+	 * No Argument constructor
+	 */
 	public HyperGDB() {
 		this.schemaloc = null;
 		this.factloc = null;
@@ -31,6 +45,8 @@ public class HyperGDB {
 		this.relTypeHandles = new Hashtable<String,HGHandle>();
 		this.entityTypeHandles = new Hashtable<String,HGHandle>();
 		this.graph = new HyperGraph(dblocation);
+		
+		this.typeCounts = new Hashtable<String,Double>();
 	}
 	/**
 	 * @param schemaloc
@@ -44,6 +60,8 @@ public class HyperGDB {
 		this.relTypeHandles = new Hashtable<String,HGHandle>();
 		this.entityTypeHandles = new Hashtable<String,HGHandle>();
 		this.graph = new HyperGraph(dblocation);
+		
+		this.typeCounts = new Hashtable<String,Double>();
 	}
 	public HyperGDB(String schemaloc, String factloc, String dbName) {
 		this.schemaloc = schemaloc;
@@ -53,6 +71,8 @@ public class HyperGDB {
 		this.relTypeHandles = new Hashtable<String,HGHandle>();
 		this.entityTypeHandles = new Hashtable<String,HGHandle>();
 		this.graph = new HyperGraph(dblocation);
+		
+		this.typeCounts = new Hashtable<String,Double>();
 	}
 		
 	/**
@@ -150,10 +170,12 @@ public class HyperGDB {
 			{
 				if(!line.startsWith("//") && !line.isEmpty())
 				{
-					line = line.substring(0, line.length()-1);
+					if(line.lastIndexOf('.')!=-1)
+						line = line.substring(0, line.lastIndexOf('.'));
 					//Utils.println(line);
 					if(line.startsWith("import:"))
 					{
+						
 						String np = line.split(":")[1];
 						Utils.println(np);
 						np = np.replace('"', ' ').trim();
@@ -188,6 +210,7 @@ public class HyperGDB {
 					}
 					else if(line.startsWith("mode:"))
 					{
+						Utils.println(line);
 						String pred = line.split(":")[1].trim();
 						String[] predArr = pred.split("\\(");
 						String predName = predArr[0];
@@ -240,7 +263,7 @@ public class HyperGDB {
 				if(!line.startsWith("//") && !line.isEmpty())
 				{
 					line=line.substring(0, line.length()-1);
-					Utils.println(line);
+					//Utils.println(line);
 					String[] predArr = line.split("\\(");
 					String predName = predArr[0];
 					HGHandle relTypeHandle = this.relTypeHandles.get(predName);
@@ -256,7 +279,7 @@ public class HyperGDB {
 						if(entityTypeHandle==null)
 							return false;
 						HGHandle objectHandle = this.graph.getHandle(a.intern());
-						Utils.println("ent Type: "+entityTypeHandle);
+						//Utils.println("ent Type: "+entityTypeHandle);
 						if(objectHandle==null)
 							objectHandle = this.graph.add(a.intern(), entityTypeHandle);
 						argHandles[i] = objectHandle;
@@ -277,6 +300,21 @@ public class HyperGDB {
 		}
 		return true;
 	}
+	public void close()
+	{
+		this.graph.close();
+	}
+	
+	public void summarize()
+	{
+		for(String k: this.entityTypeHandles.keySet())
+		{
+			long c = hg.count(this.graph, hg.type(this.entityTypeHandles.get(k)));
+			this.typeCounts.put(k, 0.0+c);
+		}
+		Utils.println(this.typeCounts);
+	}
+	
 	public void test()
 	{
 		/*String testp = "Mayukh,Tuborg,Nicks)";
@@ -291,8 +329,8 @@ public class HyperGDB {
 		}*/
 		String q = "Person";
 		Utils.println(q);
-		HGHandle ret = this.graph.getHandle(q.intern());
-		Utils.println(ret);
+		List x =hg.getAll(this.graph, hg.all());
+		Utils.println(x.size());
 	}
 
 
@@ -307,8 +345,10 @@ public class HyperGDB {
 			}
 			else
 				Utils.println("Data not loaded properly!!");
-		//hgdb.test();
-
+		hgdb.test();
+		hgdb.close();
+		//hgdb.summarize();
+		
 	}
 	
 	

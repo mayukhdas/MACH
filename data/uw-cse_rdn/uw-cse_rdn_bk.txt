@@ -13,7 +13,7 @@ queryPred: advisedby/2.
 
 //predicate declarations
 
-mode: professor(+Person). // Cap'ed by JWS.
+mode: professor(+Person).
 mode: student(+Person).
 
 mode: publication(+Title, -Person).
