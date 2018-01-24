@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.hypergraphdb.HGHandle;
 import org.hypergraphdb.HGQuery.hg;
+import org.hypergraphdb.HGSearchResult;
 import org.hypergraphdb.HyperGraph;
 import org.hypergraphdb.atom.HGRel;
 import org.hypergraphdb.atom.HGRelType;
@@ -30,10 +31,10 @@ public class HyperGDB {
 	Hashtable<String,Double> typeCounts;
 	Hashtable<String,Hashtable<String,Double>> outCounts;
 	Hashtable<String,Hashtable<String,Double>> InCounts;
-	Hashtable<String,Hashtable<String,Double>> typeInAvg;
-	Hashtable<String,Hashtable<String,Double>> typeOutAvg;
+	Hashtable<String,Double> typeInAvg;
+	Hashtable<String,Double> typeOutAvg;
 	Hashtable<String,Double> predCounts;
-	Hashtable<String,Double> corrMatrix;
+	Hashtable<String,Hashtable<String,Double>> corrMatrix;
 	
 	/**
 	 * No Argument constructor
@@ -47,6 +48,10 @@ public class HyperGDB {
 		this.graph = new HyperGraph(dblocation);
 		
 		this.typeCounts = new Hashtable<String,Double>();
+		this.InCounts = new Hashtable<String,Hashtable<String,Double>>();
+		this.outCounts = new Hashtable<String,Hashtable<String,Double>>();
+		this.typeInAvg = new Hashtable<String,Double>();
+		this.typeOutAvg = new Hashtable<String,Double>();
 	}
 	/**
 	 * @param schemaloc
@@ -62,6 +67,10 @@ public class HyperGDB {
 		this.graph = new HyperGraph(dblocation);
 		
 		this.typeCounts = new Hashtable<String,Double>();
+		this.InCounts = new Hashtable<String,Hashtable<String,Double>>();
+		this.outCounts = new Hashtable<String,Hashtable<String,Double>>();
+		this.typeInAvg = new Hashtable<String,Double>();
+		this.typeOutAvg = new Hashtable<String,Double>();
 	}
 	public HyperGDB(String schemaloc, String factloc, String dbName) {
 		this.schemaloc = schemaloc;
@@ -73,6 +82,10 @@ public class HyperGDB {
 		this.graph = new HyperGraph(dblocation);
 		
 		this.typeCounts = new Hashtable<String,Double>();
+		this.InCounts = new Hashtable<String,Hashtable<String,Double>>();
+		this.outCounts = new Hashtable<String,Hashtable<String,Double>>();
+		this.typeInAvg = new Hashtable<String,Double>();
+		this.typeOutAvg = new Hashtable<String,Double>();
 	}
 		
 	/**
@@ -313,6 +326,120 @@ public class HyperGDB {
 			this.typeCounts.put(k, 0.0+c);
 		}
 		Utils.println(this.typeCounts);
+		
+		//Degree summaries
+		for(String k: this.entityTypeHandles.keySet())
+		{
+			HGSearchResult<HGHandle> rs = this.graph.find(hg.type(this.entityTypeHandles.get(k)));
+			try {
+				while(rs.hasNext())
+				{
+					Utils.println("Here");
+					HGHandle h = rs.next();
+					Hashtable<String,Double> temp = this.InCounts.get(this.graph.get(h));
+					Hashtable<String,Double> tempo = this.outCounts.get(this.graph.get(h));
+					if(temp ==null)
+						temp = new Hashtable<String,Double>();
+					if(tempo == null)
+						tempo = new Hashtable<String,Double>();
+					for(String relt:this.relTypeHandles.keySet())
+					{
+						HGHandle relTH = this.relTypeHandles.get(relt);
+						if(((HGRelType)this.graph.get(relTH)).getArity()==1)
+						{
+							long c = hg.count(this.graph, hg.and(hg.type(relTH),hg.incidentAt(h, 0)));
+							//Utils.println(this.graph.get(h)+"--"+((HGRelType)this.graph.get(relTH)).getName()+"--"+c);
+							temp.put(relt, 0.0+c);
+							tempo.put(relt, 0.0+c);
+						}
+						if(((HGRelType)this.graph.get(relTH)).getArity()>=2)
+						{
+							long c = hg.count(this.graph, hg.and(hg.type(relTH), hg.incidentNotAt(h, 0)));
+							long co = hg.count(this.graph, hg.and(hg.type(relTH), hg.incidentAt(h, 0)));
+							//Utils.println(this.graph.get(h)+"--"+((HGRelType)this.graph.get(relTH)).getName()+"--"+c);
+							temp.put(relt, 0.0+c);
+							tempo.put(relt, 0.0+co);
+						}
+						
+					}
+					this.InCounts.put(this.graph.get(h), temp);
+					this.outCounts.put(this.graph.get(h), tempo);
+				}
+			}
+ 			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			rs.close();
+			//this.typeCounts.put(k, 0.0+c);
+		}
+		//Utils.println(this.typeCounts);
+		//Utils.println(this.InCounts);
+		//Utils.println(this.outCounts);
+		
+		//Averages
+		for(String k:this.relTypeHandles.keySet())
+		{
+			HGHandle relTypeHandle = this.relTypeHandles.get(k.intern());
+			HGRelType ty = this.graph.get(relTypeHandle);
+			int sourceCount = 0;
+			int destCount = 0;
+			
+			for(int i = 0;i<ty.getArity();i++)
+			{
+				HGHandle atomType = ty.getTargetAt(i);
+				HGSearchResult<HGHandle> rs = this.graph.find(hg.type(atomType));
+				while(rs.hasNext())
+				{
+					HGHandle atomH = rs.next();
+					if(i==0)
+					{
+						long c = hg.count(this.graph,hg.and(hg.type(relTypeHandle),hg.incidentAt(atomH, 0)));
+						//this.typeInAvg.put(ty.getName(), this.typeInAvg.get(ty.getName())+c);
+						sourceCount++;
+						if(this.typeOutAvg.get(ty.getName())==null)
+							this.typeOutAvg.put(ty.getName(), 0.0+c);
+						else
+							this.typeOutAvg.put(ty.getName(),this.typeOutAvg.get(ty.getName())+c);
+						if(ty.getArity()==1)
+						{
+							if(this.typeInAvg.get(ty.getName())==null)
+								this.typeInAvg.put(ty.getName(), 0.0+c);
+							else
+								this.typeInAvg.put(ty.getName(),this.typeInAvg.get(ty.getName())+c);
+							destCount++;
+						}
+					}
+					else if(i>0)
+					{
+						long c = hg.count(this.graph,hg.and(hg.type(relTypeHandle),hg.incidentNotAt(atomH, 0)));
+						if(this.typeInAvg.get(ty.getName())==null)
+							this.typeInAvg.put(ty.getName(), 0.0+c);
+						else
+							this.typeInAvg.put(ty.getName(),this.typeInAvg.get(ty.getName())+c);
+						destCount++;
+					}
+					
+				}
+				rs.close();
+			}
+			//for(String t:this.typeInAvg.keySet())
+			if(this.typeInAvg.get(k)!=null)
+				this.typeInAvg.put(k, this.typeInAvg.get(k)/(double)destCount);
+			//for(String t:this.typeOutAvg.keySet())
+			if(this.typeOutAvg.get(k)!=null)
+				this.typeOutAvg.put(k, this.typeOutAvg.get(k)/(double)sourceCount);
+		}
+		Utils.println(this.typeInAvg);
+		Utils.println(this.typeOutAvg);
+		
+		//Correlation
+		for(String k:this.relTypeHandles.keySet())
+		{
+			for(String l: this.relTypeHandles.keySet())
+			{
+			}
+		}
 	}
 	
 	public void test()
@@ -327,17 +454,20 @@ public class HyperGDB {
 			Utils.println(n);
 			HGHandle h = this.graph.add(n.intern());
 		}*/
-		String q = "Person";
+		String q = "projectmember";
+		HGHandle r = this.relTypeHandles.get(q);
+		String atom = "person319";
+		HGHandle atomH = this.graph.getHandle(atom.intern());
 		Utils.println(q);
-		List x =hg.getAll(this.graph, hg.all());
-		Utils.println(x.size());
+		long x =hg.count(this.graph, hg.and(hg.type(r),hg.incidentAt(atomH,0)));
+		Utils.println(x);
 	}
 
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		HyperGDB hgdb = new HyperGDB("./data/uw-cse_rdn/train0_advisedby/train0_advisedby_bk.txt",
-				"./data/uw-cse_rdn/train0_advisedby/train0_advisedby_facts.txt");
+		HyperGDB hgdb = new HyperGDB("./data/uw-cse_rdn/train1_advisedby/train1_advisedby_bk.txt",
+				"./data/uw-cse_rdn/train1_advisedby/train1_advisedby_facts.txt");
 		if(hgdb.loadSchema())
 			if(hgdb.loadEvidence())
 			{
@@ -346,8 +476,10 @@ public class HyperGDB {
 			else
 				Utils.println("Data not loaded properly!!");
 		hgdb.test();
+		//hgdb.close();
+		//Utils.println(hgdb.entityTypeHandles);
+		hgdb.summarize();
 		hgdb.close();
-		//hgdb.summarize();
 		
 	}
 	
