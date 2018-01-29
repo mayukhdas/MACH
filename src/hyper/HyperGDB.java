@@ -436,8 +436,14 @@ public class HyperGDB {
 		//Correlation
 		for(String k:this.relTypeHandles.keySet())
 		{
+			HGRel kRel = this.graph.get(this.relTypeHandles.get(k));
 			for(String l: this.relTypeHandles.keySet())
 			{
+				HGRel lRel = this.graph.get(this.relTypeHandles.get(l));
+				if(!k.intern().equals(l.intern()))
+				{
+					
+				}
 			}
 		}
 	}
