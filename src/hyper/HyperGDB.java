@@ -16,7 +16,9 @@ import org.hypergraphdb.atom.HGRelType;
 import org.hypergraphdb.query.HGQueryCondition;
 import org.hypergraphdb.type.HGAtomType;
 
+import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Table;
 
 public class HyperGDB {
@@ -449,24 +451,55 @@ public class HyperGDB {
 		Utils.println(this.typeOutAvg);
 		
 		//Correlation
+		
+		Multimap<String,String> m = ArrayListMultimap.create();
 		for(String k:this.relTypeHandles.keySet())
 		{
-			HGHandle kRelTypeHandle = this.relTypeHandles.get(k);
-			HGRelType kRelType = this.graph.get(kRelTypeHandle);
+			//HGHandle kRelTypeHandle = this.relTypeHandles.get(k);
 			ArrayList<String> argListk = this.typeArgs.get(k);
-			List<HGRel> rels = hg.getAll(this.graph, hg.type(kRelTypeHandle));
-			for(HGRel rel:rels)
+			for(String l:this.relTypeHandles.keySet())
 			{
-				for(int i = 0; i<rel.getArity(); i++)
+				//HGHandle lRelTypeHandle = this.relTypeHandles.get(l);
+				ArrayList<String> argListl = this.typeArgs.get(l);
+				if(k.intern().equals(l.intern()))
+					continue;
+				else
 				{
-					HGHandle argH = rel.getTargetAt(i);
-					long c1 = hg.count(this.graph, hg.incident(argH));
-					long c2 = hg.count(this.graph, hg.and(hg.type(kRelTypeHandle),hg.incident(argH)));
-					double c = (double) c1 - (double) c2;
-					
+					for(int i=0;i<argListk.size();i++)
+					{
+						for(int j=0;j<argListl.size();j++)
+						{
+							if(argListk.get(i).intern().equals(argListl.get(j).intern()))
+							{
+								String str = k+","+i+";"+l+","+j;
+								m.put(argListk.get(i).intern(), str);
+							}
+						}
+					}
 				}
 			}
 		}
+
+		for(String ot:this.entityTypeHandles.keySet())
+		{
+			HGHandle entTypeHandle = this.entityTypeHandles.get(ot);
+			List<HGHandle> rs = this.graph.findAll(hg.type(entTypeHandle));
+			ArrayList<String> allShapes = (ArrayList<String>)m.get(ot);	
+			Double sum = 0.0;
+			for(String shape:allShapes)
+			{
+				String[] pair = shape.split(";");
+				String k = pair[0];
+				String l = pair[1];
+				String kRel = k.split(",")[0];
+				int kPos = Integer.parseInt(k.split(",")[1]);
+				String lRel = l.split(",")[0];
+				int lPos = Integer.parseInt(l.split(",")[1]);
+				
+				
+			}
+		}
+		
 	}
 	
 	public void test()
