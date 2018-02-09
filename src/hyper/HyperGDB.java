@@ -497,6 +497,10 @@ public class HyperGDB {
 				int lPos = Integer.parseInt(l.split(",")[1]);
 				
 				
+				Utils.println(shape);
+				HGHandle relTypeHandle1 = this.relTypeHandles.get(kRel.intern());
+				HGHandle relTypeHandle2 = this.relTypeHandles.get(lRel.intern());
+				long c1 = hg.count(this.graph, hg.and(hg.type(relTypeHandle1)));
 			}
 		}
 		
