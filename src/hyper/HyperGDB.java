@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -20,6 +21,8 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Table;
+
+import Helper.Literal;
 
 public class HyperGDB {
 	
@@ -44,6 +47,8 @@ public class HyperGDB {
 	//Hashtable<String,Hashtable<String,Double>> corrMatrix;
 	Hashtable<String,ArrayList<String>> typeArgs;
 	Table<String, String, Double> corrMatrix; // = HashBasedTable.create();
+	Table<String, String, Double> leftCorr;
+	Table<String, String, Double> rightCorr;
 	/**
 	 * No Argument constructor
 	 */
@@ -55,13 +60,7 @@ public class HyperGDB {
 		this.entityTypeHandles = new Hashtable<String,HGHandle>();
 		this.graph = new HyperGraph(dblocation);
 		
-		this.typeCounts = new Hashtable<String,Double>();
-		this.InCounts = new Hashtable<String,Hashtable<String,Double>>();
-		this.outCounts = new Hashtable<String,Hashtable<String,Double>>();
-		this.typeInAvg = new Hashtable<String,Double>();
-		this.typeOutAvg = new Hashtable<String,Double>();
-		this.typeArgs = new Hashtable<String,ArrayList<String>>();
-		this.corrMatrix =  HashBasedTable.create();
+		this.initialize();
 	}
 	/**
 	 * @param schemaloc
@@ -76,13 +75,7 @@ public class HyperGDB {
 		this.entityTypeHandles = new Hashtable<String,HGHandle>();
 		this.graph = new HyperGraph(dblocation);
 		
-		this.typeCounts = new Hashtable<String,Double>();
-		this.InCounts = new Hashtable<String,Hashtable<String,Double>>();
-		this.outCounts = new Hashtable<String,Hashtable<String,Double>>();
-		this.typeInAvg = new Hashtable<String,Double>();
-		this.typeOutAvg = new Hashtable<String,Double>();
-		this.typeArgs = new Hashtable<String,ArrayList<String>>();
-		this.corrMatrix = HashBasedTable.create();
+		this.initialize();
 	}
 	public HyperGDB(String schemaloc, String factloc, String dbName) {
 		this.schemaloc = schemaloc;
@@ -93,6 +86,10 @@ public class HyperGDB {
 		this.entityTypeHandles = new Hashtable<String,HGHandle>();
 		this.graph = new HyperGraph(dblocation);
 		
+		this.initialize();
+	}
+	private void initialize()
+	{
 		this.typeCounts = new Hashtable<String,Double>();
 		this.InCounts = new Hashtable<String,Hashtable<String,Double>>();
 		this.outCounts = new Hashtable<String,Hashtable<String,Double>>();
@@ -100,6 +97,8 @@ public class HyperGDB {
 		this.typeOutAvg = new Hashtable<String,Double>();
 		this.typeArgs = new Hashtable<String,ArrayList<String>>();
 		this.corrMatrix =  HashBasedTable.create();
+		this.leftCorr = HashBasedTable.create();
+		this.rightCorr = HashBasedTable.create();
 	}
 		
 	/**
@@ -147,6 +146,7 @@ public class HyperGDB {
 	/**
 	 * @return the relTypeHandles
 	 */
+	
 	public Hashtable<String, HGHandle> getRelTypeHandles() {
 		return relTypeHandles;
 	}
@@ -484,8 +484,9 @@ public class HyperGDB {
 		{
 			HGHandle entTypeHandle = this.entityTypeHandles.get(ot);
 			List<HGHandle> rs = this.graph.findAll(hg.type(entTypeHandle));
-			ArrayList<String> allShapes = (ArrayList<String>)m.get(ot);	
+			Collection<String> allShapes = m.get(ot);	
 			Double sum = 0.0;
+			List<HGHandle> entsOfThisType = this.graph.findAll(hg.type(entTypeHandle));
 			for(String shape:allShapes)
 			{
 				String[] pair = shape.split(";");
@@ -500,10 +501,48 @@ public class HyperGDB {
 				Utils.println(shape);
 				HGHandle relTypeHandle1 = this.relTypeHandles.get(kRel.intern());
 				HGHandle relTypeHandle2 = this.relTypeHandles.get(lRel.intern());
-				long c1 = hg.count(this.graph, hg.and(hg.type(relTypeHandle1)));
+				for(HGHandle ent:entsOfThisType)
+				{
+					long c1 = hg.count(this.graph, hg.and(hg.type(relTypeHandle1), hg.incidentAt(ent, kPos)));
+					long c2 = hg.count(this.graph, hg.and(hg.type(relTypeHandle2), hg.incidentAt(ent, lPos)));
+					if(c1>0 && c2>0)
+					{
+						Double currentVal = this.corrMatrix.contains(kRel, lRel)? this.corrMatrix.get(kRel, lRel):0.0;
+						currentVal++;
+						this.corrMatrix.put(kRel, lRel, currentVal);
+						Double leftCurrVal = this.leftCorr.contains(kRel, lRel)? this.leftCorr.get(kRel, lRel):0.0;
+						leftCurrVal++;
+						this.leftCorr.put(kRel, lRel, leftCurrVal);
+						Double rightCurrVal =this.rightCorr.contains(kRel, lRel)? this.rightCorr.get(kRel, lRel):0.0;
+						rightCurrVal++;
+						this.rightCorr.put(kRel, lRel, rightCurrVal);
+					}
+					else if(c1>0 && c2==0)
+					{
+						Double leftCurrVal = this.leftCorr.contains(kRel, lRel)? this.leftCorr.get(kRel, lRel):0.0;
+						leftCurrVal++;
+						this.leftCorr.put(kRel, lRel, leftCurrVal);
+					}
+					else if(c1==0 && c2>0)
+					{
+						Double rightCurrVal =0.0;
+						rightCurrVal = this.rightCorr.contains(kRel, lRel)? this.rightCorr.get(kRel, lRel):0.0;
+						rightCurrVal++;
+						this.rightCorr.put(kRel, lRel, rightCurrVal);
+					}
+				}
 			}
 		}
 		
+	}
+	
+	public Double ApproxCount(Literal[] Clause, String bitrep)
+	{
+		for(Literal lit:Clause)
+		{
+			
+		}
+		return 0.0;
 	}
 	
 	public void test()
@@ -539,10 +578,11 @@ public class HyperGDB {
 			}
 			else
 				Utils.println("Data not loaded properly!!");
-		hgdb.test();
+		//hgdb.test();
 		//hgdb.close();
 		//Utils.println(hgdb.entityTypeHandles);
 		hgdb.summarize();
+		Utils.println(hgdb.corrMatrix);
 		hgdb.close();
 		
 	}
