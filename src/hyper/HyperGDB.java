@@ -661,6 +661,8 @@ public class HyperGDB {
 	public Double ApproxCount(Literal[] Clause, String bitrep)
 	{
 		try {
+			//------------- Build query graph -------------------------------------
+			this.initializeQuery();
 			for(Literal lit:Clause)
 			{
 				String pred = lit.getPredicateName();
@@ -679,11 +681,17 @@ public class HyperGDB {
 					args[i] = varHandle;
 					this.QryObjectHandles.put(qryArgs[i].getValue().intern(), varHandle);
 					this.qryVars.put(qryArgs[i], argTypes.get(i));
+					Double typecount = this.typeCounts.get(argTypes.get(i).intern());
+					this.CountTable.put(qryArgs[i].getValue().intern(), typecount);
 				}
 
 				HGRel qRel = new HGRel(pred.intern(),args);
-				
+				HGHandle qryRelHandle = this.qryGraph.add(qRel, qryPredType);
 			}
+			//---------------------------------------------------------------------
+			
+			
+			
 		}
 		catch(Exception e)
 		{
@@ -692,6 +700,12 @@ public class HyperGDB {
 			this.shutdown();
 			System.exit(1);
 		}
+		return 0.0;
+	}
+	
+	public Double induceCount(Term currentTerm)
+	{
+		
 		return 0.0;
 	}
 	private void shutdown()
