@@ -714,7 +714,7 @@ public class HyperGDB {
 			}
 			//---------------------------------------------------------------------
 			
-			//-------------- iterate n times over message passing ----------------
+			//-------------- Iterate n times over message passing ----------------
 			double ub=1.0, lb = 0.0;
 			int iter =0;
 			while(iter<=MaxIter && Math.abs(ub-lb)<=TOL)
