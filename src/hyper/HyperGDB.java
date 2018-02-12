@@ -23,6 +23,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Table;
 
 import Helper.Literal;
+import Helper.Term;
 
 public class HyperGDB {
 	
@@ -32,8 +33,12 @@ public class HyperGDB {
 	String factloc;
 	String dbName;
 	HyperGraph graph;
+	HyperGraph qryGraph;
 	Hashtable<String,HGHandle> relTypeHandles;
 	Hashtable<String,HGHandle> entityTypeHandles;
+	
+	Hashtable<String,HGHandle> QryRelTypeHandles;
+	Hashtable<String,HGHandle> QryEntityTypeHandles;
 	
 	/*
 	 * Summary Tables
@@ -49,6 +54,11 @@ public class HyperGDB {
 	Table<String, String, Double> corrMatrix; // = HashBasedTable.create();
 	Table<String, String, Double> leftCorr;
 	Table<String, String, Double> rightCorr;
+	
+	Hashtable<String,Double> CountTable;
+	Hashtable<Term,String> qryVars;
+	Hashtable<String,HGHandle> QryObjectHandles;
+	
 	/**
 	 * No Argument constructor
 	 */
@@ -62,6 +72,7 @@ public class HyperGDB {
 		
 		this.initialize();
 	}
+	
 	/**
 	 * @param schemaloc
 	 * @param factloc
@@ -100,6 +111,20 @@ public class HyperGDB {
 		this.leftCorr = HashBasedTable.create();
 		this.rightCorr = HashBasedTable.create();
 	}
+	
+	private void initializeQuery()
+	{
+		this.qryGraph = new HyperGraph();
+		this.QryEntityTypeHandles = new Hashtable<String,HGHandle>();
+		this.QryRelTypeHandles = new Hashtable<String,HGHandle>();
+	}
+	private void closeQuery()
+	{
+		this.QryEntityTypeHandles.clear();
+		this.QryRelTypeHandles.clear();
+		this.qryGraph.close();
+	}
+	
 		
 	/**
 	 * @return the schemaloc
@@ -281,7 +306,104 @@ public class HyperGDB {
 		}
 		return true;
 	}
-
+	
+	
+	public boolean loadSchemaForQry()
+	{
+		try
+		{
+			BufferedReader br = new BufferedReader(new FileReader(new File(this.schemaloc)));
+			String line;
+			int idx = 0;
+			while((line = br.readLine())!=null)
+			{
+				if(!line.startsWith("//") && !line.isEmpty())
+				{
+					if(line.lastIndexOf('.')!=-1)
+						line = line.substring(0, line.lastIndexOf('.'));
+					//Utils.println(line);
+					if(line.startsWith("import:"))
+					{
+						
+						String np = line.split(":")[1];
+						Utils.println(np);
+						np = np.replace('"', ' ').trim();
+						if(np.charAt(0)=='.' && np.charAt(1)=='.')
+						{
+							this.schemaloc = this.schemaloc.substring(0, this.schemaloc.lastIndexOf('/')-1);
+							this.schemaloc = this.schemaloc.substring(0, this.schemaloc.lastIndexOf('/'));
+							np = np.substring(2);
+							this.schemaloc = this.schemaloc + np;
+						}
+						else if((np.charAt(0)=='.' && np.charAt(1)=='/'))
+						{
+							this.schemaloc = this.schemaloc.substring(0, this.schemaloc.lastIndexOf('/'));
+							np = np.substring(2);
+							this.schemaloc = this.schemaloc + np;
+						}
+						else if(np.charAt(0)=='/')
+						{
+							this.schemaloc = np;
+						}
+						else
+						{
+							this.schemaloc = this.schemaloc.substring(0, this.schemaloc.lastIndexOf('/'));
+							this.schemaloc = this.schemaloc + np;
+						}
+						if(!this.loadSchema())
+						{	br.close();
+							return false;
+						}
+						idx++;
+						break;
+					}
+					else if(line.startsWith("mode:"))
+					{
+						Utils.println(line);
+						String pred = line.split(":")[1].trim();
+						String[] predArr = pred.split("\\(");
+						String predName = predArr[0];
+						String[] args = predArr[1].replaceAll("\\)", "").split(",");
+						HGHandle[] h = new HGHandle[args.length];
+						ArrayList<String> argList = new ArrayList<String>();
+						for(int i =0;i<args.length;i++)
+						{
+							String a = args[i];
+							a = a.replaceAll("\\+", "").replaceAll("-", "").replaceAll("#", "").trim();
+							argList.add(a.intern());
+							HGHandle hTemp = this.QryEntityTypeHandles.get(a.intern());
+							if(hTemp==null)
+							{
+								HGRelType objectType = new HGRelType(a.intern());
+								hTemp = this.qryGraph.add(objectType);
+							}
+							h[i] = hTemp;
+							this.QryEntityTypeHandles.put(a, hTemp);
+						}
+						HGRelType relType= new HGRelType(predName.intern(),h);
+						//this.typeArgs.put(predName.intern(), argList);
+						HGHandle relTypeHandle = this.QryRelTypeHandles.get(predName.intern());
+						if(relTypeHandle==null)
+						{
+							relTypeHandle = this.qryGraph.add(relType);
+							this.QryRelTypeHandles.put(predName.intern(), relTypeHandle);
+						}
+						idx++;
+					}
+				}
+			}
+			br.close();
+			if(idx<=0)
+				return false;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
+	
 	public boolean loadEvidence()
 	{
 		try {
@@ -538,11 +660,43 @@ public class HyperGDB {
 	
 	public Double ApproxCount(Literal[] Clause, String bitrep)
 	{
-		for(Literal lit:Clause)
+		try {
+			for(Literal lit:Clause)
+			{
+				String pred = lit.getPredicateName();
+				ArrayList<String> argTypes = this.typeArgs.get(pred.intern());
+				Term[] qryArgs = lit.getArguments();
+				HGHandle qryPredType = this.QryRelTypeHandles.get(pred);
+				HGHandle[] args = new HGHandle[qryArgs.length];
+				for(int i=0;i<qryArgs.length;i++)
+				{
+					HGHandle argType = this.QryEntityTypeHandles.get(argTypes.get(i));
+					HGHandle varHandle = this.qryGraph.getHandle(qryArgs[i].getValue().intern());
+					if(varHandle == null)
+					{
+						varHandle = this.qryGraph.add(qryArgs[i].getValue(), argType);
+					}
+					args[i] = varHandle;
+					this.QryObjectHandles.put(qryArgs[i].getValue().intern(), varHandle);
+					this.qryVars.put(qryArgs[i], argTypes.get(i));
+				}
+
+				HGRel qRel = new HGRel(pred.intern(),args);
+				
+			}
+		}
+		catch(Exception e)
 		{
-			
+			Utils.println("Problem in query!");
+			e.printStackTrace();
+			this.shutdown();
+			System.exit(1);
 		}
 		return 0.0;
+	}
+	private void shutdown()
+	{
+		
 	}
 	
 	public void test()

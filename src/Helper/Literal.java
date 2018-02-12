@@ -26,6 +26,34 @@ public class Literal {
 	}
 
 	/**
+	 * @return the predicateName
+	 */
+	public String getPredicateName() {
+		return predicateName;
+	}
+
+	/**
+	 * @param predicateName the predicateName to set
+	 */
+	public void setPredicateName(String predicateName) {
+		this.predicateName = predicateName;
+	}
+
+	/**
+	 * @return the arguments
+	 */
+	public Term[] getArguments() {
+		return Arguments;
+	}
+
+	/**
+	 * @param arguments the arguments to set
+	 */
+	public void setArguments(Term[] arguments) {
+		Arguments = arguments;
+	}
+
+	/**
 	 * @param predicateName
 	 * @param arguments
 	 */
