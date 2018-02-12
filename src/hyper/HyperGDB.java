@@ -27,6 +27,9 @@ import Helper.Term;
 
 public class HyperGDB {
 	
+	public static final double TOL = 0.005;
+	public static final int MaxIter = 10;
+	
 	public static String dblocation = "./graphs/graph1";
 	static boolean verbose = true;
 	String schemaloc;
@@ -682,7 +685,13 @@ public class HyperGDB {
 					this.QryObjectHandles.put(qryArgs[i].getValue().intern(), varHandle);
 					this.qryVars.put(qryArgs[i], argTypes.get(i));
 					Double typecount = this.typeCounts.get(argTypes.get(i).intern());
-					this.CountTable.put(qryArgs[i].getValue().intern(), typecount);
+					if(!qryArgs[i].isVar())
+						if(this.graph.getHandle(qryArgs[i].getValue().intern())!=null)
+							this.CountTable.put(qryArgs[i].getValue().intern(), 1.0);
+						else
+							this.CountTable.put(qryArgs[i].getValue().intern(), 0.0);
+					else
+						this.CountTable.put(qryArgs[i].getValue().intern(), typecount);
 				}
 
 				HGRel qRel = new HGRel(pred.intern(),args);
@@ -690,8 +699,15 @@ public class HyperGDB {
 			}
 			//---------------------------------------------------------------------
 			
+			//-------------- iterate n times over message passing ----------------
+			double ub=1.0, lb = 0.0;
+			int iter =0;
+			while(iter<=MaxIter && Math.abs(ub-lb)<=TOL)
+			{
+				
+			}
 			
-			
+			this.closeQuery();
 		}
 		catch(Exception e)
 		{
@@ -703,6 +719,8 @@ public class HyperGDB {
 		return 0.0;
 	}
 	
+	
+	//the recursive method call for message passing
 	public Double induceCount(Term currentTerm)
 	{
 		
