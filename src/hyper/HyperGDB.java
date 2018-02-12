@@ -460,6 +460,10 @@ public class HyperGDB {
 		this.graph.close();
 	}
 	
+	
+	/*
+	 * Build Graph Summaries: Should be called from constructors.
+	 */
 	public void summarize()
 	{
 		for(String k: this.entityTypeHandles.keySet())
@@ -661,6 +665,17 @@ public class HyperGDB {
 		
 	}
 	
+	
+	/**
+	 * This is the function that should be called using the custom object of this class. 
+	 * This will generate the approximate count of true grounding for a given clause. Bitrep bit-string representing the sense of each literal 
+	 * in the clause. In current implementation bitset is a string of all 1's of length equal to the #literals. We are restricted to counting over the 
+	 * true groundings of the body of HORN clause (A conjunction of positive literals). 
+	 * 
+	 * @param Clause : Array of Literals
+	 * @param bitrep : String of length = #Literals
+	 * @return Double : Count value for clause.
+	 */
 	public Double ApproxCount(Literal[] Clause, String bitrep)
 	{
 		try {
