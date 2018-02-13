@@ -54,9 +54,9 @@ public class HyperGDB {
 	Hashtable<String,Double> predCounts;
 	//Hashtable<String,Hashtable<String,Double>> corrMatrix;
 	Hashtable<String,ArrayList<String>> typeArgs;
-	Table<String, String, Double> corrMatrix; // = HashBasedTable.create();
-	Table<String, String, Double> leftCorr;
-	Table<String, String, Double> rightCorr;
+	Hashtable<String, Table<String, String, Double>> corrMatrix; // = HashBasedTable.create();
+	Hashtable<String, Table<String, String, Double>> leftCorr;
+	Hashtable<String, Table<String, String, Double>> rightCorr;
 	
 	Hashtable<String,Double> CountTable;
 	Hashtable<Term,String> qryVars;
@@ -110,9 +110,12 @@ public class HyperGDB {
 		this.typeInAvg = new Hashtable<String,Double>();
 		this.typeOutAvg = new Hashtable<String,Double>();
 		this.typeArgs = new Hashtable<String,ArrayList<String>>();
-		this.corrMatrix =  HashBasedTable.create();
-		this.leftCorr = HashBasedTable.create();
-		this.rightCorr = HashBasedTable.create();
+		this.corrMatrix = new Hashtable<String, Table<String, String, Double>>();
+		this.leftCorr =  new Hashtable<String, Table<String, String, Double>>();
+		this.rightCorr =  new Hashtable<String, Table<String, String, Double>>();
+		//this.corrMatrix =  HashBasedTable.create();
+		//this.leftCorr = HashBasedTable.create();
+		//this.rightCorr = HashBasedTable.create();
 	}
 	
 	private void initializeQuery()
@@ -634,30 +637,40 @@ public class HyperGDB {
 				{
 					long c1 = hg.count(this.graph, hg.and(hg.type(relTypeHandle1), hg.incidentAt(ent, kPos)));
 					long c2 = hg.count(this.graph, hg.and(hg.type(relTypeHandle2), hg.incidentAt(ent, lPos)));
+					String entVal = this.graph.get(ent);
+					Table<String,String,Double> tempCorr = this.corrMatrix.get(entVal.intern());
+					if(tempCorr==null)
+						tempCorr = HashBasedTable.create();
+					Table<String,String,Double> tempLeftCorr = this.leftCorr.get(entVal.intern());
+					if(tempLeftCorr==null)
+						tempLeftCorr = HashBasedTable.create();
+					Table<String,String,Double> tempRightCorr = this.rightCorr.get(entVal.intern());
+					if(tempRightCorr==null)
+						tempRightCorr = HashBasedTable.create();
 					if(c1>0 && c2>0)
 					{
-						Double currentVal = this.corrMatrix.contains(kRel, lRel)? this.corrMatrix.get(kRel, lRel):0.0;
-						currentVal++;
-						this.corrMatrix.put(kRel, lRel, currentVal);
-						Double leftCurrVal = this.leftCorr.contains(kRel, lRel)? this.leftCorr.get(kRel, lRel):0.0;
+						//Double currentVal = tempCorr.contains(kRel, lRel)? tempCorr.get(kRel, lRel):0.0;
+						//currentVal++;
+						//tempCorr.put(kRel, lRel, currentVal);
+						Double leftCurrVal = tempLeftCorr.contains(kRel, lRel)? tempLeftCorr.get(kRel, lRel):0.0;
 						leftCurrVal++;
-						this.leftCorr.put(kRel, lRel, leftCurrVal);
-						Double rightCurrVal =this.rightCorr.contains(kRel, lRel)? this.rightCorr.get(kRel, lRel):0.0;
+						tempLeftCorr.put(kRel, lRel, leftCurrVal);
+						Double rightCurrVal =tempRightCorr.contains(kRel, lRel)? tempRightCorr.get(kRel, lRel):0.0;
 						rightCurrVal++;
-						this.rightCorr.put(kRel, lRel, rightCurrVal);
+						tempRightCorr.put(kRel, lRel, rightCurrVal);
 					}
 					else if(c1>0 && c2==0)
 					{
-						Double leftCurrVal = this.leftCorr.contains(kRel, lRel)? this.leftCorr.get(kRel, lRel):0.0;
+						Double leftCurrVal = tempLeftCorr.contains(kRel, lRel)? tempLeftCorr.get(kRel, lRel):0.0;
 						leftCurrVal++;
-						this.leftCorr.put(kRel, lRel, leftCurrVal);
+						tempLeftCorr.put(kRel, lRel, leftCurrVal);
 					}
 					else if(c1==0 && c2>0)
 					{
 						Double rightCurrVal =0.0;
-						rightCurrVal = this.rightCorr.contains(kRel, lRel)? this.rightCorr.get(kRel, lRel):0.0;
+						rightCurrVal = tempRightCorr.contains(kRel, lRel)? tempRightCorr.get(kRel, lRel):0.0;
 						rightCurrVal++;
-						this.rightCorr.put(kRel, lRel, rightCurrVal);
+						tempRightCorr.put(kRel, lRel, rightCurrVal);
 					}
 				}
 			}
@@ -669,7 +682,7 @@ public class HyperGDB {
 	/**
 	 * This is the function that should be called using the custom object of this class. 
 	 * This will generate the approximate count of true grounding for a given clause. Bitrep bit-string representing the sense of each literal 
-	 * in the clause. In current implementation bitset is a string of all 1's of length equal to the #literals. We are restricted to counting over the 
+	 * in the clause. In current implementation bitrep is a string of all 1's of length equal to the #literals. We are restricted to counting over the 
 	 * true groundings of the body of HORN clause (A conjunction of positive literals). 
 	 * 
 	 * @param Clause : Array of Literals
