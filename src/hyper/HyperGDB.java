@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Set;
 
 import org.hypergraphdb.HGHandle;
 import org.hypergraphdb.HGQuery.hg;
@@ -612,8 +613,29 @@ public class HyperGDB {
 			}
 		}
 
-		for(String ot:this.entityTypeHandles.keySet())
+		Set<String> inkeys=this.InCounts.keySet();
+		Set<String> outkeys=this.outCounts.keySet();
+		Set<String> unionset = inkeys;
+		unionset.addAll(inkeys);
+		for(String obj:unionset)
 		{
+			Hashtable<String,Double> in = this.InCounts.get(obj);
+			Hashtable<String,Double> out = this.outCounts.get(obj);
+			for(String inrel:in.keySet())
+			{
+				for(String outrel:out.keySet())
+				{
+					if(outrel.intern().equals(inrel.intern()))
+					{
+						
+					}
+				}
+			}
+		}
+		//for(String ot:this.entityTypeHandles.keySet())
+		//{
+			
+			/*
 			HGHandle entTypeHandle = this.entityTypeHandles.get(ot);
 			List<HGHandle> rs = this.graph.findAll(hg.type(entTypeHandle));
 			Collection<String> allShapes = m.get(ot);	
@@ -673,8 +695,8 @@ public class HyperGDB {
 						tempRightCorr.put(kRel, lRel, rightCurrVal);
 					}
 				}
-			}
-		}
+			}*/
+		//}
 		
 	}
 	
