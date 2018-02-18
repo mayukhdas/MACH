@@ -20,7 +20,9 @@ import org.hypergraphdb.type.HGAtomType;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
+import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Table;
 
 import Helper.Literal;
@@ -60,8 +62,11 @@ public class HyperGDB {
 	Hashtable<String, Table<String, String, Double>> rightCorr;
 	
 	Hashtable<String,Double> CountTable;
-	Hashtable<Term,String> qryVars;
+	Hashtable<String,String> qryVars;
+	Hashtable<String, Term> varTerms;
 	Hashtable<String,HGHandle> QryObjectHandles;
+	Hashtable<String,SetMultimap<String,ArrayList<String>>> qryIn;
+	Hashtable<String,SetMultimap<String,ArrayList<String>>> qryOut;
 	
 	/**
 	 * No Argument constructor
@@ -315,101 +320,6 @@ public class HyperGDB {
 	}
 	
 	
-	public boolean loadSchemaForQry()
-	{
-		try
-		{
-			BufferedReader br = new BufferedReader(new FileReader(new File(this.schemaloc)));
-			String line;
-			int idx = 0;
-			while((line = br.readLine())!=null)
-			{
-				if(!line.startsWith("//") && !line.isEmpty())
-				{
-					if(line.lastIndexOf('.')!=-1)
-						line = line.substring(0, line.lastIndexOf('.'));
-					//Utils.println(line);
-					if(line.startsWith("import:"))
-					{
-						
-						String np = line.split(":")[1];
-						Utils.println(np);
-						np = np.replace('"', ' ').trim();
-						if(np.charAt(0)=='.' && np.charAt(1)=='.')
-						{
-							this.schemaloc = this.schemaloc.substring(0, this.schemaloc.lastIndexOf('/')-1);
-							this.schemaloc = this.schemaloc.substring(0, this.schemaloc.lastIndexOf('/'));
-							np = np.substring(2);
-							this.schemaloc = this.schemaloc + np;
-						}
-						else if((np.charAt(0)=='.' && np.charAt(1)=='/'))
-						{
-							this.schemaloc = this.schemaloc.substring(0, this.schemaloc.lastIndexOf('/'));
-							np = np.substring(2);
-							this.schemaloc = this.schemaloc + np;
-						}
-						else if(np.charAt(0)=='/')
-						{
-							this.schemaloc = np;
-						}
-						else
-						{
-							this.schemaloc = this.schemaloc.substring(0, this.schemaloc.lastIndexOf('/'));
-							this.schemaloc = this.schemaloc + np;
-						}
-						if(!this.loadSchema())
-						{	br.close();
-							return false;
-						}
-						idx++;
-						break;
-					}
-					else if(line.startsWith("mode:"))
-					{
-						Utils.println(line);
-						String pred = line.split(":")[1].trim();
-						String[] predArr = pred.split("\\(");
-						String predName = predArr[0];
-						String[] args = predArr[1].replaceAll("\\)", "").split(",");
-						HGHandle[] h = new HGHandle[args.length];
-						ArrayList<String> argList = new ArrayList<String>();
-						for(int i =0;i<args.length;i++)
-						{
-							String a = args[i];
-							a = a.replaceAll("\\+", "").replaceAll("-", "").replaceAll("#", "").trim();
-							argList.add(a.intern());
-							HGHandle hTemp = this.QryEntityTypeHandles.get(a.intern());
-							if(hTemp==null)
-							{
-								HGRelType objectType = new HGRelType(a.intern());
-								hTemp = this.qryGraph.add(objectType);
-							}
-							h[i] = hTemp;
-							this.QryEntityTypeHandles.put(a, hTemp);
-						}
-						HGRelType relType= new HGRelType(predName.intern(),h);
-						//this.typeArgs.put(predName.intern(), argList);
-						HGHandle relTypeHandle = this.QryRelTypeHandles.get(predName.intern());
-						if(relTypeHandle==null)
-						{
-							relTypeHandle = this.qryGraph.add(relType);
-							this.QryRelTypeHandles.put(predName.intern(), relTypeHandle);
-						}
-						idx++;
-					}
-				}
-			}
-			br.close();
-			if(idx<=0)
-				return false;
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-	}
 	
 	public boolean loadEvidence()
 	{
@@ -621,6 +531,15 @@ public class HyperGDB {
 		{
 			Hashtable<String,Double> in = this.InCounts.get(obj);
 			Hashtable<String,Double> out = this.outCounts.get(obj);
+			Table<String,String,Double> tempCorr = this.corrMatrix.get(obj);
+			if(tempCorr == null)
+				tempCorr = HashBasedTable.create();
+			Table<String,String,Double> leftTempCorr = this.leftCorr.get(obj);
+			if(leftTempCorr == null)
+				leftTempCorr = HashBasedTable.create();
+			Table<String,String,Double> rightTempCorr = this.rightCorr.get(obj);
+			if(rightTempCorr==null)
+				rightTempCorr = HashBasedTable.create();
 			for(String inrel:in.keySet())
 			{
 				for(String outrel:out.keySet())
@@ -721,41 +640,102 @@ public class HyperGDB {
 				String pred = lit.getPredicateName();
 				ArrayList<String> argTypes = this.typeArgs.get(pred.intern());
 				Term[] qryArgs = lit.getArguments();
-				HGHandle qryPredType = this.QryRelTypeHandles.get(pred);
-				HGHandle[] args = new HGHandle[qryArgs.length];
-				for(int i=0;i<qryArgs.length;i++)
+				if(qryArgs.length==1)
 				{
-					HGHandle argType = this.QryEntityTypeHandles.get(argTypes.get(i));
-					HGHandle varHandle = this.qryGraph.getHandle(qryArgs[i].getValue().intern());
-					if(varHandle == null)
-					{
-						varHandle = this.qryGraph.add(qryArgs[i].getValue(), argType);
-					}
-					args[i] = varHandle;
-					this.QryObjectHandles.put(qryArgs[i].getValue().intern(), varHandle);
-					this.qryVars.put(qryArgs[i], argTypes.get(i));
-					Double typecount = this.typeCounts.get(argTypes.get(i).intern());
-					if(!qryArgs[i].isVar())
-						if(this.graph.getHandle(qryArgs[i].getValue().intern())!=null)
-							this.CountTable.put(qryArgs[i].getValue().intern(), 1.0);
-						else
-							this.CountTable.put(qryArgs[i].getValue().intern(), 0.0);
-					else
-						this.CountTable.put(qryArgs[i].getValue().intern(), typecount);
+					String arg = qryArgs[0].getValue();
+					String argType = argTypes.get(0);
+					SetMultimap<String,ArrayList<String>> tempIn = this.qryIn.get(arg);
+					SetMultimap<String,ArrayList<String>> tempOut = this.qryOut.get(arg);
+					if(tempIn==null)
+						tempIn = HashMultimap.create();
+					if(tempOut==null)
+						tempOut = HashMultimap.create();
+					ArrayList<String> argL = new ArrayList<String>();
+					argL.add(arg.intern());
+					tempIn.put(pred, argL);
+					tempOut.put(pred, argL);
+					this.qryIn.put(arg, tempIn);
+					this.qryOut.put(arg, tempOut);
+					//-----------------
+					this.qryVars.put(arg, argType);
+					this.varTerms.put(arg, qryArgs[0]);
+					this.CountTable.put(arg, this.typeCounts.get(argType));
 				}
-
-				HGRel qRel = new HGRel(pred.intern(),args);
-				HGHandle qryRelHandle = this.qryGraph.add(qRel, qryPredType);
+				else if(qryArgs.length==2)
+				{
+					String arg1 = qryArgs[0].getValue();
+					String arg2 = qryArgs[1].getValue();
+					String argType1 = argTypes.get(0);
+					String argType2 = argTypes.get(1);
+					SetMultimap<String,ArrayList<String>> tempIn = this.qryIn.get(arg2);
+					SetMultimap<String,ArrayList<String>> tempOut = this.qryOut.get(arg1);
+					if(tempIn==null)
+						tempIn = HashMultimap.create();
+					if(tempOut==null)
+						tempOut = HashMultimap.create();
+					ArrayList<String> argLIn = new ArrayList<String>();
+					ArrayList<String> argLOut = new ArrayList<String>();
+					argLIn.add(arg1);
+					argLOut.add(arg2);
+					tempIn.put(pred, argLIn);
+					tempOut.put(pred, argLOut);
+					this.qryIn.put(arg2, tempIn);
+					this.qryOut.put(arg1, tempOut);
+					//------------------
+					this.qryVars.put(arg1, argType1);
+					this.qryVars.put(arg2, argType2);
+					this.varTerms.put(arg1, qryArgs[0]);
+					this.varTerms.put(arg2, qryArgs[1]);
+					this.CountTable.put(arg1, this.typeCounts.get(argType1));
+					this.CountTable.put(arg2, this.typeCounts.get(argType2));
+				}
+				else if(qryArgs.length>2)
+				{
+					for(int i=0;i<qryArgs.length;i++)
+					{
+						String arg = qryArgs[i].getValue();
+						String argType = argTypes.get(i);
+						SetMultimap<String,ArrayList<String>> tempIn = this.qryIn.get(arg);
+						SetMultimap<String,ArrayList<String>> tempOut = this.qryOut.get(arg);
+						if(tempIn==null)
+							tempIn = HashMultimap.create();
+						if(tempOut==null)
+							tempOut = HashMultimap.create();
+						ArrayList<String> argLIn = new ArrayList<String>();
+						ArrayList<String> argLOut = new ArrayList<String>();
+						for(int j=0;j<qryArgs.length;j++)
+						{
+							if(j!=i)
+								argLIn.add(qryArgs[j].getValue());
+								argLOut.add(qryArgs[j].getValue());
+						}
+						tempIn.put(pred, argLIn);
+						tempOut.put(pred, argLOut);
+						this.qryIn.put(arg, tempIn);
+						this.qryOut.put(arg, tempOut);
+						//-----------------
+						this.qryVars.put(arg, argType);
+						this.varTerms.put(arg, qryArgs[0]);
+						this.CountTable.put(arg, this.typeCounts.get(argType));
+					}
+				}
+								
 			}
-			//---------------------------------------------------------------------
-			
-			//-------------- Iterate n times over message passing ----------------
-			double ub=1.0, lb = 0.0;
-			int iter =0;
-			while(iter<=MaxIter && Math.abs(ub-lb)<=TOL)
+			//----------------Sanitize count table-------------------------------
+			for(String k:this.CountTable.keySet())
 			{
-				
+				if(!this.varTerms.get(k).isVar())
+					if(this.InCounts.containsKey(k) || this.outCounts.containsKey(k))
+						this.CountTable.put(k, 1.0);
+					else
+						this.CountTable.put(k, 0.0);
 			}
+			//-------------------Sanitize complete ------------------
+			
+			//Start count estimation
+			double crossProd = 1.0;
+			for(Double val:this.CountTable.values())
+				crossProd *= val;
 			
 			this.closeQuery();
 		}
@@ -771,9 +751,20 @@ public class HyperGDB {
 	
 	
 	//the recursive method call for message passing
-	public Double induceCount(Term currentTerm)
+	public Double induceJoint(Literal[] Clause)
 	{
-		
+
+		ArrayList<Double> factors = new ArrayList<Double>();
+		//Calculate factors
+		for(Literal l:Clause)
+		{
+			Term[] args = l.getArguments();
+			int arity = args.length;
+			if(arity==1)
+			{
+				String arg = args[0].getValue();
+			}
+		}
 		return 0.0;
 	}
 	private void shutdown()
