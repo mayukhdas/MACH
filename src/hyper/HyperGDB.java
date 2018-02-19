@@ -39,9 +39,9 @@ public class HyperGDB {
 	String schemaloc;
 	String factloc;
 	String dbName;
-	HyperGraph graph;
-	Hashtable<String,HGHandle> relTypeHandles;
-	Hashtable<String,HGHandle> entityTypeHandles;
+	public HyperGraph graph;
+	public Hashtable<String,HGHandle> relTypeHandles;
+	public Hashtable<String,HGHandle> entityTypeHandles;
 	
 	/*
 	 * Summary Tables
@@ -421,7 +421,7 @@ public class HyperGDB {
 			try {
 				while(rs.hasNext())
 				{
-					Utils.println("Here");
+					//Utils.println("Here");
 					HGHandle h = rs.next();
 					Hashtable<String,Double> temp = this.InCounts.get(this.graph.get(h));
 					Hashtable<String,Double> tempo = this.outCounts.get(this.graph.get(h));
@@ -439,13 +439,22 @@ public class HyperGDB {
 							temp.put(relt, 0.0+c);
 							tempo.put(relt, 0.0+c);
 						}
-						if(((HGRelType)this.graph.get(relTH)).getArity()>=2)
+						if(((HGRelType)this.graph.get(relTH)).getArity()==2)
 						{
-							long c = hg.count(this.graph, hg.and(hg.type(relTH), hg.incidentNotAt(h, 0)));
+							long c = hg.count(this.graph, hg.and(hg.type(relTH),hg.incidentAt(h, 1)));
 							long co = hg.count(this.graph, hg.and(hg.type(relTH), hg.incidentAt(h, 0)));
 							//Utils.println(this.graph.get(h)+"--"+((HGRelType)this.graph.get(relTH)).getName()+"--"+c);
 							temp.put(relt, 0.0+c);
 							tempo.put(relt, 0.0+co);
+						}
+						if(((HGRelType)this.graph.get(relTH)).getArity()>2)
+						{
+							long c = hg.count(this.graph, hg.and(hg.type(relTH), hg.incident(h)));
+							//long co = hg.count(this.graph, hg.and(hg.type(relTH), hg.incidentAt(h, 0)));
+							//Utils.println(this.graph.get(h)+"--"+((HGRelType)this.graph.get(relTH)).getName()+"--"+c);
+							temp.put(relt, 0.0+c);
+							tempo.put(relt, 0.0+c);
+							
 						}
 						
 					}
@@ -517,8 +526,8 @@ public class HyperGDB {
 			//if(this.typeOutAvg.get(k)!=null)
 				//this.typeOutAvg.put(k, this.typeOutAvg.get(k)/(double)sourceCount);
 		}
-		Utils.println(this.typeInAvg);
-		Utils.println(this.typeOutAvg);
+		//Utils.println(this.typeInAvg);
+		//Utils.println(this.typeOutAvg);
 		
 		//Correlation
 		
@@ -556,10 +565,13 @@ public class HyperGDB {
 						{
 							leftCorrTemp = leftCorrTemp + 1;
 						}
+						this.corrMatrix.put(inrel, outrel, corrtemp);
+						this.leftCorr.put(inrel, outrel, leftCorrTemp);
 					}
 				}
 			}
 		}
+		Utils.println(this.corrMatrix);
 		//for(String ot:this.entityTypeHandles.keySet())
 		//{
 			
@@ -749,12 +761,12 @@ public class HyperGDB {
 				crossProd *= val;
 			
 			ArrayList<Double> factors = this.induceJoint(Clause);
-			Utils.println(factors);
+			Utils.println("Factors"+factors);
 			Double joint = 1.0;
 			for(Double f:factors)
 				joint *=f;
 			this.closeQuery();
-			return joint;
+			return joint*crossProd;
 		}
 		catch(Exception e)
 		{
@@ -776,6 +788,7 @@ public class HyperGDB {
 		for(Literal l:Clause)
 		{
 			String pred = l.getPredicateName();
+			Utils.println("%%%%"+Clause.length);
 			Term[] args = l.getArguments();
 			int arity = args.length;
 			if(arity==1)
@@ -807,6 +820,7 @@ public class HyperGDB {
 				String arg2 = args[1].getValue();
 				boolean g1 = this.varTerms.get(arg1).isVar();
 				boolean g2 = this.varTerms.get(arg2).isVar();
+				Utils.println(pred+"------"+g1+"++++++++"+g2);
 				SetMultimap<String,ArrayList<String>> inRels = this.qryIn.get(arg2.intern());
 				if(!g1 && !g2)
 				{
@@ -828,6 +842,7 @@ public class HyperGDB {
 					Double cross = 1.0 * this.typeCounts.get(this.qryVars.get(arg2));
 					p = p/cross;
 					factors.add(p);
+					Utils.println("Factor"+factors);
 				}
 				else if(g1 && !g2)
 				{
@@ -902,11 +917,18 @@ public class HyperGDB {
 							SetMultimap<String,ArrayList<String>> tempIn = this.qryIn.get(arg);
 							if(!(tempIn==null || tempIn.isEmpty() || tempIn.size()==0))
 							{
+								int done = 0;
 								for(String rel:tempIn.keySet())
 								{
+									if(rel.intern().equals(pred.intern()))
+										continue;
 									Double corr = this.corrMatrix.get(rel, pred);
 									Double inCorr = this.leftCorr.get(rel, pred);
+									Utils.println(rel+"---"+pred);
+									Utils.println(corr); 
+									Utils.println(inCorr);
 									factors.add(corr/inCorr);
+									done++;
 								}
 							}
 						}

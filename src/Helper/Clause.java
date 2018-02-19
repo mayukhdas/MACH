@@ -5,7 +5,7 @@ public class Clause {
 	public static Literal[] generateClause(String clause)
 	{
 		try {
-			String[] lits = clause.split("^");
+			String[] lits = clause.split("\\^");
 			Literal[] cl = new Literal[lits.length];
 			int idx = 0;
 			for(String l:lits)
