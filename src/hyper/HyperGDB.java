@@ -39,12 +39,8 @@ public class HyperGDB {
 	String factloc;
 	String dbName;
 	HyperGraph graph;
-	HyperGraph qryGraph;
 	Hashtable<String,HGHandle> relTypeHandles;
 	Hashtable<String,HGHandle> entityTypeHandles;
-	
-	Hashtable<String,HGHandle> QryRelTypeHandles;
-	Hashtable<String,HGHandle> QryEntityTypeHandles;
 	
 	/*
 	 * Summary Tables
@@ -57,14 +53,13 @@ public class HyperGDB {
 	Hashtable<String,Double> predCounts;
 	//Hashtable<String,Hashtable<String,Double>> corrMatrix;
 	Hashtable<String,ArrayList<String>> typeArgs;
-	Hashtable<String, Table<String, String, Double>> corrMatrix; // = HashBasedTable.create();
-	Hashtable<String, Table<String, String, Double>> leftCorr;
-	Hashtable<String, Table<String, String, Double>> rightCorr;
+	Table<String, String, Double> corrMatrix; // = HashBasedTable.create();
+	Table<String, String, Double> leftCorr;
+	Table<String, String, Double> rightCorr;
 	
 	Hashtable<String,Double> CountTable;
 	Hashtable<String,String> qryVars;
 	Hashtable<String, Term> varTerms;
-	Hashtable<String,HGHandle> QryObjectHandles;
 	Hashtable<String,SetMultimap<String,ArrayList<String>>> qryIn;
 	Hashtable<String,SetMultimap<String,ArrayList<String>>> qryOut;
 	
@@ -80,6 +75,7 @@ public class HyperGDB {
 		this.graph = new HyperGraph(dblocation);
 		
 		this.initialize();
+		this.summarize();
 	}
 	
 	/**
@@ -96,6 +92,7 @@ public class HyperGDB {
 		this.graph = new HyperGraph(dblocation);
 		
 		this.initialize();
+		this.summarize();
 	}
 	public HyperGDB(String schemaloc, String factloc, String dbName) {
 		this.schemaloc = schemaloc;
@@ -107,6 +104,7 @@ public class HyperGDB {
 		this.graph = new HyperGraph(dblocation);
 		
 		this.initialize();
+		this.summarize();
 	}
 	private void initialize()
 	{
@@ -116,25 +114,29 @@ public class HyperGDB {
 		this.typeInAvg = new Hashtable<String,Double>();
 		this.typeOutAvg = new Hashtable<String,Double>();
 		this.typeArgs = new Hashtable<String,ArrayList<String>>();
-		this.corrMatrix = new Hashtable<String, Table<String, String, Double>>();
-		this.leftCorr =  new Hashtable<String, Table<String, String, Double>>();
-		this.rightCorr =  new Hashtable<String, Table<String, String, Double>>();
-		//this.corrMatrix =  HashBasedTable.create();
-		//this.leftCorr = HashBasedTable.create();
-		//this.rightCorr = HashBasedTable.create();
+		//this.corrMatrix = new Hashtable<String, Table<String, String, Double>>();
+		//this.leftCorr =  new Hashtable<String, Table<String, String, Double>>();
+		//this.rightCorr =  new Hashtable<String, Table<String, String, Double>>();
+		this.corrMatrix =  HashBasedTable.create();
+		this.leftCorr = HashBasedTable.create();
+		this.rightCorr = HashBasedTable.create();
 	}
 	
 	private void initializeQuery()
 	{
-		this.qryGraph = new HyperGraph();
-		this.QryEntityTypeHandles = new Hashtable<String,HGHandle>();
-		this.QryRelTypeHandles = new Hashtable<String,HGHandle>();
+		this.CountTable = new Hashtable<String,Double>();
+		this.qryVars = new Hashtable<String,String>();
+		this.varTerms = new Hashtable<String, Term>();
+		this.qryIn = new Hashtable<String,SetMultimap<String,ArrayList<String>>>();
+		this.qryOut = new Hashtable<String,SetMultimap<String,ArrayList<String>>>();
 	}
 	private void closeQuery()
 	{
-		this.QryEntityTypeHandles.clear();
-		this.QryRelTypeHandles.clear();
-		this.qryGraph.close();
+		this.CountTable.clear();
+		this.qryVars.clear();
+		this.varTerms.clear();
+		this.qryIn.clear();
+		this.qryOut.clear();
 	}
 	
 		
@@ -378,7 +380,7 @@ public class HyperGDB {
 	/*
 	 * Build Graph Summaries: Should be called from constructors.
 	 */
-	public void summarize()
+	private void summarize()
 	{
 		for(String k: this.entityTypeHandles.keySet())
 		{
@@ -495,33 +497,6 @@ public class HyperGDB {
 		
 		//Correlation
 		
-		Multimap<String,String> m = ArrayListMultimap.create();
-		for(String k:this.relTypeHandles.keySet())
-		{
-			//HGHandle kRelTypeHandle = this.relTypeHandles.get(k);
-			ArrayList<String> argListk = this.typeArgs.get(k);
-			for(String l:this.relTypeHandles.keySet())
-			{
-				//HGHandle lRelTypeHandle = this.relTypeHandles.get(l);
-				ArrayList<String> argListl = this.typeArgs.get(l);
-				if(k.intern().equals(l.intern()))
-					continue;
-				else
-				{
-					for(int i=0;i<argListk.size();i++)
-					{
-						for(int j=0;j<argListl.size();j++)
-						{
-							if(argListk.get(i).intern().equals(argListl.get(j).intern()))
-							{
-								String str = k+","+i+";"+l+","+j;
-								m.put(argListk.get(i).intern(), str);
-							}
-						}
-					}
-				}
-			}
-		}
 
 		Set<String> inkeys=this.InCounts.keySet();
 		Set<String> outkeys=this.outCounts.keySet();
@@ -531,22 +506,30 @@ public class HyperGDB {
 		{
 			Hashtable<String,Double> in = this.InCounts.get(obj);
 			Hashtable<String,Double> out = this.outCounts.get(obj);
-			Table<String,String,Double> tempCorr = this.corrMatrix.get(obj);
-			if(tempCorr == null)
-				tempCorr = HashBasedTable.create();
-			Table<String,String,Double> leftTempCorr = this.leftCorr.get(obj);
-			if(leftTempCorr == null)
-				leftTempCorr = HashBasedTable.create();
-			Table<String,String,Double> rightTempCorr = this.rightCorr.get(obj);
-			if(rightTempCorr==null)
-				rightTempCorr = HashBasedTable.create();
+			
 			for(String inrel:in.keySet())
 			{
 				for(String outrel:out.keySet())
 				{
-					if(outrel.intern().equals(inrel.intern()))
+					if(!inrel.intern().equals(outrel.intern()))
 					{
-						
+						Double corrtemp = this.corrMatrix.get(inrel, outrel);
+						Double leftCorrTemp = this.leftCorr.get(inrel, outrel);
+						if(corrtemp==null)
+							corrtemp = 0.0;
+						if(leftCorrTemp == null)
+							leftCorrTemp = 0.0;
+						Double inc = in.get(inrel.intern());
+						Double outc = out.get(outrel.intern());
+						if((inc!=null && outc !=null) || (inc!=0.0 && outc!=0.0))
+						{
+							corrtemp = corrtemp+1;
+							leftCorrTemp = leftCorrTemp + 1;
+						}
+						if((inc!=null ||inc!=0.0) && (outc==null || outc==0))
+						{
+							leftCorrTemp = leftCorrTemp + 1;
+						}
 					}
 				}
 			}
@@ -737,7 +720,12 @@ public class HyperGDB {
 			for(Double val:this.CountTable.values())
 				crossProd *= val;
 			
+			ArrayList<Double> factors = this.induceJoint(Clause);
+			Double joint = 1.0;
+			for(Double f:factors)
+				joint *=f;
 			this.closeQuery();
+			return joint;
 		}
 		catch(Exception e)
 		{
@@ -751,25 +739,157 @@ public class HyperGDB {
 	
 	
 	//the recursive method call for message passing
-	public Double induceJoint(Literal[] Clause)
+	private ArrayList<Double> induceJoint(Literal[] Clause)
 	{
 
 		ArrayList<Double> factors = new ArrayList<Double>();
 		//Calculate factors
 		for(Literal l:Clause)
 		{
+			String pred = l.getPredicateName();
 			Term[] args = l.getArguments();
 			int arity = args.length;
 			if(arity==1)
 			{
 				String arg = args[0].getValue();
+				SetMultimap<String,ArrayList<String>> inRels = this.qryIn.get(arg.intern());
+				int num =0;
+				if(inRels!=null)
+					for(String r:inRels.keySet())
+					{
+						if(!r.equals(pred))
+						{
+							num++;
+							//TODO
+						}
+					}
+				if(num>0)
+				{
+					if(inRels!=null)
+						factors.add(1.0);
+					else
+						factors.add(0.0);
+				}
+				
+			}
+			else if(arity==2)
+			{
+				String arg1 = args[0].getValue();
+				String arg2 = args[1].getValue();
+				boolean g1 = this.varTerms.get(arg1).isVar();
+				boolean g2 = this.varTerms.get(arg2).isVar();
+				SetMultimap<String,ArrayList<String>> inRels = this.qryIn.get(arg2.intern());
+				if(!g1 && !g2)
+				{
+					HGHandle h1 = this.graph.getHandle(arg1.intern());
+					HGHandle h2 = this.graph.getHandle(arg2.intern());
+					List ret = hg.findAll(this.graph, hg.and(
+							hg.type(this.relTypeHandles.get(pred.intern())),hg.incidentAt(h1, 0),
+							hg.incidentAt(h2, 1)));
+					if(ret==null || ret.isEmpty() || ret.size()==0)
+					{
+						factors.add(0.0);
+					}
+					else
+						factors.add(1.0);
+				}
+				else if(!g1 && g1)
+				{
+					Double p = this.outCounts.get(arg1).get(pred);
+					Double cross = 1.0 * this.typeCounts.get(this.qryVars.get(arg2));
+					p = p/cross;
+					factors.add(p);
+				}
+				else if(g1 && !g2)
+				{
+					Double p = this.outCounts.get(arg2).get(pred);
+					Double cross = 1.0 * this.typeCounts.get(this.qryVars.get(arg1));
+					p = p/cross;
+					factors.add(p);
+					SetMultimap<String,ArrayList<String>> tempIn = this.qryIn.get(arg1);
+					for(String rel:tempIn.keySet())
+					{
+						Double corr = this.corrMatrix.get(rel, pred);
+						Double inCorr = this.leftCorr.get(rel, pred);
+						factors.add(corr/inCorr);
+					}
+				}
+				else
+				{
+					SetMultimap<String,ArrayList<String>> tempIn = this.qryIn.get(arg1);
+					if(tempIn!=null || !tempIn.isEmpty())
+						for(String rel:tempIn.keySet())
+						{
+							Double corr = this.corrMatrix.get(rel, pred);
+							Double inCorr = this.leftCorr.get(rel, pred);
+							factors.add(corr/inCorr);
+						}
+					else
+					{
+						Double p = this.typeInAvg.get(pred);
+						Double cross = this.typeCounts.get(this.qryVars.get(arg1))
+								*this.typeCounts.get(this.qryVars.get(arg2));
+						factors.add(p/cross);
+					}
+				}
+			}
+			else if(arity>2)
+			{
+				Double cross = 1.0;
+				int gr = 0;
+				//cross product calc
+				for(Term a:args)
+				{
+					if(a.isVar())
+						cross *= this.typeCounts.get(this.qryVars.get(a.getValue()));
+					else
+					{
+						gr++;
+						if(this.InCounts.containsKey(a.getValue().intern()) ||
+								this.outCounts.containsKey(a.getValue().intern()))
+							cross *= 1.0;
+						else
+							cross *=0.0;
+					}
+				}
+				//factor calc
+				if(gr==0)
+				{
+					Double p=this.typeInAvg.get(pred);
+					factors.add(p/cross);
+				}
+				else
+				{
+					for(int i=0;i<args.length;i++)
+					{
+						String arg = args[i].getValue();
+						if(!args[i].isVar())
+						{
+							Double p = this.outCounts.get(arg.intern()).get(pred);
+							factors.add(p/cross);
+						}
+						else
+						{
+							SetMultimap<String,ArrayList<String>> tempIn = this.qryIn.get(arg);
+							if(!(tempIn==null || tempIn.isEmpty() || tempIn.size()==0))
+							{
+								for(String rel:tempIn.keySet())
+								{
+									Double corr = this.corrMatrix.get(rel, pred);
+									Double inCorr = this.leftCorr.get(rel, pred);
+									factors.add(corr/inCorr);
+								}
+							}
+						}
+					}
+				}
 			}
 		}
-		return 0.0;
+		return factors;
 	}
 	private void shutdown()
 	{
-		
+		this.graph.close();
 	}
 	
 	public void test()
