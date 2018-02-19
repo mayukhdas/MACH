@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Set;
@@ -75,7 +76,17 @@ public class HyperGDB {
 		this.graph = new HyperGraph(dblocation);
 		
 		this.initialize();
-		this.summarize();
+		
+		if(loadSchema())
+			if(loadEvidence())
+			{
+				Utils.println("Data loaded!!");
+				this.summarize();
+			}
+			else
+				Utils.println("Data not loaded properly!!");
+		
+		
 	}
 	
 	/**
@@ -92,7 +103,14 @@ public class HyperGDB {
 		this.graph = new HyperGraph(dblocation);
 		
 		this.initialize();
-		this.summarize();
+		if(loadSchema())
+			if(loadEvidence())
+			{
+				Utils.println("Data loaded!!");
+				this.summarize();
+			}
+			else
+				Utils.println("Data not loaded properly!!");
 	}
 	public HyperGDB(String schemaloc, String factloc, String dbName) {
 		this.schemaloc = schemaloc;
@@ -104,7 +122,14 @@ public class HyperGDB {
 		this.graph = new HyperGraph(dblocation);
 		
 		this.initialize();
-		this.summarize();
+		if(loadSchema())
+			if(loadEvidence())
+			{
+				Utils.println("Data loaded!!");
+				this.summarize();
+			}
+			else
+				Utils.println("Data not loaded properly!!");
 	}
 	private void initialize()
 	{
@@ -387,7 +412,7 @@ public class HyperGDB {
 			long c = hg.count(this.graph, hg.type(this.entityTypeHandles.get(k)));
 			this.typeCounts.put(k, 0.0+c);
 		}
-		Utils.println(this.typeCounts);
+		Utils.println("TYPECOUNTS"+this.typeCounts);
 		
 		//Degree summaries
 		for(String k: this.entityTypeHandles.keySet())
@@ -486,11 +511,11 @@ public class HyperGDB {
 				rs.close();
 			}
 			//for(String t:this.typeInAvg.keySet())
-			if(this.typeInAvg.get(k)!=null)
-				this.typeInAvg.put(k, this.typeInAvg.get(k)/(double)destCount);
+			//if(this.typeInAvg.get(k)!=null)
+				//this.typeInAvg.put(k, this.typeInAvg.get(k)/(double)destCount);
 			//for(String t:this.typeOutAvg.keySet())
-			if(this.typeOutAvg.get(k)!=null)
-				this.typeOutAvg.put(k, this.typeOutAvg.get(k)/(double)sourceCount);
+			//if(this.typeOutAvg.get(k)!=null)
+				//this.typeOutAvg.put(k, this.typeOutAvg.get(k)/(double)sourceCount);
 		}
 		Utils.println(this.typeInAvg);
 		Utils.println(this.typeOutAvg);
@@ -500,8 +525,9 @@ public class HyperGDB {
 
 		Set<String> inkeys=this.InCounts.keySet();
 		Set<String> outkeys=this.outCounts.keySet();
-		Set<String> unionset = inkeys;
+		Set<String> unionset = new HashSet<String>();
 		unionset.addAll(inkeys);
+		unionset.addAll(outkeys);
 		for(String obj:unionset)
 		{
 			Hashtable<String,Double> in = this.InCounts.get(obj);
@@ -622,6 +648,7 @@ public class HyperGDB {
 			{
 				String pred = lit.getPredicateName();
 				ArrayList<String> argTypes = this.typeArgs.get(pred.intern());
+				Utils.println(argTypes+"---"+pred);
 				Term[] qryArgs = lit.getArguments();
 				if(qryArgs.length==1)
 				{
@@ -699,6 +726,7 @@ public class HyperGDB {
 						//-----------------
 						this.qryVars.put(arg, argType);
 						this.varTerms.put(arg, qryArgs[0]);
+						
 						this.CountTable.put(arg, this.typeCounts.get(argType));
 					}
 				}
@@ -721,6 +749,7 @@ public class HyperGDB {
 				crossProd *= val;
 			
 			ArrayList<Double> factors = this.induceJoint(Clause);
+			Utils.println(factors);
 			Double joint = 1.0;
 			for(Double f:factors)
 				joint *=f;
@@ -738,7 +767,7 @@ public class HyperGDB {
 	}
 	
 	
-	//the recursive method call for message passing
+	//the method call for factor estimation of joint
 	private ArrayList<Double> induceJoint(Literal[] Clause)
 	{
 

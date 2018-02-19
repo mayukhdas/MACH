@@ -12,6 +12,7 @@ public class Literal {
 	 * @param arguments
 	 */
 	
+	
 	public Literal(String predicateName, String... arguments) {
 		super();
 		this.predicateName = predicateName;
