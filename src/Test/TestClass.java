@@ -20,7 +20,7 @@ public class TestClass {
 		Literal[] clause = Clause.generateClause("taughtby(Course1,person292,Term1)^hasposition(person292,Fac)");
 		Utils.println(clause[0]);
 		Double count = hgdb.ApproxCount(clause, "11");
-		Utils.print(count);
+		Utils.println(count);
 		
 		
 		
@@ -29,9 +29,9 @@ public class TestClass {
 		HGHandle ht = hgdb.relTypeHandles.get("taughtby");
 		HGHandle hh = hgdb.relTypeHandles.get("hasposition");
 		
-		Utils.println(h);
+		//Utils.println(h);
 		
-		long c = hg.count(hgdb.graph, hg.and(hg.type(hh),hg.incident(h)));
+		long c = hg.count(hgdb.graph, hg.and(hg.type(ht),hg.incident(h)));
 		Utils.println(c);
 
 	}

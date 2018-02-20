@@ -759,7 +759,7 @@ public class HyperGDB {
 			double crossProd = 1.0;
 			for(Double val:this.CountTable.values())
 				crossProd *= val;
-			
+			Utils.println(this.CountTable +"---" + "---" + this.typeCounts);
 			ArrayList<Double> factors = this.induceJoint(Clause);
 			Utils.println("Factors"+factors);
 			Double joint = 1.0;

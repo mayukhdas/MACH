@@ -30,8 +30,8 @@ mode: courselevel(+Course, #Level).
 
 // mode: introcourse(+Course).
 
-mode: hasposition(+Person, +Position!1).
-mode: hasposition(+Person, #Position).
+mode: hasposition(+Person, +Position).
+//mode: hasposition(+Person, #Position).
 mode: multiclass_hasposition(+Person).
 okIfUnknown: multiclass_hasposition/1.
 mode: projectmember(+Project, -Person).
@@ -54,8 +54,8 @@ phase(post_quals).
 
 mode: advisedby(+Person, +Person).
 
-mode: inphase(+Person, +Phase!1).
-mode: inphase(+Person, #Phase).
+mode: inphase(+Person, +Phase).
+//mode: inphase(+Person, #Phase).
 mode: multiclass_inphase(+Person).
 okIfUnknown: multiclass_inphase/1.
 
