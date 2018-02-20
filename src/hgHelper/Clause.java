@@ -1,4 +1,4 @@
-package Helper;
+package hgHelper;
 
 public class Clause {
 

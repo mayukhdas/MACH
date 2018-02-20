@@ -3,10 +3,10 @@ package Test;
 import org.hypergraphdb.HGHandle;
 import org.hypergraphdb.HGQuery.hg;
 
-import Helper.Clause;
-import Helper.Literal;
+import hgHelper.Clause;
+import hgHelper.Literal;
 import hyper.HyperGDB;
-import hyper.Utils;
+import hyper.GraphUtils;
 
 public class TestClass {
 
@@ -18,9 +18,9 @@ public class TestClass {
 		
 		//hasposition(person292, faculty_affiliate).taughtby(course15, person292, winter_0001).
 		Literal[] clause = Clause.generateClause("taughtby(Course1,person292,Term1)^hasposition(person292,Fac)");
-		Utils.println(clause[0]);
+		GraphUtils.println(clause[0]);
 		Double count = hgdb.ApproxCount(clause, "11");
-		Utils.println(count);
+		GraphUtils.println(count);
 		
 		
 		
@@ -32,7 +32,7 @@ public class TestClass {
 		//Utils.println(h);
 		
 		long c = hg.count(hgdb.graph, hg.and(hg.type(ht),hg.incident(h)));
-		Utils.println(c);
+		GraphUtils.println(c);
 
 	}
 

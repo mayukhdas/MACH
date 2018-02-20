@@ -7,7 +7,7 @@ package hyper;
  * @author Mayukh
  *
  */
-public class Utils {
+public class GraphUtils {
 
 	public static void print(Object o)
 	{

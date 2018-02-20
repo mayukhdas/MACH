@@ -26,8 +26,8 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.SetMultimap;
 import com.google.common.collect.Table;
 
-import Helper.Literal;
-import Helper.Term;
+import hgHelper.Literal;
+import hgHelper.Term;
 
 public class HyperGDB {
 	
@@ -80,11 +80,11 @@ public class HyperGDB {
 		if(loadSchema())
 			if(loadEvidence())
 			{
-				Utils.println("Data loaded!!");
+				GraphUtils.println("Data loaded!!");
 				this.summarize();
 			}
 			else
-				Utils.println("Data not loaded properly!!");
+				GraphUtils.println("Data not loaded properly!!");
 		
 		
 	}
@@ -106,11 +106,11 @@ public class HyperGDB {
 		if(loadSchema())
 			if(loadEvidence())
 			{
-				Utils.println("Data loaded!!");
+				GraphUtils.println("Data loaded!!");
 				this.summarize();
 			}
 			else
-				Utils.println("Data not loaded properly!!");
+				GraphUtils.println("Data not loaded properly!!");
 	}
 	public HyperGDB(String schemaloc, String factloc, String dbName) {
 		this.schemaloc = schemaloc;
@@ -125,11 +125,11 @@ public class HyperGDB {
 		if(loadSchema())
 			if(loadEvidence())
 			{
-				Utils.println("Data loaded!!");
+				GraphUtils.println("Data loaded!!");
 				this.summarize();
 			}
 			else
-				Utils.println("Data not loaded properly!!");
+				GraphUtils.println("Data not loaded properly!!");
 	}
 	private void initialize()
 	{
@@ -245,7 +245,7 @@ public class HyperGDB {
 		String path = "";
 		path = dblocation.substring(0, dblocation.lastIndexOf('/'));
 		path = path + this.dbName;
-		Utils.println(path);
+		GraphUtils.println(path);
 		return path;
 	}
 	
@@ -268,7 +268,7 @@ public class HyperGDB {
 					{
 						
 						String np = line.split(":")[1];
-						Utils.println(np);
+						GraphUtils.println(np);
 						np = np.replace('"', ' ').trim();
 						if(np.charAt(0)=='.' && np.charAt(1)=='.')
 						{
@@ -301,7 +301,7 @@ public class HyperGDB {
 					}
 					else if(line.startsWith("mode:"))
 					{
-						Utils.println(line);
+						GraphUtils.println(line);
 						String pred = line.split(":")[1].trim();
 						String[] predArr = pred.split("\\(");
 						String predName = predArr[0];
@@ -412,7 +412,7 @@ public class HyperGDB {
 			long c = hg.count(this.graph, hg.type(this.entityTypeHandles.get(k)));
 			this.typeCounts.put(k, 0.0+c);
 		}
-		Utils.println("TYPECOUNTS"+this.typeCounts);
+		GraphUtils.println("TYPECOUNTS"+this.typeCounts);
 		
 		//Degree summaries
 		for(String k: this.entityTypeHandles.keySet())
@@ -571,7 +571,7 @@ public class HyperGDB {
 				}
 			}
 		}
-		Utils.println(this.corrMatrix);
+		GraphUtils.println(this.corrMatrix);
 		//for(String ot:this.entityTypeHandles.keySet())
 		//{
 			
@@ -660,7 +660,7 @@ public class HyperGDB {
 			{
 				String pred = lit.getPredicateName();
 				ArrayList<String> argTypes = this.typeArgs.get(pred.intern());
-				Utils.println(argTypes+"---"+pred);
+				GraphUtils.println(argTypes+"---"+pred);
 				Term[] qryArgs = lit.getArguments();
 				if(qryArgs.length==1)
 				{
@@ -759,9 +759,9 @@ public class HyperGDB {
 			double crossProd = 1.0;
 			for(Double val:this.CountTable.values())
 				crossProd *= val;
-			Utils.println(this.CountTable +"---" + "---" + this.typeCounts);
+			GraphUtils.println(this.CountTable +"---" + "---" + this.typeCounts);
 			ArrayList<Double> factors = this.induceJoint(Clause);
-			Utils.println("Factors"+factors);
+			GraphUtils.println("Factors"+factors);
 			Double joint = 1.0;
 			for(Double f:factors)
 				joint *=f;
@@ -770,7 +770,7 @@ public class HyperGDB {
 		}
 		catch(Exception e)
 		{
-			Utils.println("Problem in query!");
+			GraphUtils.println("Problem in query!");
 			e.printStackTrace();
 			this.shutdown();
 			System.exit(1);
@@ -788,7 +788,7 @@ public class HyperGDB {
 		for(Literal l:Clause)
 		{
 			String pred = l.getPredicateName();
-			Utils.println("%%%%"+Clause.length);
+			GraphUtils.println("%%%%"+Clause.length);
 			Term[] args = l.getArguments();
 			int arity = args.length;
 			if(arity==1)
@@ -820,7 +820,7 @@ public class HyperGDB {
 				String arg2 = args[1].getValue();
 				boolean g1 = this.varTerms.get(arg1).isVar();
 				boolean g2 = this.varTerms.get(arg2).isVar();
-				Utils.println(pred+"------"+g1+"++++++++"+g2);
+				GraphUtils.println(pred+"------"+g1+"++++++++"+g2);
 				SetMultimap<String,ArrayList<String>> inRels = this.qryIn.get(arg2.intern());
 				if(!g1 && !g2)
 				{
@@ -842,7 +842,7 @@ public class HyperGDB {
 					Double cross = 1.0 * this.typeCounts.get(this.qryVars.get(arg2));
 					p = p/cross;
 					factors.add(p);
-					Utils.println("Factor"+factors);
+					GraphUtils.println("Factor"+factors);
 				}
 				else if(g1 && !g2)
 				{
@@ -924,9 +924,9 @@ public class HyperGDB {
 										continue;
 									Double corr = this.corrMatrix.get(rel, pred);
 									Double inCorr = this.leftCorr.get(rel, pred);
-									Utils.println(rel+"---"+pred);
-									Utils.println(corr); 
-									Utils.println(inCorr);
+									GraphUtils.println(rel+"---"+pred);
+									GraphUtils.println(corr); 
+									GraphUtils.println(inCorr);
 									factors.add(corr/inCorr);
 									done++;
 								}
@@ -959,9 +959,9 @@ public class HyperGDB {
 		HGHandle r = this.relTypeHandles.get(q);
 		String atom = "person319";
 		HGHandle atomH = this.graph.getHandle(atom.intern());
-		Utils.println(q);
+		GraphUtils.println(q);
 		long x =hg.count(this.graph, hg.and(hg.type(r),hg.incidentAt(atomH,0)));
-		Utils.println(x);
+		GraphUtils.println(x);
 	}
 
 
@@ -972,15 +972,15 @@ public class HyperGDB {
 		if(hgdb.loadSchema())
 			if(hgdb.loadEvidence())
 			{
-				Utils.println("Data loaded!!");
+				GraphUtils.println("Data loaded!!");
 			}
 			else
-				Utils.println("Data not loaded properly!!");
+				GraphUtils.println("Data not loaded properly!!");
 		//hgdb.test();
 		//hgdb.close();
 		//Utils.println(hgdb.entityTypeHandles);
 		hgdb.summarize();
-		Utils.println(hgdb.corrMatrix);
+		GraphUtils.println(hgdb.corrMatrix);
 		hgdb.close();
 		
 	}
