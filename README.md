@@ -1,6 +1,6 @@
 # Motif-based Approximate Counting via Hypergraphs (MACH)
 
-This is the modular code for approximate satisfiability counting for First Order defininite clauses following the original paper - *Das et al., AAAI 2019* [1](1).
+This is the modular code for approximate satisfiability counting for First Order defininite clauses following the original paper - *Das et al., AAAI 2019* [1].
 
 ## HyperApprox
 Approximation of satisfiability counting via hypergraphs
