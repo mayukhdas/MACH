@@ -4,4 +4,7 @@ This is the modular code for approximate satisfiability counting for First Order
 as a plug & play module. It can either be used independently as an approximate counting library for definite clauses of your choice *OR* it can be integrated with your favourite Probabilistic Logic Learner or Lifted Inference code (preferably java code), to make them scalable. For technical details about the algorithm itself please refer to the cited paper. 
 
 
+### Dependencies
+
+
 [1]: M. Das, D. S. Dhami, G. Kunapuli, K. Kersting & S. Natarajan. [Fast Relational Probabilistic Inference and Learning Approximate Counting via Hypergraphs](https://starling.utdallas.edu/assets/pdfs/AAAI18_HyperGraphApproxCount.pdf). *AAAI* 2019
