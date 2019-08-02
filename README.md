@@ -12,6 +12,7 @@ There are several library dependencies that needs to be resolved. (The *jar* fil
 4. **AUC library** (Use provided jar file)
 
 ### How to use/integrate
-Instantiate **hyper.HyperGDB** : `HyperGDB hdgdb = new HyperGDB();`
+- Instantiate **hyper.HyperGDB** class : `HyperGDB hgdb = new HyperGDB(<schema location>, <data location>, <database name>);`
+- Call method **ApproxCount()** from the *hgdb* object: `Double count = hgdb.ApproxCount(<clause>, <sense>);`
 
 [1]: M. Das, D. S. Dhami, G. Kunapuli, K. Kersting & S. Natarajan. [Fast Relational Probabilistic Inference and Learning Approximate Counting via Hypergraphs](https://starling.utdallas.edu/assets/pdfs/AAAI18_HyperGraphApproxCount.pdf). *AAAI* 2019
